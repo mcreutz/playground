@@ -1,0 +1,36 @@
+name: hello-martin
+summary: A summary of your application in 78 characters or less.
+description: |
+  A detailed description of your application.
+  The description can have multiple lines.
+version: '1.0'
+base: core18
+confinement: strict
+
+apps:
+  sayhello:
+    command: python3 hello_martin.py
+  get-data:
+    command: python3 hello_request.py
+  start-server:
+    command: python3 hello_flask.py
+  start-broker:
+    command: hbmqtt
+
+parts:
+  hellomartin:
+    plugin: python
+    source: .
+    # requirements: requirements.txt
+    python-packages:
+      - requests
+      - flask
+      - hbmqtt
+
+plugs:
+  your-snap-home:
+    interface: home
+  your-snap-network-access:
+    interface: network
+  your-snap-network-service:
+    interface: network-bind
