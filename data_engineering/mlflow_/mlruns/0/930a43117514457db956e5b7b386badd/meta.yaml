@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/martin/Documents/devel/mlflow_playground/mlruns/0/930a43117514457db956e5b7b386badd/artifacts
+end_time: 1591302338222
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 930a43117514457db956e5b7b386badd
+run_uuid: 930a43117514457db956e5b7b386badd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1590930407529
+status: 3
+tags: []
+user_id: martin
