@@ -1,0 +1,19 @@
+Thougts:
+
+Client shoud call mediator and not components. And the mediator should 
+activeley mediate and not only connect.
+-> Opposing view: When client calls components, data flow gets much easier. And 
+more functional code can stay in the components. Also the one task of the 
+mediator is to mediate, and not to act as a facade. This should be done by 
+another class.
+
+Necessary data does not need to be pushed by components in advance, but could 
+be pulled from mediator after event notification.
+-> Better, because a pull-method is more versatile.
+-> Also, this eleminates the necessitiy of components pushing data to the mediator.
+-> Components should only initiate communication to the mediator in case of an 
+externally triggered event. Otherwiese the mediator should initiate the communication.
+-> A message at communicating to the mediator could be omitted, when the 
+mediator in return asks the reporting component, what its status is.
+
+One own mediator for each multi-component operation?
