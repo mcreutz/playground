@@ -1,0 +1,20 @@
+docker network create my-network
+
+docker run \
+	-p 5432:5432 \
+	--name my-postgres \
+	-d \
+	-v database-storage:/var/lib/postgresql \
+	--network my-network \
+	-e POSTGRES_PASSWORD=mypassword \
+	postgres
+
+docker run \
+	-p 3000:3000 \
+	--name my-grafana \
+	-d \
+	-v grafana-storage:/var/lib/grafana \
+	--network my-network \
+	grafana/grafana
+
+docker build
