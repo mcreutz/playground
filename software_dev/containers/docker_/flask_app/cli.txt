@@ -1,0 +1,18 @@
+# Build the image
+docker build -t flaskapp:latest .
+
+# Run the image in detached mode
+docker run -d -p 5000:5000 flaskapp
+
+# Run the image with access to its shell
+# `--entrypoint /bin/sh` to override entrypoint where decalred in `Dockerfile`
+docker run -it -p 5000:5000 --entrypoint /bin/bash flaskapp
+
+# Execute command in runnning container
+docker exec -it [name/id] bash
+
+# See all containers on host
+docker ps -a
+
+# Stop running container by name or id (shortening possible, id 123abc456... -> 123)
+docker stop [name/id]
