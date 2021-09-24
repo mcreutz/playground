@@ -4,6 +4,8 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pylint = "*"
+autopep8 = "*"
 
 [packages]
 beautifulsoup4 = "*"
@@ -12,14 +14,14 @@ dash-core-components = "*"
 dash-html-components = "*"
 dash_daq = "*"
 "dask[complete]" = "*"
-jupyterlab = "*"
+ipykernel = "*"
 matplotlib = "*"
 ntplib = "*"
 numpy = "*"
 pandas = "*"
 plotly = "*"
 qgrid = "*"
-psycopg2 = "*"
+psycopg2-binary = "*"
 requests = "*"
 scikit-learn = "*"
 seaborn = "*"
