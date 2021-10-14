@@ -25,3 +25,15 @@ if __name__ == "__main__":
     print(Whatever.attr)
     print(we1.attr)
     print(we2.attr)
+
+    # 0
+    # 0
+    # 0
+    # -----------
+    # 100
+    # 100
+    # 100
+    # -----------
+    # 100
+    # 200
+    # 100
