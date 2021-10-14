@@ -8,6 +8,9 @@ Todo:
 - composition
 """
 
+from abc import ABC, abstractmethod
+
+
 global_variable = 12
 
 
@@ -20,7 +23,8 @@ class MyClass1:
     # Static attributes / variables
     # public, because no underscores. External acces possible.
     static_public_attribute = 1
-    # protected, because one underscore. External access only possible from subclasses.
+    # protected, because one underscore. External access only possible from
+    # subclasses.
     _static_protected_attribute = 2
     # private, because two underscores. External access NOT possible
     __static_private_attribute = 3
@@ -46,36 +50,39 @@ class MyClass1:
     @staticmethod
     def static_method(par_1):
         """
-        can not access class status
-        https://www.geeksforgeeks.org/class-method-vs-static-method-python/
+        can not access class properties
+        (although it could, by accessing 'MyClass.my_attribute')
         """
         return par_1
 
     # Object methods
     def method1(self, parameter_1="default_value"):
-        """public, because no underscores. External rw possible."""
+        """public, because no underscores. External access possible."""
         return parameter_1
 
     def _method2(self, parameter_2="default_value"):
         """
-        protected, because one underscore. External rw possible, but not 
-        suggested.
+        protected, because one underscore. External acces possible only from 
+        inheriting classes
         """
         return parameter_2
 
     def __method3(self, parameter_3="default_value"):
         """
-        private, because two underscores. External rw NOT possible, invisible
+        private, because two underscores. External acces NOT possible, 
+        invisible
         """
         return parameter_3
 
 
-class MyInterface():
+class MyAbstractBaseClass(ABC):
+
+    @abstractmethod
     def another_method_1():
         raise NotImplementedError
 
 
-class MyClass2(MyClass1, MyInterface):
+class MyClass2(MyClass1, MyAbstractBaseClass):
     """Inherits from MyClass1, MyInterface"""
     another_static_public_attribute = 1
 
