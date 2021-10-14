@@ -7,14 +7,17 @@
 
 ---
 ## Comitting modifications
-### Add file to stage/index
-`git add <file>`
+### Add file [single changes] to stage/index
+`git add [-p] <file>` 
 
-### Remove file from stage/index but keep changes locally
-`git reset <file>`
+### Show modifications
+`git diff <file>`
 
 ### Show modified and staged/indexed files
 `git status`
+
+### Remove file from stage/index but keep changes locally
+`git reset <file>`
 
 ### Commit staged/indexed changes
 `git commit [-m <message>]`
@@ -35,6 +38,15 @@
 
 ### Merge another branch into the current one
 `git merge <name>`
+
+### Abort a conflicted merge
+`git merge --abort`
+
+### Delete local branch
+`git branch -d <name>`
+
+### Integrate all commits of another branch into the current one. This modifies the git history, so only use on local commits and never on commits that were already pushed to a remote repo.
+`git rebase <name>`
 
 ---
 ## Nice reference
