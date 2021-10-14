@@ -37,10 +37,9 @@ b) Composition: Extract those methods, that only some of the classes of an inter
 High-level modules should not depend on low-level modules. They should depend on abstractions and abstractions should not depend on details, rather details should depend on abstractions
 
 
-# Reasons
+# Goals
 - Re-usability
-- Coupling
-- Cohesion
+- Low coupling / high cohesion
 
 
 
@@ -55,8 +54,12 @@ High-level modules should not depend on low-level modules. They should depend on
 # Others
 - KISS
 - DRY
-- TDD
+- TDD (create test, fail test, create functional code, pass test, refactor functional code)
 - CI/CD
+- Separate creation from use (SRP)
+- Dependency injection
+- Contract analogy
+
 
 
 
@@ -66,3 +69,4 @@ High-level modules should not depend on low-level modules. They should depend on
 - Pylance
 - Mypy
 - Black
+- pydantic
