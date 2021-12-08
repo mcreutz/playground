@@ -4,11 +4,15 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pylint = "*"
 autopep8 = "*"
+mypy = "*"
+pylint = "*"
+pytest = "*"
+rope = "*"
 
 [packages]
 beautifulsoup4 = "*"
+ccxt = "*"
 # dash = "*"
 # dash-core-components = "*"
 # dash-html-components = "*"
