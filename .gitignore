@@ -18,3 +18,7 @@ Pipfile.lock
 
 # dask
 dask-worker-space/
+
+# secrets
+secrets.json
+
