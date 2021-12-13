@@ -34,7 +34,9 @@
 `git branch <name>`
 
 ### Switch to other branch
-`git checkout <name>`
+`git switch <name>` [-c to create and switch]
+
+(old: `git checkout <name>`)
 
 ### Merge another branch into the current one
 `git merge <name>`
