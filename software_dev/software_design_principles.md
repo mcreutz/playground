@@ -135,3 +135,7 @@ Flexibility: Interchangeability between similar modules
 
 ## Information hiding
 Provide outside access only to necessary parts through access modifiers
+
+## Object types
+Entity, boundry, control
+
