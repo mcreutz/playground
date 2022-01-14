@@ -1,3 +1,24 @@
+## Setup
+### User
+`$ git config --global user.name "Mona Lisa"`
+
+`$ git config --global user.name`
+
+`> Mona Lisa`
+
+`$ git config --global user.email "email@example.com"`
+
+`$ git config --global user.email`
+
+`> email@example.com`
+### Store credentials
+#### Unencrypted file at ~/.git-credentials
+`$ git config credential.helper store`
+
+#### MacOS Keychain
+`$ git config --global credential.helper osxkeychain`
+
+---
 ## Initialization
 ### Initialize git in current directory
 `$ git init`
