@@ -1,3 +1,8 @@
+# Goals
+- Re-usability of code
+- Flexibility
+- Maintainability
+
 # SOLID design principles
 
 ## Single Responsibility Principle
@@ -38,41 +43,29 @@ b) Composition: Extract those methods, that only some of the sub-classes of an i
 - Abstractions should not depend on details, rather details should depend on abstractions
 
 
-# Goals
-- Re-usability of code
-- Flexibility
-- Maintainability
+# Other priciples
+
+## Principle Of Least Knowledge / Law of Demeter
+*Classes should know about and interact with as few other classes as possible.*
+
+Methods should only call other methods, that are either
+- defined within the same object
+- defined within an object of its own parameters
+- defined within an object, that is instantiated within this method
+- difined within an object, that is a direct component of its own object.
+
+Returned objects should be of a type that are declared either
+- locally in the method
+- in the method's parameters
+- in instance variables of the class that encapsulates the method
+
+
+## Composing Objects Principle
+*Use composition over inheritance, where possible*
 
 
 
-
-# Links
-- https://www.youtube.com/watch?v=pTB30aXS77U
-
-
-
-
-# Others
-- KISS
-- DRY
-- TDD (create test, fail test, create functional code, pass test, refactor functional code)
-- CI/CD
-- Separate creation from use (SRP)
-- Dependency injection
-- Contract analogy: An interface is like a contract, that needs to be fulfilled by implementing classes
-
-
-
-
-# Helpers
-- Pylint
-- Pylance
-- Mypy
-- Black
-- pydantic
-
-
-
+# Techniques
 
 ## Abstraction
 Reducing (an object) to its (for the given context) relevant features
@@ -80,9 +73,15 @@ Reducing (an object) to its (for the given context) relevant features
 ## Encapsulation
 Limiting the access of properties and methods from outside a class by access modifiers and getters/setters to improve understandability and control about property value modifications
 
+## Information hiding
+Provide outside access only to necessary parts through access modifiers
+
+## Separaton of concerns
+
 ## Decomposition
 The division of a whole into smaller pieces ant their relationships. Or the connection of smaller pieces to form a bigger whole.
 
+## ???
 ### Association
 Two classes have a loose relationship but do exist independently of each other.
 Airline - person
@@ -90,13 +89,13 @@ Line connects the classes
 
 ### Aggregation
 An association, where..
-Parts belong to other parts, loose 'has-a'-relationship. But the connection is temporal and the objects can exist separately.
+- Parts belong to other parts, loose 'has-a'-relationship. But the connection is temporal and the objects can exist separately.
 Plane - crew
 Hollow diamond marks the containing class
 
 ### Composition
 An aggregation, where..
-Parts belong to other parts, strong 'has-a'-relationship. Parts cannot exist separately.
+- Parts belong to other parts, strong 'has-a'-relationship. Parts cannot exist separately.
 Human - brain
 Daughter object does not need to be created within mother object. Dependency injection is also possible.
 Filled diamond marks the containing class
@@ -120,8 +119,6 @@ Drawn as hollow arrow with dashed line, pointing upwards to the interface
 ### Polymorphism
 Objects with the same (method-)signature but different implementations
 
-
-
 ## Coupling
 Degree: The number of connections to other modules (classes, methods)
 Ease: Connections should be easy to make and understand, without knowledge about the implementation of the other module.
@@ -129,13 +126,88 @@ Flexibility: Interchangeability between similar modules
 
 ## Cohesion
 
-
-## Separaton of concerns
-
-
-## Information hiding
-Provide outside access only to necessary parts through access modifiers
-
 ## Object types
 Entity, boundry, control
 
+## Delegation
+
+
+
+
+# Links
+- https://www.youtube.com/watch?v=pTB30aXS77U
+
+
+
+
+# Others
+- KISS
+- DRY
+- TDD (create test, fail test, create functional code, pass test, refactor functional code)
+- CI/CD
+- Separate creation from use (SRP)
+- Dependency injection
+- Contract analogy: An interface is like a contract, that needs to be fulfilled by implementing classes
+
+
+
+# Helpers
+- Pylint
+- Pylance
+- Mypy
+- Black
+- pydantic
+
+
+
+
+# Code smells
+- Bad comments
+- Duplicated code
+- Long method
+- Large class
+- Small class
+- Long parameter list
+- Feature envy
+- Inappropriate intimacy
+- Message chains
+- Primitive obsession
+- Switch statements
+- Speculative generality
+- Refused request
+(On code changes)
+- Divergent change
+- Shotgun surgery
+
+
+
+# Design pattterns
+## Creational
+- Abstract Factory
+- Builder
+- Factory Method
+- Prototype
+- Singleton
+
+## Structural
+- Adapter
+- Bridge
+- Composite
+- Decorator
+- Facade 
+- Flyweight
+- Model View Controller
+- Proxy
+
+## Behavioral
+- Chain of Responsibility
+- Command
+- Interpreter
+- Iterator
+- Mediator
+- Memento
+- Observer
+- State
+- Strategy
+- Template Method
+- Visitor
