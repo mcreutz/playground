@@ -1,0 +1,28 @@
+One creates the other
+- within constructor and stores as property			(Association)
+- within constructor and stores as temporary local object		()
+- on method call and stores as property				(Association)
+- on method call and stores as temporary local object		()
+
+one receives the other 
+- as constructor parameter and stores as property			(Association)
+- as constructor parameter and stores as temporary local object	()
+- as method parameter and stores as property			(Association)
+- as method parameter and stores as temporary local object	(Dependency)
+
+
+
+## Dependency
+Elements are dependent on each other. One class receives an instance of another class as a method parameter. 
+
+## Association
+One class holds a reference to another one.
+
+## Aggregation (Association)
+As association, but the child can exist independently of the parent.
+
+## Composition (Association)
+Composition implies that two classes are associated and it adds the following details: within a Composition sub-objects are strongly dependent on a whole. Objects of the types are instantiated together and have common lifecycle.
+
+
+If a reference to an object is passed to another class, the object can survive its creator class
