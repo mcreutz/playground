@@ -118,19 +118,21 @@ One class is dependent on the other. It uses parts of the other class, but is no
 Dashed line connects the classes, an open tip marks the daughter class
 
 ### Association
-Two classes have a loose relationship but do exist independently of each other. An association is also a dependency.
+Two classes have a loose relationship (one uses the other, but no ownership) and they do exist independently of each other (regarding lifetime). An association is also a dependency.
 
 Airline - person
 Line connects the classes, sometimes an open tip marks the daughter class
 
 ### Aggregation
-An association, where..
+An association, where 
+- one object also owns the other one. But the lifetime of the objects is still unrelated.
 - Parts belong to other parts, loose 'has-a'-relationship. But the connection is temporal and the objects can exist separately.
 Plane - crew
 Line connects the classes, hollow diamond marks the mother class
 
 ### Composition
 An aggregation, where..
+- one object not only uses and owns another object, but also the lifetime of the other object depends on the owning class.
 - Parts belong to other parts, strong 'has-a'-relationship. Parts cannot exist separately.
 Plane - Engine
 Daughter object does not need to be created within mother object. Dependency injection is also possible.
