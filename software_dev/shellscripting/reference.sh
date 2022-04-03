@@ -54,10 +54,18 @@ cd .. \
 $HOME
 
 # comparisons
--le
-&&
-||
-==
+## equality
+==, !=
+##comparison
+<=, >=, <, >
+## bitwise
+&, |, ^(XOR)
+## logical
+&&, ||
+
+# evaluations
+(command)
+((arithmetic expression))
 
 # Slicing
 
