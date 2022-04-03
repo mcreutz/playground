@@ -65,6 +65,9 @@
 ### Merge another branch into the current one
 `$ git merge <name>`
 
+### Merge two branches
+`$ git merge <destination> <source>`
+
 ### Abort a conflicted merge
 `$ git merge --abort`
 
