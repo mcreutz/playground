@@ -7,7 +7,6 @@ verify_ssl = true
 autopep8 = "*"
 mypy = "*"
 pylint = "*"
-pytest = "*"
 rope = "*"
 
 [packages]
@@ -27,7 +26,9 @@ pandas = "*"
 plotly = "*"
 # qgrid = "*"
 psycopg2-binary = "*"
+pytest = "*"
 requests = "*"
+responses = "*"
 scikit-learn = "*"
 seaborn = "*"
 sqlalchemy = "*"
