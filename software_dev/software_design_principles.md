@@ -51,7 +51,7 @@ Methods should only call other methods, that are either
 - defined within an object, that is instantiated within this method
 - difined within an object, that is a direct component of its own object.
 
-Returned objects should be of a type that are declared either
+Returned objects should be of a type that is declared either
 - locally in the method
 - in the method's parameters
 - in instance variables of the class that encapsulates the method
@@ -148,17 +148,12 @@ Dashed line connects the classes, an hollow tip marks the base class, usually po
 
 
 
-
 ## Object types
 Entity, boundry, control
 
+
+
 ## Delegation
-
-
-
-
-# Links
-- https://www.youtube.com/watch?v=pTB30aXS77U
 
 
 
@@ -174,17 +169,25 @@ Entity, boundry, control
 
 
 
-# Helpers
-- Pylint
-- Pylance
-- Mypy
-- Black
-- pydantic
 
 
 
 
-# Code smells
+
+# Clean Code
+## Methods
+- Methods should have as few parameters as possible. 3 or more parameters only in emergencies.
+- Types of methods:...
+- Max one level of abstraction
+- Do one thing only
+- Have no side effects
+- Command/Query separation
+- Throw exceptions if not returning as advertised
+
+## Classes
+- 
+
+## Code smells
 - Bad comments
 - Duplicated code
 - Long method
@@ -201,49 +204,3 @@ Entity, boundry, control
 (On code changes)
 - Divergent change
 - Shotgun surgery
-
-
-
-# Design pattterns
-## Creational
-- Abstract Factory
-- Builder
-- Factory Method
-- Prototype
-- Singleton
-
-## Structural
-- Adapter
-- Bridge
-- Composite
-- Decorator
-- Facade 
-- Flyweight
-- Model View Controller
-- Proxy
-
-## Behavioral
-- Chain of Responsibility
-- Command
-- Interpreter
-- Iterator
-- Mediator
-- Memento
-- Observer
-- State
-- Strategy
-- Template Method
-- Visitor
-
-## Data acccess
-- Data Mapper
-- Identity List
-- Repository
-- Active Record
-- Row Data Gateway
-- Table Data Gateway
-
-
-
-
-Inversion of control == dependency injection ?
