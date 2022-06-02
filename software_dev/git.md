@@ -81,5 +81,10 @@
 `$ git rebase <name>`
 
 ---
+## Remotes
+### Get URL of remote named origin
+`$ git remote get-url origin`
+
+---
 ## Nice reference
 https://education.github.com/git-cheat-sheet-education.pdf
