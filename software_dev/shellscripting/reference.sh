@@ -96,12 +96,24 @@ cat
 chmod
 curl / wget
 grep
+history  # Command history
 jq
 less / more
+mount | column -t  # Column formatted table of active mounts
 passwd
 pwd
 pushd / popd
 sed
+tail -f  # Open textfile and stream file updates
 tar
 tee
 test
+truncate -s 0 filename  # Remove content of file up to given size is reached. Good to clear a file without deleting it.
+
+# shortcuts
+!nnn  # Run command no nnn from command history
+!!  # Last command
+-  # Previous directory
+.  # Current directory
+..  # Parent directory
+~  # Current users home directory
