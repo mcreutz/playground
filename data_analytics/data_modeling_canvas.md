@@ -1,9 +1,6 @@
-This worksfow is ordered from the computational point of view. The workflow may be in a slightly different order.
-
 Pre-inspection
-    Check feature identifiers (what is this?)
+    Check feature identifiers/names
     .describe() / .info() / .head()
-    Check for duplicates
 
 Split dataset
     Test
@@ -11,11 +8,15 @@ Split dataset
         Use seed value or indexes, to have always the same values for validation and test, even when further values are added to the original dataset
         Use stratified split methods, to ensure equal feature distribution in train and test dataset.
     Validation
-    Test
+        For hyperparameter optimization
+    Training
         This is the rest of the data. If it is too big for efficient exploratory analysis, create an subset for EDA.
         Separate labels from features
 
-Feature selection
+Exploratory Data Analysis / Feature selection
+    Correlations to Label
+    Correlation between features / redundant features
+    Also check for non-linear correlations
     Generating additional features
         Variations from single feature (^^2, ^^3, sqrt)
         Aggregation or combination of similar/connected features, eg:
@@ -23,11 +24,8 @@ Feature selection
         - count_of_houses / count_of_rooms = avg_rooms_per_house
         Decompose existing features, eg:
         - split datetime to date and time, or use the hour only, whatever seems suitable for the problem
-    Correlations to Label
-    Correlation between features / redundant features
-    Also check for non-linear correlations
     
-Feature preparation
+Feature preparation (of selected features)
     Datatype modification where necessary
     missing values (univariate or multivariate imputation / row removal / >.15 feature removal)
     Split numerical and categorical freatures
@@ -45,6 +43,9 @@ Feature preparation
         one-hot-encoding
     Lables
         Remove samples with missing label-values?
+
+Create pipeline
+
 
 Modeling
 
