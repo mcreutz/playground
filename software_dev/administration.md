@@ -3,7 +3,7 @@
 nmap -sn 192.168.0.0/24
 
 ## Portscan
-nmap www.hostname.com
+nmap <url>
 nmap 192.168.0.1-10
 nmap 192.168.0.1/13
 nmap –p 80 192.168.0.1
