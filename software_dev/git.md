@@ -82,8 +82,17 @@
 
 ---
 ## Remotes
-### Get URL of remote named origin
-`$ git remote get-url origin`
+### Get URL of remote
+`$ git remote get-url <remote-name>`
+
+### Push local commits of active branch to remote repo
+`$ git push`
+
+### Push local commits of specific branch to remote repo
+`$ git push <branch-name>`
+
+### Push local commits of new branch to remote repo
+`$ git push --set-upstream <remote-name> <branch-name>`
 
 ---
 ## Nice reference
