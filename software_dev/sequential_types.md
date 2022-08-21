@@ -1,18 +1,15 @@
-| Type                     | Declaration                          | Mixed datatypes | Sliceable / indexable | Duplicate entries | Fixed element order | Hashed | Mutability |
-| ------------------------ | ------------------------------------ | --------------- | --------------------- | ----------------- | ------------------- | ------ | ---------- |
-| **List**                 | l = [1, "some", 3.45]                | ✅               | ✅                     | ✅                 | ✅                   | ❌      | ✅          |
-| **Tuple**                | t = (1, 2)                           | ✅               | ✅                     | ✅                 | ✅                   | ❌      | ❌          |
-| **Dictionary keys**      | d = {'some': 11, 'key': "value"}     | ✅               | ❌                     | ❌                 | ❌                   | ✅      | ✅          |
-| **Dictionary values**    | d = {1: "some", 2: 22}               | ✅               | ❌                     | ✅                 | by key              | ❌      | ✅          |
-| **Set**                  | s = {1, "a"}                         | ✅               | ❌                     | ❌                 | ❌                   | ✅      | ✅          |
-| **Frozenset**            | 🤔                                    | 🤔               | 🤔                     | 🤔                 | 🤔                   | 🤔      | 🤔          |
-| **String**               | s = "some"                           | ❌               | ✅                     | ✅                 | ✅                   | ❌      | ❌          |
-| **Bytearray**            | 🤔                                    | 🤔               | 🤔                     | 🤔                 | 🤔                   | 🤔      | 🤔          |
-| **Numpy ndarray**        | n = np.array([[1, 2], [3, 4]])       | ❌               | ✅                     | ✅                 | ✅                   | ❌      | ✅          |
-| **Pandas series index**  | s = pd.Series({'a': 11, 9: "value"}) | ❌               | ✅                     | ❌                 | ❌                   | ✅      | ✅          |
-| **Pandas series values** | s = pd.Series({'a': 11, 9: "value"}) | ❌               | ✅                     | ✅                 | by index            | ❌      | ✅          |
-
-
-
-Todo:
-- Modifications (adding, removing, sorting, accessing):
+| Type                                                                                                      | Declaration                          | Mixed types | Indexable | Duplicate entries | Fixed element order | Hashed | Mutable |
+| --------------------------------------------------------------------------------------------------------- | ------------------------------------ | :---------: | :-------: | :---------------: | :-----------------: | :----: | :-----: |
+| [**List**](https://docs.python.org/3/library/stdtypes.html#list)                                          | l = [1, "some", 3.45]                |      ✅      |     ✅     |         ✅         |          ✅          |   ❌    |    ✅    |
+| [**Tuple**](https://docs.python.org/3/library/stdtypes.html#tuple)                                        | t = (1, 2)                           |      ✅      |     ✅     |         ✅         |          ✅          |   ❌    |    ❌    |
+| [**Range**](https://docs.python.org/3/library/stdtypes.html#range)                                        | r = range(5)                         |      ❌      |     ✅     |         ❌         |          ✅          |   ❌    |    ❌    |
+| [**Dictionary keys**](https://docs.python.org/3/library/stdtypes.html#dict)                               | d = {'some': 11, 'key': "value"}     |      ✅      |     ❌     |         ❌         |          ❌          |   ✅    |    ✅    |
+| [**Dictionary values**](https://docs.python.org/3/library/stdtypes.html#dict)                             | d = {1: "some", 2: 22}               |      ✅      |     ❌     |         ✅         |       by key        |   ❌    |    ✅    |
+| [**Set**](https://docs.python.org/3/library/stdtypes.html#set)                                            | s = {1, "a"}                         |      ✅      |     ❌     |         ❌         |          ❌          |   ✅    |    ✅    |
+| [**Frozenset**](https://docs.python.org/3/library/stdtypes.html#frozenset)                                | f = {1, "a"}                         |      ✅      |     ❌     |         ❌         |          ❌          |   ✅    |    ❌    |
+| [**String**](https://docs.python.org/3/library/stdtypes.html#textseq)                                     | s = "some"                           |      ❌      |     ✅     |         ✅         |          ✅          |   ❌    |    ❌    |
+| [**Bytearray**](https://docs.python.org/3/library/stdtypes.html#bytearray-objects)                        | b = bytearray(b"some")               |      ❌      |     ✅     |         ✅         |          ✅          |   ❌    |    ✅    |
+| [**Bytes**](https://docs.python.org/3/library/stdtypes.html#bytes-objects)                                | b = bytes(b"some")                   |      ❌      |     ✅     |         ✅         |          ✅          |   ❌    |    ❌    |
+| [**Numpy ndarray**](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html)                  | n = np.array([[1, 2], [3, 4]])       |      ❌      |     ✅     |         ✅         |          ✅          |   ❌    |    ✅    |
+| [**Pandas series index**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html)  | s = pd.Series({'a': 11, 9: "value"}) |      ✅      |     ✅     |         ❌         |          ❌          |   ✅    |    ✅    |
+| [**Pandas series values**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html) | s = pd.Series({'a': 11, 9: "value"}) |      ❌      |     ✅     |         ✅         |      by index       |   ❌    |    ✅    |
