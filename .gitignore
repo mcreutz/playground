@@ -24,3 +24,7 @@ secrets.json
 
 # mypy
 .mypy_cache/
+
+# terraform
+.terraform/
+.terraform*
