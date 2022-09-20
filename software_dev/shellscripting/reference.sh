@@ -76,7 +76,9 @@ exit 1  # If no exit command is given at the end and last command was successful
 
 
 
-
+# Environment variables
+printenv  # Show all environment variables for the active user, that have a value set
+env  # Run a command under modified environment: $ env EDITOR=vim xterm
 
 
 
@@ -101,6 +103,7 @@ jq
 less / more
 mount | column -t  # Column formatted table of active mounts
 passwd
+printenv
 pwd
 pushd / popd
 sed
