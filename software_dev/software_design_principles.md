@@ -204,3 +204,7 @@ Entity, boundry, control
 (On code changes)
 - Divergent change
 - Shotgun surgery
+
+
+# Links
+- https://clean-code-developer.de/
