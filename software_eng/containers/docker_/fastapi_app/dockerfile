@@ -1,0 +1,29 @@
+# -----------------------------------------------------------
+# Using Alpine linux
+
+FROM alpine:latest
+
+# ENV http_proxy "http://wpad.germany.focke.de:8080"
+# ENV https_proxy "https://wpad.germany.focke.de:8080"
+
+RUN apk update
+RUN apk add --update python3 py3-pip
+
+# -----------------------------------------------------------
+# Using Ubuntu linux
+
+# FROM ubuntu
+
+# ENV http_proxy "http://wpad.germany.focke.de:8080"
+# ENV https_proxy "https://wpad.germany.focke.de:8080"
+
+# RUN apt-get update \
+# && apt-get install -y python-dev python-pip
+
+# -----------------------------------------------------------
+# OS independant
+
+COPY . /app
+WORKDIR /app
+RUN pip install -r requirements.txt 
+ENTRYPOINT [ "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80" ]
