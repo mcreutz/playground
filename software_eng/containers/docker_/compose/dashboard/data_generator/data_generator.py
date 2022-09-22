@@ -15,13 +15,19 @@ def signal_handler(sig, frame):
     abort = True
     sys.exit(0)
 
+
 signal.signal(signal.SIGINT, signal_handler)
 print("Press Ctrl+C to abort.")
 
 # Establish db connection
-db_host = os.environ['DB_HOST']
-db_port = os.environ['DB_PORT']
-con = psycopg2.connect(database="postgres", user="postgres", password="mypassword", host=db_host, port=db_port)
+DB_HOST = os.environ['DB_HOST']
+DB_PORT = os.environ['DB_PORT']
+DB_NAME = os.environ['DB_NAME']
+POSTGRES_USER = os.environ['POSTGRES_USER']
+POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
+
+con = psycopg2.connect(database=DB_NAME, user=POSTGRES_USER,
+                       password=POSTGRES_PASSWORD, host=DB_HOST, port=DB_PORT)
 cur = con.cursor()
 
 # Create table, if not exists
@@ -57,7 +63,3 @@ while not abort:
 
 # Close connection
 con.close()
-
-
-
-

@@ -10,33 +10,37 @@ services:
       - "8000:3000"  # expose grafana port to host
     volumes:
       - "grafana-storage:/var/lib/grafana/"
-    networks:
-      - "my-network"
+    # networks:
+    #   - "my-network"
 
   my-postgres:
     image: "postgres:latest"
     env_file:
       - "database.env" # configure postgres
-    # volumes:
-    #   - database-storage:/var/lib/postgresql/data/ # persist data even if container shuts down
+    volumes:
+      - database-storage:/var/lib/postgresql/data/ 
     ports:
       - "8001:5432"  # expose postgres port to host
-    networks:
-      - "my-network"
+    # networks:
+    #   - "my-network"
 
   data-generator:
     build: "./data_generator"
-    networks:
-      - "my-network"
     depends_on:
       - "my-postgres"
     environment:
       - "DB_HOST=my-postgres"
       - "DB_PORT=5432"
+      - "DB_NAME=my_database"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=mypassword"
+      
+    # networks:
+    #   - "my-network"
 
 volumes:
   grafana-storage:
-  # database-storage: # named volumes can be managed easier using docker-compose
+  database-storage: # named volumes can be managed easier using docker-compose
 
-networks:
-  my-network:
+# networks:
+#   my-network:

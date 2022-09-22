@@ -1,8 +1,9 @@
 FROM ubuntu:latest
 
 RUN apt update
-RUN apt upgrade -y python3
+RUN apt upgrade -y python3-dev
 RUN apt upgrade -y python3-pip
+RUN apt upgrade -y libpq-dev
 
 WORKDIR /datagen
 
