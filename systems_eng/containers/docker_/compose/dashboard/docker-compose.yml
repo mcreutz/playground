@@ -1,7 +1,6 @@
 version: "3.9"
 
 services:
-
   my-grafana:
     image: "grafana/grafana:latest"
     env_file:
@@ -10,8 +9,6 @@ services:
       - "8000:3000"  # expose grafana port to host
     volumes:
       - "grafana-storage:/var/lib/grafana/"
-    # networks:
-    #   - "my-network"
 
   my-postgres:
     image: "postgres:latest"
@@ -21,8 +18,6 @@ services:
       - database-storage:/var/lib/postgresql/data/ 
     ports:
       - "8001:5432"  # expose postgres port to host
-    # networks:
-    #   - "my-network"
 
   data-generator:
     build: "./data_generator"
@@ -34,13 +29,7 @@ services:
       - "DB_NAME=my_database"
       - "POSTGRES_USER=postgres"
       - "POSTGRES_PASSWORD=mypassword"
-      
-    # networks:
-    #   - "my-network"
 
 volumes:
   grafana-storage:
-  database-storage: # named volumes can be managed easier using docker-compose
-
-# networks:
-#   my-network:
+  database-storage: 
