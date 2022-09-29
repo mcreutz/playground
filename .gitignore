@@ -26,5 +26,6 @@ secrets.json
 .mypy_cache/
 
 # terraform
+*.tfstate*
 .terraform/
 .terraform*
