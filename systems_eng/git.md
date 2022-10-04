@@ -1,98 +1,148 @@
 ## Setup
 ### User
-`$ git config --global user.name "Mona Lisa"`
+```console
+$ git config --global user.name "Mona Lisa"`
+$ git config --global user.name
+> Mona Lisa
+```
+```console
+$ git config --global user.email "email@example.com"
+$ git config --global user.email
+> email@example.com
+```
 
-`$ git config --global user.name`
-
-`> Mona Lisa`
-
-`$ git config --global user.email "email@example.com"`
-
-`$ git config --global user.email`
-
-`> email@example.com`
 ### Store credentials
 #### Unencrypted file at ~/.git-credentials
-`$ git config credential.helper store`
+```console
+$ git config credential.helper store
+```
 
 #### MacOS Keychain
-`$ git config --global credential.helper osxkeychain`
+```console
+$ git config --global credential.helper osxkeychain
+```
 
 ---
 ## Initialization
 ### Initialize git in current directory
-`$ git init`
+```console
+$ git init
+```
 
 ### Clone remote repository to local drive
-`$ git clone <url> [<local_path>]`
+```console
+$ git clone <url> [<local_path>]
+```
 
 ---
 ## Comitting modifications
 ### Add file [single changes] to stage/index
-`$ git add [-p] <file>` 
+```console
+$ git add [-p] <file>
+```
 
 ### Show modifications
-`$ git diff <file>`
+```console
+$ git diff <file>
+```
 
 ### Show modified and staged/indexed files
-`$ git status`
+```console
+$ git status
+```
 
 ### Remove file from stage/index but keep changes locally
-`$ git reset <file>`
+```console
+$ git reset <file>
+```
 
 ### Commit staged/indexed changes
-`$ git commit [-m <message>]`
+```console
+$ git commit [-m <message>]
+```
 
 ### Remove file from version control but keep it in the filesystem
-`$ git rm --cached <file>`
+```console
+$ git rm --cached <file>
+```
 
 ---
 ## Branching
 ### List branches
-`$ git branch`
+```console
+$ git branch
+```
 
 ### Create new branch
-`$ git branch <name>`
+```console
+$ git branch <name>
+```
 
 ### Switch to other branch
-`$ git switch <name>` [-c to create and switch]
+```console
+$ git switch <name> [-c to create and switch]
+```
 
-(old: `$ git checkout <name>`)
+```console
+$ git checkout <name> (deprecated)
+```
 
 ### Rename branch
-`$ git branch -m new-name`
+```console
+$ git branch -m new-name
+```
 
 ### Merge another branch into the current one
-`$ git merge <name>`
+```console
+$ git merge <name>
+```
 
 ### Merge two branches
-`$ git merge <destination> <source>`
+```console
+$ git merge <destination> <source>
+```
 
 ### Abort a conflicted merge
-`$ git merge --abort`
+```console
+$ git merge --abort
+```
 
 ### Delete local branch
-`$ git branch -d <name>`
+```console
+$ git branch -d <name>
+```
 
 ### Delete remote branch
-`$ git push remote_name -d remote_branch_name`
+```console
+$ git push remote_name -d remote_branch_name
+```
 
 ### Integrate all commits of another branch into the current one. This modifies the git history, so only use on local commits and never on commits that were already pushed to a remote repo.
-`$ git rebase <name>`
+```console
+$ git rebase <name>
+```
 
 ---
 ## Remotes
 ### Get URL of remote
-`$ git remote get-url <remote-name>`
+```console
+$ git remote get-url <remote-name>
+```
 
 ### Push local commits of active branch to remote repo
-`$ git push`
+```console
+$ git push
+```
 
 ### Push local commits of specific branch to remote repo
-`$ git push <branch-name>`
+```console
+$ git push <branch-name>
+```
 
 ### Push local commits of new branch to remote repo
-`$ git push --set-upstream <remote-name> <branch-name>`
+```console
+$ git push --set-upstream <remote-name> <branch-name>
+```
 
 ---
 ## Nice reference
