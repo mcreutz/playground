@@ -17,10 +17,11 @@ func local_variables() {
 	// varaible declaration at function level
 	var three, four bool
 	seven := "seven" // this can be used insted of a 'var'-statement, but only within functions
+	fmt.Println(three, four, seven)
 
 	// Auto initialization
 	// if variables are not explicitly initialized at declaration, they are implicitly initialized by the runtime.
-	// zero for numeric types, fals for bool, "" for string
+	// zero for numeric types, false for bool, "" for string
 	var i int
 	var f float64
 	var b bool
@@ -31,6 +32,7 @@ func local_variables() {
 	ii := 42
 	ff := float64(ii)
 	uu := uint(ff)
+	fmt.Println(uu)
 
 	// Formatting
 	my_var := 10
@@ -48,8 +50,8 @@ func local_variables() {
 	fmt.Println(primes)
 
 	// Slices
-	var s []int = primes[1:4]
-	fmt.Println(s)
+	var ss []int = primes[1:4]
+	fmt.Println(ss)
 }
 
 func add(x int, y int) int {
@@ -93,7 +95,6 @@ func conditionals() int {
 	} else {
 		return 2 * c // The 'elese'-staement is optional
 	}
-	return 0
 }
 
 func switch_case() {
@@ -209,6 +210,8 @@ func main() {
 	// 'Println' can be called from 'fmt', because it is public. Go calls this 'exported'.
 	// You can 'export' fuctions from a package by starting their name with a capital letter.
 	a, b := swap("hello", "world")
+	fmt.Println(a, b)
+
 	// '>>', '<<' are byte-shift operators.
 	// mil = 1 << 6
 }
