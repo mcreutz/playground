@@ -5,7 +5,7 @@ description = ""
 authors = ["Martin <35747507+croidzen@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
-python = "~3.9"
+python = "~3.10"
 asyncua = "^0.9.94"
 beautifulsoup4 = "^4.11.1"
 ccxt = "^1.92.19"
