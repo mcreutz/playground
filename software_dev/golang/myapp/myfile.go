@@ -17,7 +17,9 @@ func local_variables() {
 	// varaible declaration at function level
 	var three, four bool
 	seven := "seven" // this can be used insted of a 'var'-statement, but only within functions
+	fmt.Println("varaible declaration at function level")
 	fmt.Println(three, four, seven)
+	fmt.Println()
 
 	// Auto initialization
 	// if variables are not explicitly initialized at declaration, they are implicitly initialized by the runtime.
@@ -54,7 +56,7 @@ func local_variables() {
 	fmt.Println(ss)
 }
 
-func add(x int, y int) int {
+func Add(x int, y int) int {
 	// takes two int parameters and returns an int
 	return x + y
 }
