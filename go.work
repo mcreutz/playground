@@ -1,7 +1,7 @@
 go 1.19
 
 use (
-	./software_dev/golang/benchmark
-	./software_dev/golang/myapp
-	./software_dev/golang/oop
+	./software_dev/go/benchmark
+	./software_dev/go/myapp
+	./software_dev/go/oop
 )
