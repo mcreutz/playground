@@ -19,3 +19,8 @@ ps -A | grep <pid>
 kill <pid>
 pkill <pname>
 
+# Gaining root user privileges
+sudo   # Execute following command with admin privileges, if current user is granted sudo rights. User password is prompted
+su  # Login as root with existing environment. Root user password is prompted
+su -  # Login as root with root environment. Root user password is prompted
+sudo su -  # Login as root with root environment. User password is prompted
