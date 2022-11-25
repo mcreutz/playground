@@ -98,22 +98,39 @@ test -z "$TARGET_DIR" && { echo "Fatal Error: No TARGET_DIR set" ; exit 1 ; }
 
 
 # Select parent dir
-REPO_ROOT_DIR="${CI_DIR}/.."
+REPO_ROOT_DIR = "${CI_DIR}/.."
+
+
+# Files handling
+cat  # print a files content. If multiple files are given, print concatenated contents 
+chmod
+chown
+cp
+mkdir
+mv
+rm
+rmdir
+touch  # create files. If file exists, modification timestamp is updated
+
+
+# Redirecting standartd output
+command_1 | command_2
+command > file  # Write to file (replace previous content or create if file does not exist)
+command >> file  # Append to file
 
 
 # Useful commands and programs
-cat
-chmod
 curl / wget
-grep
+echo  # create output from string
+grep  # filter lines for text or regex
 history  # Command history
 jq
 less / more
 mount | column -t  # Column formatted table of active mounts
 passwd
 printenv
-pwd
 pushd / popd
+pwd
 sed
 tail -f  # Open textfile and stream file updates
 tar
@@ -129,3 +146,5 @@ truncate -s 0 filename  # Remove content of file up to given size is reached. Go
 .  # Current directory
 ..  # Parent directory
 ~  # Current users home directory
+Esc, Esc  # Re-run last command with sudo, zsh only
+

@@ -20,7 +20,25 @@ kill <pid>
 pkill <pname>
 
 # Gaining root user privileges
-sudo   # Execute following command with admin privileges, if current user is granted sudo rights. User password is prompted
-su  # Login as root with existing environment. Root user password is prompted
-su -  # Login as root with root environment. Root user password is prompted
-sudo su -  # Login as root with root environment. User password is prompted
+sudo <command>  # Execute the command with admin privileges, if current user is granted sudo rights. User password is prompted
+su <username>  # Switch to other user, but with existing environment. Root, if no username is given. New users password is prompted. 'exit' or Ctrl-D to exit.
+su -  # Switch to root with root environment. Root user password is prompted
+sudo su -  # Switch to root with root environment. User password is prompted
+
+# User management
+whoami  # show current user
+who  # show logged-in users
+
+# Disk management
+du
+df
+
+head
+tail
+date
+less
+history
+ps
+kill \ killall
+
+gzip \ gunzip \ tar
