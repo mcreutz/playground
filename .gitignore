@@ -16,16 +16,8 @@ Pipfile.lock
 # macos stuff
 .DS_Store
 
-# dask
-dask-worker-space/
-
 # secrets
 secrets.json
 
 # mypy
 .mypy_cache/
-
-# terraform
-*.tfstate*
-.terraform/
-.terraform*
