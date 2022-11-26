@@ -15,30 +15,47 @@ nmap –p– 192.168.0.1  # scan all ports (1 – 65535)
 netstat -anv | grep <port>  # gets the PID
 ps -A | grep <pid>
 
-# Kill a process
+# Process management
 kill <pid>
 pkill <pname>
+killall
+ps
 
 # Gaining root user privileges
 sudo <command>  # Execute the command with admin privileges, if current user is granted sudo rights. User password is prompted
-su <username>  # Switch to other user, but with existing environment. Root, if no username is given. New users password is prompted. 'exit' or Ctrl-D to exit.
-su -  # Switch to root with root environment. Root user password is prompted
+su <username>  # Switch to other user, but with existing environment. Switches to root, if no username is given. New user's password is prompted. 'exit' or Ctrl-D to exit.
+su -  # Switch to root with root environment. '-' is short for '-l', switching environment. Root user password is prompted
 sudo su -  # Switch to root with root environment. User password is prompted
 
 # User management
 whoami  # show current user
 who  # show logged-in users
+passwd  # change active user's password
 
 # Disk management
 du
 df
 
+# Memory
+free  # show memeory usage
+
+# Network
+ip
+ifconfig  # list all network interfaces
+netstat  # show network traffic
+nslookup <domain>  # get domain information
+curl / wget
+
+# Firewall
+iptables
+nftables
+
+# Other
 head
 tail
 date
 less
 history
 ps
-kill \ killall
-
 gzip \ gunzip \ tar
+awk
