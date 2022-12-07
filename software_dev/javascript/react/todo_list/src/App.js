@@ -1,23 +1,20 @@
 // Tutorial from https://www.youtube.com/watch?v=hQAHSlTtcmY
 
-// 'useState' stores currrent state ???
-// 'useRef' allows access to other components
-// 'useEfffect' ???
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';  // React hooks
 
 import TodoList from './TodoList'  // import our own component
 import uuidv4 from 'uuid/dist/v4'  // to create unique IDs for todos
 
 
-const LOCAL_STORAGE_KEY = 'todoApp.todos'  // Key to reference our todos in 'useEffect'
+const LOCAL_STORAGE_KEY = 'todoApp.todos'  // Key to reference our todos in 'useEffect', could be anything.
 
 
 function App() {
-  const [todos, setTodos] = useState([])
-  const todoNameRef = useRef()
+  const [todos, setTodos] = useState([])  // 'useState' stores currrent state, changes of state re-renders the app
+  const todoNameRef = useRef()  // 'useRef' allows access to other components by reference
 
   // On app load, get stored todos from storage. If not empty, load.
-  // Content of '[]' is monitored for change to trigger this function. No ccontent means triggger on startup.
+  // 'useEffect' monitors content of '[]' for change, then triggers this function. No content means triggger on startup.
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
     if (storedTodos) setTodos(storedTodos)
@@ -29,7 +26,7 @@ function App() {
   }, [todos])
 
 
-  // On toggle of chackbox, copy all todos, then toggle '.complete' of given 'id' and update.
+  // On toggle of checkbox, copy all todos, then toggle '.complete' of given 'id' and update.
   function toggleTodo(id) {
     const newTodos = [...todos]
     const todo = newTodos.find(todo => todo.id === id)
