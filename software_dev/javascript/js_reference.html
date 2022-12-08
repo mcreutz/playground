@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <title>Title</title>
+</head>
+
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script>
+        // Semicolons at end of line can be omittet.
+
+        /*
+        Variable types:
+        - undefined
+        - null
+        - boolean
+        - string  (single quotes, double quotes or backticks)
+        - symbol
+        - number
+        - object
+        */
+
+        // Variable declaration
+        var myName = "my value";  // global scope
+        let otherName = "other value";  // current scope
+        const anotherName = "some value";  // constant
+
+        // shorteded arithmtic with +=, *= etc. are available. ++ and -- also.
+
+        // String handling
+        console.log(myName + " concatenated.");
+        console.log("Length of a string: " + myName.length);
+
+        // Slicing / indexing
+        console.log(myName[0]);
+        console.log(myName[myName.length - 1]);
+
+        // Import / export
+        import { myFunction } from "./myModule.js";
+        export { myFunction };
+
+        // Control structures
+        if (true) {
+            console.log("if");
+        } else if (false) {
+            console.log("else if");
+        } else {
+            console.log("else");
+        }
+
+        switch (myName) {
+            case "my value":
+                console.log("switch");
+                break;
+            case "other value":
+                console.log("switch");
+                break;
+            default:
+                console.log("switch");
+                break;
+        }
+
+        for (let i = 0; i < 10; i++) {
+            console.log("for");
+        }
+
+        let i = 0;
+        while (i < 10) {
+            console.log("while");
+            i++;
+        }
+
+        do {
+            console.log("do while");
+            i++;
+        } while (i < 10);
+
+        // Array syntax (push, pop, shift, unshift, slice, splice, concat, indexOf, lastIndexOf, forEach, map, filter, reduce)
+        let myArray = [1, 2, 3];
+        console.log(myArray);
+        console.log(myArray[1]);
+        console.log(myArray.length);
+        console.log(myArray.pop());
+        console.log(myArray);
+        console.log(myArray.push(4));
+        console.log(myArray);
+        console.log(myArray.shift());
+        console.log(myArray);
+        console.log(myArray.unshift(5));
+        console.log(myArray);
+        console.log(myArray.slice(1, 2));
+        console.log(myArray);
+        console.log(myArray.splice(1, 2));
+        console.log(myArray);
+        console.log(myArray.concat([6, 7, 8]));
+        console.log(myArray);
+        console.log(myArray.indexOf(1));
+        console.log(myArray.lastIndexOf(1));
+        myArray.forEach((element) => {
+            console.log(element);
+        });
+        let myArray2 = myArray.map((element) => {
+            return element * 2;
+        });
+        console.log(myArray2);
+        let myArray3 = myArray.filter((element) => {
+            return element > 2;
+        });
+        console.log(myArray3);
+        let myArray4 = myArray.reduce((accumulator, currentValue) => {
+            return accumulator + currentValue;
+        });
+        console.log(myArray4);
+
+        // Function syntax
+        function myFunction(param1 = 1, param2 = 2) {
+            return param1 + param2;
+        }
+
+        // Class syntax
+        class MyClass {
+            constructor(param1, param2) {
+                this.param1 = param1;
+                this.param2 = param2;
+            }
+
+            myMethod() {
+                return this.param1 + this.param2;
+            }
+        }
+
+        // Inheritance
+        class MySubClass extends MyClass {
+            constructor(param1, param2, param3) {
+                super(param1, param2);
+                this.param3 = param3;
+            }
+
+            myMethod() {
+                return super.myMethod() + this.param3;
+            }
+        }
+
+        // Class instantiation
+        let myClass = new MyClass(1, 2);
+
+        // Object syntax
+        let myObject = {
+            "key1": "value1",
+            "key2": "value2",
+            "key3": "value3"
+        };
+        console.log(myObject);
+        console.log(myObject.key1);
+        console.log(myObject["key1"]);
+
+        // Destructuring
+        let [a, b, c] = [1, 2, 3];
+        console.log(a);
+        console.log(b);
+        console.log(c);
+
+        let { d, e, f } = { d: 4, e: 5, f: 6 };
+        console.log(d);
+        console.log(e);
+        console.log(f);
+
+        // Spread operator
+        let arr1 = [1, 2, 3];
+        let arr2 = [...arr1, 4, 5, 6];
+        console.log(arr2);
+
+        // Rest operator
+        function myFunction2(...args) {
+            console.log(args);
+        }
+        myFunction2(1, 2, 3);
+
+        // Arrow function
+        let myFunction3 = (param1, param2) => param1 + param2;
+        console.log(myFunction3(1, 2));
+
+        // Template literal
+        let myVar = "my value";
+        let myString = `This is a string with a variable: ${myVar}`;
+        console.log(myString);
+
+        // Import and export
+        export { myFunction, myFunction2 };
+        export default myFunction3;
+
+        // Object literal
+        let myObject2 = {
+            myFunction,
+            myFunction2,
+            myFunction3
+        };
+        console.log(myObject2);
+
+        // Promise
+        let myPromise = new Promise((resolve, reject) => {
+            let condition = true;
+            if (condition) {
+                resolve("Promise resolved");
+            } else {
+                reject("Promise rejected");
+            }
+        });
+        myPromise.then((value) => {
+            console.log(value);
+        }).catch((value) => {
+            console.log(value);
+        });
+
+        // Fetch
+        fetch("https://jsonplaceholder.typicode.com/todos/1")
+            .then(response => response.json())
+            .then(json => console.log(json));
+
+    </script>
+</body>
+
+</html>
