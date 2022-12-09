@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import Basics from './Basics';
 import Clock from './Clock';
+import { Form, Toggle, WithParam } from './Events';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 // calling root.render() will instanciate the given components and render them
 root.render(
   <React.StrictMode>
-    <App />
+    <Basics />
     <Clock />
+    <Form />
+    <Toggle />
+    <br></br>
+    <WithParam />
   </React.StrictMode>
 );

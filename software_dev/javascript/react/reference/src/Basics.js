@@ -17,13 +17,13 @@ class WelcomeCls extends React.Component {
 // hooks ?
 // setInterval(FunctionName, 1000);
 
-function App() {
+function Basics() {
   return (
-    <div className="App">
+    <div className="Basics">
       <WelcomeFunc name="function" />
       <WelcomeCls name="class" />
     </div>
   );
 }
 
-export default App;
+export default Basics;
