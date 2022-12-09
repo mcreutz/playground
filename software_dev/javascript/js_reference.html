@@ -53,6 +53,8 @@
             console.log("else");
         }
 
+        condition ? console.log("true") : console.log("false");
+
         switch (myName) {
             case "my value":
                 console.log("switch");
@@ -193,6 +195,12 @@
         // Import and export
         export { myFunction, myFunction2 };
         export default myFunction3;
+        export function myFunction4() {
+            console.log("exported function");
+        }
+        import myFunction4 from "./myModule.js";
+        import { myFunction, myFunction2 } from "./myModule.js";
+        import { myFunction2 as myFunction22, myFunction3 as myFunction33 } from "./myModule.js";
 
         // Object literal
         let myObject2 = {
