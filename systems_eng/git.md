@@ -1,3 +1,4 @@
+# Git
 ## Setup
 ### User
 ```console
@@ -67,6 +68,38 @@ $ git rm --cached <file>
 ```
 
 ---
+## Remotes
+### Push local commits of active branch to remote repo
+```console
+$ git push
+```
+
+### Push local commits of specific branch to remote repo
+```console
+$ git push <branch-name>
+```
+
+### Push local commits of new branch to remote repo
+```console
+$ git push --set-upstream <remote-name> <branch-name>
+```
+
+### Pull new commits from remote repo into local workspace
+```console
+$ git pull
+```
+
+### Fetch new commits from remote repo into local repo, but do not update local workspace
+```console
+$ git fetch
+```
+
+### Get URL of remote
+```console
+$ git remote get-url <remote-name>
+```
+
+---
 ## Branching
 ### List branches
 ```console
@@ -81,9 +114,6 @@ $ git branch <name>
 ### Switch to other branch
 ```console
 $ git switch <name> [-c to create and switch]
-```
-
-```console
 $ git checkout <name> (deprecated)
 ```
 
@@ -120,28 +150,6 @@ $ git push remote_name -d remote_branch_name
 ### Integrate all commits of another branch into the current one. This modifies the git history, so only use on local commits and never on commits that were already pushed to a remote repo.
 ```console
 $ git rebase <name>
-```
-
----
-## Remotes
-### Get URL of remote
-```console
-$ git remote get-url <remote-name>
-```
-
-### Push local commits of active branch to remote repo
-```console
-$ git push
-```
-
-### Push local commits of specific branch to remote repo
-```console
-$ git push <branch-name>
-```
-
-### Push local commits of new branch to remote repo
-```console
-$ git push --set-upstream <remote-name> <branch-name>
 ```
 
 ---
