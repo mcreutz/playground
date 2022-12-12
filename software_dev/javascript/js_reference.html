@@ -32,6 +32,11 @@
 
         // shorteded arithmtic with +=, *= etc. are available. ++ and -- also.
 
+        // comparisons
+        "42" == 42;  // true, double equal operator does type conversion
+        "42" === 42;  // false, triple equal operator does not do type conversion
+        // primitives are equal if they have the same value, objects are equal if they are the same object
+
         // String handling
         console.log(myName + " concatenated.");
         console.log("Length of a string: " + myName.length);
