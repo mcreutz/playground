@@ -34,6 +34,7 @@ function App() {
     setTodos(newTodos)
   }
 
+
   // On add button click, get input text and add to todos. Then clear input.
   function handleAddTodo(e) {
     const name = todoNameRef.current.value
@@ -44,6 +45,7 @@ function App() {
     todoNameRef.current.value = null
   }
 
+
   // On clear button click, filter all todos with .complete false, then update.
   function handleClearTodos() {
     const newTodos = todos.filter(todo => !todo.complete)
@@ -52,10 +54,10 @@ function App() {
 
 
   return (
-    // Encapsulate in empty tag, because 'return' can return only 1 object
+    // Encapsulate in empty tag, because 'return' can return only 1 object. Empty tag in react is short for 'React.Fragment'.
     <>
       <TodoList todos={todos} toggleTodo={toggleTodo} />
-      <input ref={todoNameRef} type="text" />  {/* ref to be readable from other component */}
+      <input ref={todoNameRef} type="text" />  {/* ref, to be readable from other component */}
       <button onClick={handleAddTodo}>Add todo</button>
       <button onClick={handleClearTodos}>Clear completed</button>
       <div>There are {todos.filter(todo => !todo.complete).length} todos left</div>
