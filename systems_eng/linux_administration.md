@@ -22,7 +22,7 @@ killall
 ps
 
 # Gaining root user privileges
-sudo <command>  # Execute the command with admin privileges, if current user is granted sudo rights. User password is prompted
+sudo <command>  # Execute the command with admin privileges, if current user is granted sudo rights. User password is prompted. Some distros also change to a safe PATH, see '/etc/sudoers'.
 su <username>  # Switch to other user, but with existing environment. Switches to root, if no username is given. New user's password is prompted. 'exit' or Ctrl-D to exit.
 su -  # Switch to root with root environment. '-' is short for '-l', switching environment. Root user password is prompted
 sudo su -  # Switch to root with root environment. User password is prompted

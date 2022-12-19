@@ -22,6 +22,7 @@ function Basics() {
     <div className="Basics">
       <WelcomeFunc name="function" />
       <WelcomeCls name="class" />
+      <a href='/clock'>Clock</a>
     </div>
   );
 }
