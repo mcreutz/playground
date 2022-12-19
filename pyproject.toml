@@ -35,7 +35,9 @@ SQLAlchemy = "^1.4.40"
 statsmodels = "^0.13.2"
 tensorflow = "^2.9.1"
 tqdm = "^4.64.0"
-wxPython = "^4.2.0"
+# wxPython = "^4.2.0"
+impacket = "^0.10.0"
+pysmb = "^1.2.8"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.7.0"
