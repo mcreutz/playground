@@ -1,11 +1,13 @@
+#!/bin/bash
+
 # Shebangs
 # Need to be in the first line of the script, runs the script in an separate
 # shell when scrpt file is executed. Use 'source' command to execure a script 
 # in the current shell.
-#!/bin/sh
-#!/bin/bash
-#!/usr/bin/bash
-#!/bin/bash -ex
+# #!/bin/bash
+# #!/bin/sh
+# #!/usr/bin/bash
+# #!/bin/bash -ex
 
 
 # Output a string
@@ -14,27 +16,32 @@ echo "Hello World"
 
 
 # Variables
-MY_VAR = my_value
-MY_VAR = "my_value"
-echo $MY_VAR
-echo $"MY_VAR"
-echo ${MY_VAR}
+MY_VAR = myvalue
+MY_VAR = "my value"
+echo $MY_VAR  # "variable substiturion", short syntax
+echo ${MY_VAR}  # full syntax
+echo "$MY_VAR"  # double quoting preserves whitespaces in strings
+echo '$MY_VAR'  # -> $MY_VAR
 cd "$HOME"/Documents
 cd ${HOME}/Document
 
+
+# Execute command
+<command>
+$(<command>)  # “command substitution”, substitutes the given command with its output
 
 # Variable scope
 export
 
 
 # Conditional execution
-if <condition>; then
+if [<condition>]; then
   <commands>
 fi
 
 
 # Loops
-while [condition]; do
+while [<condition>]; do
   <commands>
 done
 
@@ -74,6 +81,10 @@ $HOME
 
 ## logical
 &&, ||
+
+## strings
+-z  # resolves to true, if following string has length zero:  foo="bar"; [ -z "$foo" ]
+-n  # resolves to false, if following string has length zero
 
 
 # evaluations
@@ -147,4 +158,9 @@ truncate -s 0 filename  # Remove content of file up to given size is reached. Go
 ..  # Parent directory
 ~  # Current users home directory
 Esc, Esc  # Re-run last command with sudo, zsh only
+
+
+
+# References
+https://tldp.org/LDP/abs/html/index.html
 
