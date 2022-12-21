@@ -1910,6 +1910,21 @@ python-versions = "*"
 pyasn1 = "*"
 
 [[package]]
+name = "pyspnego"
+version = "0.7.0"
+description = "Windows Negotiate Authentication Client and Server"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+cryptography = "*"
+
+[package.extras]
+kerberos = ["gssapi (>=1.6.0)", "krb5 (>=0.3.0)"]
+yaml = ["ruamel.yaml"]
+
+[[package]]
 name = "pytest"
 version = "7.1.3"
 description = "pytest: simple powerful testing with Python"
@@ -2215,6 +2230,21 @@ description = "Python 2 and 3 compatibility utilities"
 category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+
+[[package]]
+name = "smbprotocol"
+version = "1.10.1"
+description = "Interact with a server using the SMB 2/3 Protocol"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+cryptography = ">=2.0"
+pyspnego = "*"
+
+[package.extras]
+kerberos = ["pyspnego[kerberos]"]
 
 [[package]]
 name = "sniffio"
@@ -2730,7 +2760,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.10"
-content-hash = "d3fa923d5d6bf8e445aa6c5c4ab8f7bd6e316a98272710bd6c062100568b8bf5"
+content-hash = "c9ad04bdc594bc16f5af3812a19a433fb249540a07f39190d3e7612be9db5018"
 
 [metadata.files]
 absl-py = [
@@ -4527,6 +4557,20 @@ pyrsistent = [
 pysmb = [
     {file = "pysmb-1.2.8.zip", hash = "sha256:3b07db16217465039d0c25694c0705b83663ca82259e209f3566d577536a7395"},
 ]
+pyspnego = [
+    {file = "pyspnego-0.7.0-cp310-cp310-win32.whl", hash = "sha256:e6e9664123d5521ecd21c32322f8ceb1575c8282b2f838beb33484ebaf2e66f9"},
+    {file = "pyspnego-0.7.0-cp310-cp310-win_amd64.whl", hash = "sha256:247e2d6ad6a6eaeaa6c9239a167ccf8d8c3b3322c684c90c03e6e18504c61d3a"},
+    {file = "pyspnego-0.7.0-cp311-cp311-win32.whl", hash = "sha256:f951ad694b4cc166932736be2756fa84c4dfbda9c4b30733d9fb62464f898f29"},
+    {file = "pyspnego-0.7.0-cp311-cp311-win_amd64.whl", hash = "sha256:6cc0bab3737f1323dc9ebc0ca49b48ded6a09009643424f471a909083d298dbf"},
+    {file = "pyspnego-0.7.0-cp37-cp37m-win32.whl", hash = "sha256:99c8fb4f4b859ae297c2f6cfed1511e46df574974a556c98a15c004251be0bec"},
+    {file = "pyspnego-0.7.0-cp37-cp37m-win_amd64.whl", hash = "sha256:64c665f1e88a07cc25b680a475755a393df2b6b2bb62b75b2e79d7059b056109"},
+    {file = "pyspnego-0.7.0-cp38-cp38-win32.whl", hash = "sha256:e7dfcc0c780de04273655a9c3f62ea09e24cd5cd401fe0039eac553b0732e362"},
+    {file = "pyspnego-0.7.0-cp38-cp38-win_amd64.whl", hash = "sha256:5eb034dc30eba0ec85e9ba02ef7b7d26df8804027ea95e5280838919b5ceecdd"},
+    {file = "pyspnego-0.7.0-cp39-cp39-win32.whl", hash = "sha256:65705b3763dc696358a5d6f9c74398afe37824a739e110b2b61ab731d617ff75"},
+    {file = "pyspnego-0.7.0-cp39-cp39-win_amd64.whl", hash = "sha256:0f43048a26a0c2c9edd8f3906f519022fcc5ae2baac1d2a65cdf9434ce0b761a"},
+    {file = "pyspnego-0.7.0-py3-none-any.whl", hash = "sha256:a35976b59e226e6166a69398240edee688ad40c96d5afdc0e07ac1f09fcc5830"},
+    {file = "pyspnego-0.7.0.tar.gz", hash = "sha256:da78096fd7c9f40e716f6fbe3e30d913103d75fd676f839f98fc3a6fee92fbe3"},
+]
 pytest = [
     {file = "pytest-7.1.3-py3-none-any.whl", hash = "sha256:1377bda3466d70b55e3f5cecfa55bb7cfcf219c7964629b967c37cf0bda818b7"},
     {file = "pytest-7.1.3.tar.gz", hash = "sha256:4f365fec2dff9c1162f834d9f18af1ba13062db0c708bf7b946f8a5c76180c39"},
@@ -4776,6 +4820,10 @@ setuptools-scm = [
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
     {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
+]
+smbprotocol = [
+    {file = "smbprotocol-1.10.1-py3-none-any.whl", hash = "sha256:1b884136efa4c241e0194b0c02a95a7bf761558adcac14a7e9d3bce2f643de8e"},
+    {file = "smbprotocol-1.10.1.tar.gz", hash = "sha256:b5bc9d4930ec947d42c21089a4d373b97e3f6488fd15d32d27189312fd8a04c9"},
 ]
 sniffio = [
     {file = "sniffio-1.3.0-py3-none-any.whl", hash = "sha256:eecefdce1e5bbfb7ad2eeaabf7c1eeb404d7757c379bd1f7e5cce9d8bf425384"},
