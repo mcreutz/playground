@@ -87,3 +87,10 @@ if __name__ == '__main__':
     # Rock and roll
     # print(server.getServerConfig())
     server.start()
+
+
+
+    # startwith:
+    # sudo /path/to/python impacket_simple_smb_server.py \
+    #   -username uDCS -password Password -port 446 \
+    #   testshare /bin
