@@ -8,6 +8,7 @@
 # #!/bin/sh
 # #!/usr/bin/bash
 # #!/bin/bash -ex
+# #!/usr/bin/env bash
 
 
 # Output a string
@@ -148,6 +149,7 @@ tar
 tee
 test
 truncate -s 0 filename  # Remove content of file up to given size is reached. Good to clear a file without deleting it.
+yq
 
 
 # shortcuts
@@ -158,6 +160,15 @@ truncate -s 0 filename  # Remove content of file up to given size is reached. Go
 ..  # Parent directory
 ~  # Current users home directory
 Esc, Esc  # Re-run last command with sudo, zsh only
+
+
+# parameters
+$@ delivers all parameters, ./someScript.sh foo bar, $@ -> foo bar
+"$@" delivers all parameters, each one in double quotes
+
+
+# misc
+exec
 
 
 
