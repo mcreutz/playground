@@ -9,7 +9,8 @@ SAMBA_FOLLOW_SYMLINKS=${SAMBA_FOLLOW_SYMLINKS:-yes}
 SAMBA_WIDE_LINKS=${SAMBA_WIDE_LINKS:-yes}
 SAMBA_HOSTS_ALLOW=${SAMBA_HOSTS_ALLOW:-127.0.0.0/8 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16}
 #SAMBA_INTERFACES=${SAMBA_INTERFACES:-eth0}
-SAMBA_PROTOCOL_VERSION=${SAMBA_PROTOCOL_VERSION:-SMB3_11}
+SAMBA_MIN_PROTOCOL_VERSION=${SAMBA_MIN_PROTOCOL_VERSION:-NT1}
+SAMBA_MAX_PROTOCOL_VERSION=${SAMBA_MAX_PROTOCOL_VERSION:-SMB3_11}
 
 echo "Setting timezone to ${TZ}"
 ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime
@@ -54,7 +55,7 @@ printing = bsd
 printcap name = /dev/null
 disable spoolss = yes
 disable netbios = yes
-smb ports = 445
+smb ports = 446
 client ipc min protocol = default
 client ipc max protocol = default
 ;wins support = yes
@@ -73,8 +74,8 @@ fruit:veto_appledouble = no
 fruit:wipe_intentionally_left_blank_rfork = yes
 fruit:delete_empty_adfiles = yes
 fruit:time machine = yes
-server min protocol = ${SAMBA_PROTOCOL_VERSION}
-server max protocol = ${SAMBA_PROTOCOL_VERSION}
+server min protocol = ${SAMBA_MIN_PROTOCOL_VERSION}
+server max protocol = ${SAMBA_MAX_PROTOCOL_VERSION}
 EOL
 
 if [ -n "${SAMBA_INTERFACES}" ]; then
