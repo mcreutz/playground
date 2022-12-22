@@ -2,8 +2,6 @@ ARG SAMBA_VERSION=4.16.8
 
 FROM alpine:3.17
 
-ENV TZ="UTC"
-
 ARG SAMBA_VERSION
 # ARG SAMBA_RELEASE
 
@@ -17,9 +15,10 @@ RUN apk --update --no-cache add \
     yq \
   && rm -rf /tmp/*
 
+COPY testfile.txt /testshare/testfile.txt
 COPY entrypoint.sh /entrypoint.sh
 
-EXPOSE 445
+EXPOSE 445 446 447 448 449
 
 VOLUME [ "/data" ]
 

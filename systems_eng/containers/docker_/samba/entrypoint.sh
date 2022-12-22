@@ -1,20 +1,11 @@
 #!/bin/bash
 
-TZ=${TZ:-UTC}
-
 SAMBA_WORKGROUP=${SAMBA_WORKGROUP:-WORKGROUP}
 SAMBA_SERVER_STRING=${SAMBA_SERVER_STRING:-Docker Samba Server}
+SAMBA_SMB_PORT=${SAMBA_SMB_PORT:-445}
 SAMBA_LOG_LEVEL=${SAMBA_LOG_LEVEL:-0}
-SAMBA_FOLLOW_SYMLINKS=${SAMBA_FOLLOW_SYMLINKS:-yes}
-SAMBA_WIDE_LINKS=${SAMBA_WIDE_LINKS:-yes}
-SAMBA_HOSTS_ALLOW=${SAMBA_HOSTS_ALLOW:-127.0.0.0/8 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16}
-#SAMBA_INTERFACES=${SAMBA_INTERFACES:-eth0}
 SAMBA_MIN_PROTOCOL_VERSION=${SAMBA_MIN_PROTOCOL_VERSION:-NT1}
 SAMBA_MAX_PROTOCOL_VERSION=${SAMBA_MAX_PROTOCOL_VERSION:-SMB3_11}
-
-echo "Setting timezone to ${TZ}"
-ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime
-echo ${TZ} > /etc/timezone
 
 echo "Initializing files and folders"
 mkdir -p /data/cache /data/lib
@@ -35,10 +26,6 @@ server services = -dns, -nbt
 server signing = default
 server multi channel support = yes
 log level = ${SAMBA_LOG_LEVEL}
-;log file = /usr/local/samba/var/log.%m
-;max log size = 50
-hosts allow = ${SAMBA_HOSTS_ALLOW}
-hosts deny = 0.0.0.0/0
 security = user
 guest account = nobody
 pam password change = yes
@@ -48,43 +35,26 @@ create mask = 0664
 force create mode = 0664
 directory mask = 0775
 force directory mode = 0775
-follow symlinks = ${SAMBA_FOLLOW_SYMLINKS}
-wide links = ${SAMBA_WIDE_LINKS}
+follow symlinks = no
 unix extensions = no
 printing = bsd
 printcap name = /dev/null
 disable spoolss = yes
 disable netbios = yes
-smb ports = 446
+smb ports = ${SAMBA_SMB_PORT}
 client ipc min protocol = default
 client ipc max protocol = default
-;wins support = yes
-;wins server = w.x.y.z
-;wins proxy = yes
 dns proxy = no
 socket options = TCP_NODELAY
 strict locking = no
 local master = no
 winbind scan trusted domains = yes
 vfs objects = fruit streams_xattr
-fruit:metadata = stream
-fruit:model = MacSamba
-fruit:posix_rename = yes
-fruit:veto_appledouble = no
-fruit:wipe_intentionally_left_blank_rfork = yes
-fruit:delete_empty_adfiles = yes
-fruit:time machine = yes
 server min protocol = ${SAMBA_MIN_PROTOCOL_VERSION}
 server max protocol = ${SAMBA_MAX_PROTOCOL_VERSION}
 EOL
 
-if [ -n "${SAMBA_INTERFACES}" ]; then
-  cat >> /etc/samba/smb.conf <<EOL
-interfaces = ${SAMBA_INTERFACES}
-bind interfaces only = yes
-EOL
-fi
-
+# auth
 if [[ "$(yq --output-format=json e '(.. | select(tag == "!!str")) |= envsubst' /data/config.yml 2>/dev/null | jq '.auth')" != "null" ]]; then
   for auth in $(yq -j e '(.. | select(tag == "!!str")) |= envsubst' /data/config.yml 2>/dev/null | jq -r '.auth[] | @base64'); do
     _jq() {
@@ -102,15 +72,7 @@ if [[ "$(yq --output-format=json e '(.. | select(tag == "!!str")) |= envsubst' /
   done
 fi
 
-if [[ "$(yq --output-format=json e '(.. | select(tag == "!!str")) |= envsubst' /data/config.yml 2>/dev/null | jq '.global')" != "null" ]]; then
-  for global in $(yq --output-format=json e '(.. | select(tag == "!!str")) |= envsubst' /data/config.yml 2>/dev/null | jq -r '.global[] | @base64'); do
-  echo "Add global option: $(echo "$global" | base64 --decode)"
-  cat >> /etc/samba/smb.conf <<EOL
-$(echo "$global" | base64 --decode)
-EOL
-  done
-fi
-
+# share
 if [[ "$(yq --output-format=json e '(.. | select(tag == "!!str")) |= envsubst' /data/config.yml 2>/dev/null | jq '.share')" != "null" ]]; then
   for share in $(yq --output-format=json e '(.. | select(tag == "!!str")) |= envsubst' /data/config.yml 2>/dev/null | jq -r '.share[] | @base64'); do
     _jq() {

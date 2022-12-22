@@ -1,0 +1,16 @@
+auth:
+  - user: uDCS
+    group: somegroup
+    uid: 1000
+    gid: 1000
+    password: Password
+
+share:
+  - name: TESTSHARE
+    comment: some mock directory
+    path: /testshare
+    browsable: yes
+    readonly: yes
+    guestok: no
+    veto: no
+    recycle: no
