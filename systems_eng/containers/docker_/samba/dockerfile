@@ -15,12 +15,12 @@ RUN apk --update --no-cache add \
     yq \
   && rm -rf /tmp/*
 
-COPY testfile.txt /testshare/testfile.txt
+COPY testfile.txt /shared_directory/subdirectory/testfile.txt
 COPY entrypoint.sh /entrypoint.sh
 
-EXPOSE 445 446 447 448 449
+EXPOSE 445
 
-VOLUME [ "/data" ]
+# VOLUME [ "/data" ]
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "smbd", "-F", "--debug-stdout", "--no-process-group" ]
