@@ -5,7 +5,7 @@
 ### [isort](https://github.com/PyCQA/isort) (Style Linter for Import Statements) 5.4k⭐️
 ### [Pycodestyle](https://github.com/PyCQA/pycodestyle) (Style Linter) 4.7k⭐️
 ### [Pylint](https://github.com/PyCQA/pylint) (Error Linter, Style Linter) 4.4k⭐️
-### [Autopep8](https://github.com/hhatto/autopep8) () 4.2k⭐️
+### [Autopep8](https://github.com/hhatto/autopep8) (Style Linter, Formatter) 4.2k⭐️
 * uses pycodestyle
 ### [Flake8](https://github.com/PyCQA/flake8) (Error Linter, Style Linter) 2.5k⭐️
 * uses Pyflakes, Pycodestyle
