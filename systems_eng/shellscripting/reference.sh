@@ -19,7 +19,7 @@ echo "Hello World"
 # Variables
 MY_VAR = myvalue
 MY_VAR = "my value"
-echo $MY_VAR  # "variable substiturion", short syntax
+echo $MY_VAR  # "variable substitution", short syntax
 echo ${MY_VAR}  # full syntax
 echo "$MY_VAR"  # double quoting preserves whitespaces in strings
 echo '$MY_VAR'  # -> $MY_VAR
@@ -36,7 +36,7 @@ export
 
 
 # Conditional execution
-if [<condition>]; then
+if [ <condition> ]; then
   <commands>
 fi
 
