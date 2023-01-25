@@ -35,3 +35,6 @@
 - /sys: It's similar to the /proc directory and the data in this directory is stored in memory, but it mainly stores information related to the kernel.
 
 - /var: It is used to store dynamic data, such as caches, log files, and files generated during software operation.
+
+
+Futher reding: https://www.pathname.com/fhs/pub/fhs-2.3.html
