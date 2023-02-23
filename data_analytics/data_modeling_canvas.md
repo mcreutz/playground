@@ -15,8 +15,8 @@ Split dataset
         For hyperparameter optimization
         Alternatively use CrossValidation on training data
     Training
-        This is the rest of the data. If it is too big for efficient exploratory analysis, create an subset for EDA.
-        Separate labels from features
+        This is the rest of the data. If it is too big for efficient exploratory analysis, create a subset for EDA.
+        Then separate labels from features
 
 Exploratory Data Analysis / Feature selection
     Correlations to Label
@@ -40,7 +40,7 @@ Feature preparation (of selected features)
         Outliers
             Find/Remove by (histogram/scatter) plot / by standardized aproach
         Distribution
-            Log-transformation (log1p?) against positive skew (skew>.75)
+            Log-transformation (log1p?) against positive skew (skew >.75)
         Normalization / Standardization
     Categorical features
         one-hot-encoding
@@ -59,3 +59,21 @@ Impalanced class representations (regression?)
 Collinearity
 Pipeline
 Normalization / Standardization
+Where to do the train test split?
+Loss functions?
+
+Hints:
+Metrics?
+Hyperparameter optimization
+Feature selection
+Feature engineering
+Feature scaling
+Feature encoding
+Feature extraction
+Feature transformation
+Feature generation
+Feature reduction
+Feature aggregation
+Feature decomposition
+Feature discretization
+
