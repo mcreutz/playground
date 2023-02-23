@@ -41,15 +41,15 @@
 - Is used eg. for recovery of the cluster.
 - Running on the Control Plane
 
-## kublet
+## kubelet
 - Process running on each worker-node, responsible for communication between nodes (workers and master) and the running processes on its own node. 
 
 ## Service (svc)
 - Pods are ephemeral, so shutdowns or restarts have to be expected. Also, Pod IPs are not bound to the Pods content, means restarting a Pod results in a new IP
 - Service is an abstraction over one or multiple Pods, offering a permanent IP or service name to the front
-- Also offers to make services externally accessible via the individual service IP
+- Also offers to make services externally accessible via the individual service IP (also see Ingress)
 - Also offers redundancy by connecting to multiple Pods of the same kind as replicas
-- Also offers load balancing for parallel Pods
+- Also offers load balancing for Pods with multiple replicas
 
 ## Ingress (ing)
 - Route traffic into the cluster
@@ -70,7 +70,8 @@
 ## Deployment (deploy)
 - An abstraction layer on top of a Pod, managing the the underlying Pods in terms of configuration and replicas
 - In practice, you create Deployments, not Pods
-- Can only replicate stateless pods (eg. no databases)
+- With deployments, you can only replicate stateless pods (eg. no databases), because parallel accesses to the same database would result in data corruption. See StatefulSet.
+- In practice, databases are often hosted outside of Kubernetes
 
 ## StatefulSet (sts)
 - Deployment for stateful Pods (eg. databases)
