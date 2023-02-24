@@ -86,3 +86,8 @@
 - helm charts
 - kubectl
 - minicube
+- deployment controller
+- proxy
+- logs
+- exec
+- replicaSet
