@@ -91,3 +91,7 @@
 - logs
 - exec
 - replicaSet
+
+
+point local docker cli to minikube docker daemon
+eval $(minikube -p minikube docker-env)
