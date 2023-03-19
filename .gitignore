@@ -1,23 +1,16 @@
-# ignore ide stuff
-.idea/
-.ipynb_checkpoints/
+# ide
 .vscode/
-.vs/
 
-# ignore pycache
+# python
 __pycache__/
+.ipynb_checkpoints/
+.mypy_cache/
 
-# ignore log files
+# log files
 *.log
 
-# ignore pipenv lockfile
-Pipfile.lock
-
-# macos stuff
+# macos
 .DS_Store
 
 # secrets
 secrets.json
-
-# mypy
-.mypy_cache/
