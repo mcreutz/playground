@@ -1,0 +1,42 @@
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:  
+      - name: Loki
+        type: loki
+        access: proxy
+        url: "http://loki-gateway:80"
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: "http://prometheus-server:80"
+
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: ''
+      type: file
+      disableDeletion: false
+      editable: true
+      options:
+        path: /var/lib/grafana/dashboards/default
+
+dashboards:
+  default:
+    # custom-dashboard:
+    #   file: dashboards/prometheus-2-0-overview_rev2.json
+      # datasource: Prometheus
+    # prometheus-stats:
+    #   gnetId: 2
+    #   revision: 2
+    #   datasource: Prometheus
+    my-dash:
+      json: |
+        {{ .Files.Get "dashboards/prometheus-2-0-overview_rev2.json" | nindent 8 }}
+
+    kubernetes:
+      json: |
+        ${indent(8, file("${path.module}/dashboards/prometheus-2-0-overview_rev2.json"))
