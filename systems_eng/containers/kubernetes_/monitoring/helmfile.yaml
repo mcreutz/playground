@@ -1,0 +1,24 @@
+releases:
+  - name: grafana
+    chart: grafana/grafana
+    namespace: monitoring
+    values:
+      - grafana-values.yaml
+
+  - name: loki
+    chart: grafana/loki
+    namespace: monitoring
+    values:
+      - loki-values.yaml
+
+  - name: promtail
+    chart: grafana/promtail
+    namespace: monitoring
+    values:
+      - promtail-values.yaml
+
+  - name: prometheus
+    chart: prometheus-community/prometheus
+    namespace: monitoring
+    values:
+      - prometheus-values.yaml
