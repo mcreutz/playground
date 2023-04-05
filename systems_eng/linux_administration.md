@@ -50,6 +50,9 @@ curl / wget
 iptables
 nftables
 
+# Archiving
+tar -xf <file>  # extract archive
+
 # Other
 head
 tail
