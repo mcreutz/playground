@@ -5,5 +5,5 @@ use (
 	./software_dev/go/benchmark
 	./software_dev/go/myapp
 	./software_dev/go/oop
-	./software_dev/go/go_packages
+	./software_dev/go/awesomego
 )

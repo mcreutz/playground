@@ -1,4 +1,4 @@
-module go_packages
+module awesomego
 
 go 1.20
 
