@@ -1,3 +1,4 @@
+// Package description goes here
 package main
 
 // outside of functions, every statement begins with a keyword (import, var, const, func, ..)
@@ -7,13 +8,32 @@ import (
 	"math/rand"
 	"runtime"
 	"time"
+
+	"mymodule/mypointers"
 )
+
+// Function description goes here
+func main() {
+	localVariables()
+	arrays()
+	readUserInput()
+	byteshiftOperators()
+	Add(12, 13)
+	mypointers.PointersToPrimitives()
+}
 
 // varaibles at package level
 var one, two bool
 var five, six = 5, "six" // if an initialization value is given, the type can be omitted
 
-func local_variables() {
+func localVariables() {
+	//simple variables and constants
+	var myVariable = "Something" // type inference
+	const myConstant = 20
+	fmt.Println("Hello World!")
+	fmt.Println("Some text", myVariable, "some more text.")
+	// primitive types: string, int, uint,
+
 	// varaible declaration at function level
 	var three, four bool
 	seven := "seven" // this can be used insted of a 'var'-statement, but only within functions
@@ -30,6 +50,12 @@ func local_variables() {
 	var s string
 	fmt.Printf("%v %v %v %q\n", i, f, b, s)
 
+	// auto initialization
+	var myUninitializedVariable string
+	fmt.Println(myUninitializedVariable) // outputs "", because Go automatically initializes variables
+	myUninitializedVariable = "Anything"
+	fmt.Printf("My %v Text.\n", myUninitializedVariable)
+
 	// Type conversions
 	ii := 42
 	ff := float64(ii)
@@ -40,34 +66,65 @@ func local_variables() {
 	my_var := 10
 	fmt.Printf("Value: %v", my_var)
 	fmt.Printf("Type: %T", my_var)
-
-	// Arrays
-	var a [2]string
-	a[0] = "Hello"
-	a[1] = "World"
-	fmt.Println(a[0], a[1])
-	fmt.Println(a)
-
-	primes := [6]int{2, 3, 5, 7, 11, 13}
-	fmt.Println(primes)
-
-	// Slices
-	var ss []int = primes[1:4]
-	fmt.Println(ss)
 }
 
+func arrays() {
+	var arrayName = [50]string{"one", "two", "three"} //fixed length array
+	fmt.Println(arrayName[0])
+
+	// // Arrays
+	// var a [2]string
+	// a[0] = "Hello"
+	// a[1] = "World"
+	// fmt.Println(a[0], a[1])
+	// fmt.Println(a)
+
+	// primes := [6]int{2, 3, 5, 7, 11, 13}
+	// fmt.Println(primes)
+
+	var arr []int
+	arr = append(arr, 1)
+	arr = append(arr, 2)
+	fmt.Println(arr)
+	fmt.Println(len(arr))
+	fmt.Println(cap(arr))
+
+	// // Slices
+	// var ss []int = primes[1:4]
+	// fmt.Println(ss)
+}
+
+func readUserInput() {
+	// reading user input
+	var answer string
+	fmt.Print("Query: ")
+	fmt.Scan(&answer) //pointer
+	fmt.Printf("Answer was: %v\n", answer)
+
+	fmt.Println("My favorite number is", rand.Intn(10))
+	// 'Println' can be called from 'fmt', because it is public. Go calls this 'exported'.
+	// You can 'export' fuctions from a package by starting their name with a capital letter.
+	a, b := multipleReturnValues("hello", "world")
+	fmt.Println(a, b)
+}
+
+func byteshiftOperators() {
+	// '>>', '<<' are byte-shift operators.
+	// mil = 1 << 6
+}
+
+// takes two int parameters and returns an int
 func Add(x int, y int) int {
-	// takes two int parameters and returns an int
 	return x + y
 }
 
-func swap(x, y string) (string, string) {
-	// shortened parameters syntax, multiple return values
+// shortened parameters syntax, multiple return values
+func multipleReturnValues(x, y string) (string, string) {
 	return y, x
 }
 
-func split(sum int) (x, y int) {
-	// returning named variables
+// returning named variables
+func namedReturnValues(sum int) (x, y int) {
 	x = sum * 4 / 9
 	y = sum - x
 	return
@@ -141,79 +198,4 @@ func deferring() {
 	// > 2
 	// > 1
 	// > 0
-}
-
-func pointers() {
-	i, j := 42, 2701
-
-	p := &i         // p is a pointer to i
-	fmt.Println(*p) // read i through the pointer
-	*p = 21         // set i through the pointer
-	fmt.Println(i)  // see the new value of i
-
-	p = &j         // point to j
-	*p = *p / 37   // divide j through the pointer
-	fmt.Println(j) // see the new value of j
-
-	//&: address of
-	//*: value at adress
-}
-
-type Point struct {
-	X int
-	Y int
-}
-
-var (
-	v1 = Point{1, 2}  // has type Point
-	v2 = Point{X: 1}  // Y:0 is implicit
-	v3 = Point{}      // X:0 and Y:0
-	p  = &Point{1, 2} // has type *Point
-)
-
-func point_user() {
-	fmt.Println(Point{1, 2})
-
-	v := Point{10, 20}
-	v.X = 4
-	fmt.Println(v.X)
-
-	vv := Point{1, 2}
-	p := &vv
-	p.X = 1e9 // actually (*p).X, but p.X is permitted
-	fmt.Println(vv)
-}
-
-// execution starts at main() function of application
-func main() {
-	//simple variables and constants
-	var myVariable = "Something" // type inference
-	const myConstant = 20
-	fmt.Println("Hello World!")
-	fmt.Println("Some text", myVariable, "some more text.")
-	// primitive types: string, int, uint,
-
-	var arrayName = [50]string{"one", "two", "three"} //fixed length array
-	fmt.Println(arrayName[0])
-
-	// auto initialization
-	var myUninitializedVariable string
-	fmt.Println(myUninitializedVariable) // outputs "", because Go automatically initializes variables
-	myUninitializedVariable = "Anything"
-	fmt.Printf("My %v Text.\n", myUninitializedVariable)
-
-	// reading user input
-	var answer string
-	fmt.Print("Query: ")
-	fmt.Scan(&answer) //pointer
-	fmt.Printf("Answer was: %v\n", answer)
-
-	fmt.Println("My favorite number is", rand.Intn(10))
-	// 'Println' can be called from 'fmt', because it is public. Go calls this 'exported'.
-	// You can 'export' fuctions from a package by starting their name with a capital letter.
-	a, b := swap("hello", "world")
-	fmt.Println(a, b)
-
-	// '>>', '<<' are byte-shift operators.
-	// mil = 1 << 6
 }

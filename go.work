@@ -3,7 +3,7 @@ go 1.20
 use (
 	./software_dev/algorithms/leetcode
 	./software_dev/go/benchmark
-	./software_dev/go/myapp
+	./software_dev/go/mymodule
 	./software_dev/go/oop
 	./software_dev/go/awesomego
 )
