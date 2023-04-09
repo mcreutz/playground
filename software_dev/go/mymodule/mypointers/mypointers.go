@@ -3,6 +3,8 @@ package mypointers
 import "fmt"
 
 func PointersToPrimitives() {
+	fmt.Println("----- Pointers to Primitives -----")
+
 	i, j := 42, 2701
 
 	p := &i         // p is a pointer to i

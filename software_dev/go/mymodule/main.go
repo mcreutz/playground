@@ -5,38 +5,54 @@ package main
 
 import (
 	"fmt" //from standard library (https://pkg.go.dev/fmt)
-	"math/rand"
 	"runtime"
 	"time"
 
-	"mymodule/mypointers"
+	"mymodule/myfunctions"
+	"mymodule/mygoroutines"
 )
 
 // Function description goes here
 func main() {
+	consoleOutput()
 	localVariables()
+	typeConversion()
 	arrays()
+	slices()
 	readUserInput()
 	byteshiftOperators()
-	Add(12, 13)
-	mypointers.PointersToPrimitives()
+	for_loops()
+	conditionals()
+	switch_case()
+	deferring()
+	myfunctions.Functions()
+	// mypointers.PointersToPrimitives()
+	// mystructs.Structs()
+	// mymethods.Methods()
+	mygoroutines.Goroutines()
 }
 
-// varaibles at package level
-var one, two bool
+// variables at package level
+var one, two bool        // initialized to 'false'
 var five, six = 5, "six" // if an initialization value is given, the type can be omitted
 
+func consoleOutput() {
+	fmt.Println("----- Console Output -----")
+	// Println prints a line to the console. Variables are formatted by their standard. Values are separated by spaces.
+	fmt.Println("Hello", "World", 123, 3.14, one, two, five, six)
+	// Printf prints a formatted string to the console. The format is specified by a format string. Newline is not appended.
+	fmt.Printf("Hello %v %v %v %v %v\n", "World", 123, 3.14, true, 1+2i)
+}
+
 func localVariables() {
-	//simple variables and constants
+	//simple variables and constants declaration at function level
+	fmt.Println("----- Local Variables -----")
 	var myVariable = "Something" // type inference
 	const myConstant = 20
-	fmt.Println("Hello World!")
 	fmt.Println("Some text", myVariable, "some more text.")
 	// primitive types: string, int, uint,
-
-	// varaible declaration at function level
 	var three, four bool
-	seven := "seven" // this can be used insted of a 'var'-statement, but only within functions
+	seven := "seven" // ':='-notation can be used insted of a 'var'-statement, but only within functions
 	fmt.Println("varaible declaration at function level")
 	fmt.Println(three, four, seven)
 	fmt.Println()
@@ -49,88 +65,73 @@ func localVariables() {
 	var b bool
 	var s string
 	fmt.Printf("%v %v %v %q\n", i, f, b, s)
+}
 
-	// auto initialization
-	var myUninitializedVariable string
-	fmt.Println(myUninitializedVariable) // outputs "", because Go automatically initializes variables
-	myUninitializedVariable = "Anything"
-	fmt.Printf("My %v Text.\n", myUninitializedVariable)
-
-	// Type conversions
-	ii := 42
-	ff := float64(ii)
-	uu := uint(ff)
-	fmt.Println(uu)
-
-	// Formatting
-	my_var := 10
-	fmt.Printf("Value: %v", my_var)
-	fmt.Printf("Type: %T", my_var)
+func typeConversion() {
+	fmt.Println("----- Type Conversion -----")
+	i := 42
+	f := float64(i)
+	u := uint(f)
+	fmt.Println(u)
 }
 
 func arrays() {
+	fmt.Println("----- Arrays -----")
+
 	var arrayName = [50]string{"one", "two", "three"} //fixed length array
 	fmt.Println(arrayName[0])
 
-	// // Arrays
-	// var a [2]string
-	// a[0] = "Hello"
-	// a[1] = "World"
-	// fmt.Println(a[0], a[1])
-	// fmt.Println(a)
+	var a [2]string
+	a[0] = "Hello"
+	a[1] = "World"
+	fmt.Println(a[0], a[1])
+	fmt.Println(a)
+	fmt.Println(a[len(a)-1]) // last element
+}
 
-	// primes := [6]int{2, 3, 5, 7, 11, 13}
-	// fmt.Println(primes)
+func slices() {
+	fmt.Println("----- Slices -----")
 
-	var arr []int
-	arr = append(arr, 1)
-	arr = append(arr, 2)
-	fmt.Println(arr)
+	// slices are like references to arrays
+	arr := [6]int{2, 3, 5, 7, 11, 13}
+	var slc []int = arr[1:4] // begin is inclusive, end is exclusive
+	fmt.Println(slc)
+	// omitting the low index implies 0
+	fmt.Println(arr[:3])
+	// omitting the high index implies len(s)
+	fmt.Println(arr[4:])
+
+	// slices can be larger than the underlying array
+	var bigSlc []int = arr[:]
+	slc = append(bigSlc, 17)
 	fmt.Println(len(arr))
-	fmt.Println(cap(arr))
+	fmt.Println(len(bigSlc))
 
-	// // Slices
-	// var ss []int = primes[1:4]
-	// fmt.Println(ss)
+	// nil slices
+	var nslc []int
+	nslc = append(nslc, 1)
+	nslc = append(nslc, 2)
+	fmt.Println(slc)
+	fmt.Println(len(nslc))
+	fmt.Println(cap(nslc))
 }
 
 func readUserInput() {
-	// reading user input
+	fmt.Println("----- Read User Input -----")
 	var answer string
 	fmt.Print("Query: ")
 	fmt.Scan(&answer) //pointer
 	fmt.Printf("Answer was: %v\n", answer)
-
-	fmt.Println("My favorite number is", rand.Intn(10))
-	// 'Println' can be called from 'fmt', because it is public. Go calls this 'exported'.
-	// You can 'export' fuctions from a package by starting their name with a capital letter.
-	a, b := multipleReturnValues("hello", "world")
-	fmt.Println(a, b)
 }
 
 func byteshiftOperators() {
+	fmt.Println("----- Byteshift Operators -----")
 	// '>>', '<<' are byte-shift operators.
 	// mil = 1 << 6
 }
 
-// takes two int parameters and returns an int
-func Add(x int, y int) int {
-	return x + y
-}
-
-// shortened parameters syntax, multiple return values
-func multipleReturnValues(x, y string) (string, string) {
-	return y, x
-}
-
-// returning named variables
-func namedReturnValues(sum int) (x, y int) {
-	x = sum * 4 / 9
-	y = sum - x
-	return
-}
-
 func for_loops() {
+	fmt.Println("----- For Loops -----")
 	// full syntax
 	sum := 0
 	for i := 0; i < 10; i++ {
@@ -140,15 +141,24 @@ func for_loops() {
 
 	// shortened syntax
 	counter := 1
-	for counter < 1000 { // The init and post-statements are optional
-		counter += counter
+	for counter < 10 { // The init and post-statements are optional
+		counter += 1
 	}
 	fmt.Println(counter)
-	// There is no 'while' in Go. A shortened 'for' acts like a 'while'
-	// 'for {...}' will loop ... forever
+
+	// There is no 'while' in Go. A 'for' without statements acts like a 'while'
+	while_counter := 1
+	for {
+		while_counter++
+		if while_counter > 10 {
+			break
+		}
+	}
+	fmt.Println(while_counter)
 }
 
 func conditionals() int {
+	fmt.Println("----- Conditionals -----")
 	if c := 12; c > 10 { // init statement; condition. init-statement can be omitted
 		return c
 	} else {
@@ -157,7 +167,8 @@ func conditionals() int {
 }
 
 func switch_case() {
-	// switch with initializer and condition
+	fmt.Println("----- Switch Case -----")
+	// switch with initializer
 	switch os := runtime.GOOS; os {
 	case "darwin":
 		fmt.Println("OS X.")
@@ -169,7 +180,7 @@ func switch_case() {
 		fmt.Printf("%s.\n", os)
 	}
 
-	// switch without initializer and condition
+	// switch with conditions
 	t := time.Now()
 	switch {
 	case t.Hour() < 12:
@@ -177,11 +188,12 @@ func switch_case() {
 	case t.Hour() < 17:
 		fmt.Println("Good afternoon.")
 	default:
-		fmt.Println("Good evening.")
+		fmt.Println("Good day.")
 	}
 }
 
 func deferring() {
+	fmt.Println("----- Deferring -----")
 	// A defer statement defers the execution of a function until the surrounding function returns.
 	// The deferred call's arguments are evaluated immediately, but the function call is not executed until the surrounding function returns.
 	defer fmt.Println("world")

@@ -15,6 +15,8 @@ var (
 )
 
 func point_user() {
+	fmt.Println("----- Structs -----")
+
 	fmt.Println(Point{1, 2})
 
 	v := Point{10, 20}
