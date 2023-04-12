@@ -14,7 +14,7 @@ var (
 	p  = &Point{1, 2} // has type *Point
 )
 
-func point_user() {
+func Structs() {
 	fmt.Println("----- Structs -----")
 
 	fmt.Println(Point{1, 2})

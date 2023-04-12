@@ -7,42 +7,31 @@ import (
 	"fmt" //from standard library (https://pkg.go.dev/fmt)
 	"runtime"
 	"time"
-
-	"mymodule/myfunctions"
-	"mymodule/mygoroutines"
 )
 
 // Function description goes here
 func main() {
-	consoleOutput()
-	localVariables()
-	typeConversion()
+	// localVariables()
+	// consoleOutput()
+	// readUserInput()
+	// typeConversion()
 	arrays()
-	slices()
-	readUserInput()
-	byteshiftOperators()
-	for_loops()
-	conditionals()
-	switch_case()
-	deferring()
-	myfunctions.Functions()
-	// mypointers.PointersToPrimitives()
+	// slices()
+	// byteshiftOperators()
+	// conditionals()
+	// switch_case()
+	// for_loops()
+	// deferring()
+	// myfunctions.Functions()
+	// mypointers.Pointers()
 	// mystructs.Structs()
 	// mymethods.Methods()
-	mygoroutines.Goroutines()
+	// mygoroutines.Goroutines()
 }
 
 // variables at package level
 var one, two bool        // initialized to 'false'
 var five, six = 5, "six" // if an initialization value is given, the type can be omitted
-
-func consoleOutput() {
-	fmt.Println("----- Console Output -----")
-	// Println prints a line to the console. Variables are formatted by their standard. Values are separated by spaces.
-	fmt.Println("Hello", "World", 123, 3.14, one, two, five, six)
-	// Printf prints a formatted string to the console. The format is specified by a format string. Newline is not appended.
-	fmt.Printf("Hello %v %v %v %v %v\n", "World", 123, 3.14, true, 1+2i)
-}
 
 func localVariables() {
 	//simple variables and constants declaration at function level
@@ -65,6 +54,22 @@ func localVariables() {
 	var b bool
 	var s string
 	fmt.Printf("%v %v %v %q\n", i, f, b, s)
+}
+
+func consoleOutput() {
+	fmt.Println("----- Console Output -----")
+	// Println prints a line to the console. Variables are formatted by their standard. Values are separated by spaces.
+	fmt.Println("Hello", "World", 123, 3.14, one, two, five, six)
+	// Printf prints a formatted string to the console. The format is specified by a format string. Newline is not appended.
+	fmt.Printf("Hello %v %v %v %v %v\n", "World", 123, 3.14, true, 1+2i)
+}
+
+func readUserInput() {
+	fmt.Println("----- Read User Input -----")
+	var answer string
+	fmt.Print("Query: ")
+	fmt.Scan(&answer) //pointer
+	fmt.Printf("Answer was: %v\n", answer)
 }
 
 func typeConversion() {
@@ -108,53 +113,24 @@ func slices() {
 	fmt.Println(len(bigSlc))
 
 	// nil slices
+	fmt.Println("nil slices")
 	var nslc []int
-	nslc = append(nslc, 1)
+	nslc = append(nslc, 1) // enlarging underlying array causes allocation of new array, avoid in loops and for large slices
 	nslc = append(nslc, 2)
+	fmt.Println(nslc[0])
 	fmt.Println(slc)
-	fmt.Println(len(nslc))
-	fmt.Println(cap(nslc))
-}
+	fmt.Println(len(nslc)) // length of the slice
+	fmt.Println(cap(nslc)) // capacity is the number of elements in the underlying array, counting from the first element in the slice
 
-func readUserInput() {
-	fmt.Println("----- Read User Input -----")
-	var answer string
-	fmt.Print("Query: ")
-	fmt.Scan(&answer) //pointer
-	fmt.Printf("Answer was: %v\n", answer)
+	given_length := make([]int, 5) // if length is known, declare with make and given length, to be more efficient
+	fmt.Println(given_length)
+
 }
 
 func byteshiftOperators() {
 	fmt.Println("----- Byteshift Operators -----")
 	// '>>', '<<' are byte-shift operators.
 	// mil = 1 << 6
-}
-
-func for_loops() {
-	fmt.Println("----- For Loops -----")
-	// full syntax
-	sum := 0
-	for i := 0; i < 10; i++ {
-		sum += i
-	}
-	fmt.Println(sum)
-
-	// shortened syntax
-	counter := 1
-	for counter < 10 { // The init and post-statements are optional
-		counter += 1
-	}
-	fmt.Println(counter)
-
-	// There is no 'while' in Go. A 'for' without statements acts like a 'while'
-	while_counter := 1
-	for {
-		while_counter++
-		if while_counter > 10 {
-			break
-		}
-	}
-	fmt.Println(while_counter)
 }
 
 func conditionals() int {
@@ -192,6 +168,41 @@ func switch_case() {
 	}
 }
 
+func for_loops() {
+	fmt.Println("----- For Loops -----")
+	// full syntax
+	sum := 0
+	for i := 0; i < 10; i++ {
+		sum += i
+	}
+	fmt.Println(sum)
+
+	// shortened syntax
+	counter := 1
+	for counter < 10 { // The init and post-statements are optional
+		counter += 1
+	}
+	fmt.Println(counter)
+
+	// There is no 'while' in Go. A 'for' without statements acts like a 'while'
+	while_counter := 1
+	for {
+		while_counter++
+		if while_counter > 10 {
+			break
+		}
+	}
+	fmt.Println(while_counter)
+
+	// range
+	// 'val' is given as copy, not as reference
+	var arr = []int{1, 2, 3, 4, 5}
+	// for idx := range arr {
+	for idx, val := range arr {
+		fmt.Printf("2**%d = %d\n", idx, val)
+	}
+}
+
 func deferring() {
 	fmt.Println("----- Deferring -----")
 	// A defer statement defers the execution of a function until the surrounding function returns.
@@ -210,4 +221,12 @@ func deferring() {
 	// > 2
 	// > 1
 	// > 0
+}
+
+func maps() {
+	var myMap map[string]int
+	myMap = make(map[string]int)
+
+	myMap["my key"] = 99
+	fmt.Println(myMap["Bell Labs"])
 }
