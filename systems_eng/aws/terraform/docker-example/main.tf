@@ -1,3 +1,5 @@
+# This is the main Terraform configuration file
+
 terraform {
   required_providers {
     docker = {
