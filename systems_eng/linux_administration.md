@@ -54,11 +54,12 @@ nftables
 tar -xf <file>  # extract archive
 
 # Other
-head
-tail
-date
-less
-history
-ps
-gzip \ gunzip \ tar
-awk
+* `head`- 
+* `tail`- 
+* `date`- 
+* `less`- 
+* `history`- 
+* `ps`- 
+* `gzip`-  \ gunzip \ tar
+* `awk`- 
+* `tr` - replace characters in output: echo "$PATH" | tr ':' '\n'
