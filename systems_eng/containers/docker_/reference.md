@@ -14,3 +14,9 @@
 
 ## Stop running container by name or id (shortening possible, id 123abc456... -> 123)
 `docker stop <container-name>`
+
+
+## Best practices
+- use least ppriivilegd user possible inside container
+- use multi-stage builds to reduce image size
+- use .dockerignore to exclude files from build context
