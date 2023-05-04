@@ -4,7 +4,12 @@ Initialize the module
 $ go mod init <module name>
 ```
 
-Install dependencies from go.mod (and remove unused dependencies)
+Download a package and add it to go.mod
+```console
+$ go get <example.com/packagename>[@version]
+```
+
+Install all dependencies from source code and add them to go.mod (also remove unused dependencies from go.mod)
 ```console
 $ go mod tidy
 ```
