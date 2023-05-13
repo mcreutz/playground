@@ -1,0 +1,2462 @@
+{
+    "widgets": [
+        {
+            "height": 9,
+            "width": 9,
+            "y": 1,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [
+                        "AWS/EC2",
+                        "CPUUtilization",
+                        "InstanceId",
+                        "i-0f256ecb58a3199be",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-0fc801a23fe139f03",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-0a02c84c3ba20fef9",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-03a3309c3f3a3d47f",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-031fecd650e6da536",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-03b9fb27e9f284b86",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-0d377fffdc98a5a33",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-0e5c498b0352b95dd",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-0b5ad4232137b1627",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-05b9a2e11a3decab0",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-0099283e497511450",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-0f996b4b35be7a991",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-0b04984ae5ac61574",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-03414ff3c7b42ed75",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-0fde6ebe230d06c96",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-06ebf5d2535b25e51",
+                        {
+                            "region": "eu-central-1",
+                            "visible": false
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-05443deeb0d74c93e",
+                        {
+                            "region": "eu-central-1",
+                            "yAxis": "left"
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-0dc049f04ff59aa49",
+                        {
+                            "region": "eu-central-1",
+                            "yAxis": "left"
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-01da19e7b523d6c67",
+                        {
+                            "region": "eu-central-1",
+                            "yAxis": "left"
+                        }
+                    ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-central-1",
+                "period": 300,
+                "legend": {
+                    "position": "bottom"
+                },
+                "stat": "Average",
+                "setPeriodToTimeRange": true
+            }
+        },
+        {
+            "height": 9,
+            "width": 9,
+            "y": 1,
+            "x": 9,
+            "type": "metric",
+            "properties": {
+                "view": "timeSeries",
+                "stacked": false,
+                "metrics": [
+                    [
+                        "AWS/EC2",
+                        "DiskReadBytes",
+                        "InstanceId",
+                        "i-01da19e7b523d6c67",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-05443deeb0d74c93e",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-0dc049f04ff59aa49",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "DiskWriteBytes",
+                        ".",
+                        ".",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-01da19e7b523d6c67",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-05443deeb0d74c93e",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ]
+                ],
+                "region": "eu-central-1",
+                "legend": {
+                    "position": "bottom"
+                },
+                "period": 300
+            }
+        },
+        {
+            "height": 9,
+            "width": 9,
+            "y": 10,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [
+                        "AWS/EC2",
+                        "NetworkIn",
+                        "InstanceId",
+                        "i-0dc049f04ff59aa49",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "NetworkOut",
+                        ".",
+                        ".",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "NetworkIn",
+                        ".",
+                        "i-01da19e7b523d6c67",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "NetworkOut",
+                        ".",
+                        ".",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "NetworkIn",
+                        ".",
+                        "i-05443deeb0d74c93e",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "NetworkOut",
+                        ".",
+                        ".",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-central-1",
+                "legend": {
+                    "position": "right"
+                },
+                "period": 300,
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 9,
+            "width": 9,
+            "y": 10,
+            "x": 9,
+            "type": "metric",
+            "properties": {
+                "view": "timeSeries",
+                "stacked": false,
+                "metrics": [
+                    [
+                        "AWS/EC2",
+                        "StatusCheckFailed_System",
+                        "InstanceId",
+                        "i-0dc049f04ff59aa49",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-01da19e7b523d6c67",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "StatusCheckFailed_Instance",
+                        ".",
+                        "i-05443deeb0d74c93e",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-01da19e7b523d6c67",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-0dc049f04ff59aa49",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "StatusCheckFailed_System",
+                        ".",
+                        "i-05443deeb0d74c93e",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "StatusCheckFailed",
+                        ".",
+                        "i-01da19e7b523d6c67",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-0dc049f04ff59aa49",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        "...",
+                        "i-05443deeb0d74c93e",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ]
+                ],
+                "region": "eu-central-1",
+                "period": 300,
+                "legend": {
+                    "position": "right"
+                }
+            }
+        },
+        {
+            "height": 9,
+            "width": 9,
+            "y": 20,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "view": "timeSeries",
+                "stacked": false,
+                "metrics": [
+                    [
+                        "AWS/S3",
+                        "BucketSizeBytes",
+                        "StorageType",
+                        "StandardStorage",
+                        "BucketName",
+                        "focke-iot-platform-terraform-state-focke-dev-eu-central-1",
+                        {
+                            "period": 86400
+                        }
+                    ],
+                    [
+                        ".",
+                        "NumberOfObjects",
+                        ".",
+                        "AllStorageTypes",
+                        ".",
+                        ".",
+                        {
+                            "period": 86400
+                        }
+                    ],
+                    [
+                        "...",
+                        "omnitalos",
+                        {
+                            "period": 86400
+                        }
+                    ],
+                    [
+                        ".",
+                        "BucketSizeBytes",
+                        ".",
+                        "StandardStorage",
+                        ".",
+                        ".",
+                        {
+                            "period": 86400
+                        }
+                    ]
+                ],
+                "region": "eu-central-1"
+            }
+        },
+        {
+            "height": 1,
+            "width": 18,
+            "y": 0,
+            "x": 0,
+            "type": "text",
+            "properties": {
+                "markdown": "# EC2",
+                "background": "transparent"
+            }
+        },
+        {
+            "height": 1,
+            "width": 18,
+            "y": 19,
+            "x": 0,
+            "type": "text",
+            "properties": {
+                "markdown": "# S3",
+                "background": "transparent"
+            }
+        },
+        {
+            "height": 9,
+            "width": 9,
+            "y": 30,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "view": "timeSeries",
+                "stacked": false,
+                "metrics": [
+                    [
+                        "AWS/EBS",
+                        "VolumeReadOps",
+                        "VolumeId",
+                        "vol-0027a8a59a03c5d46"
+                    ],
+                    [
+                        "...",
+                        "vol-004e741a158f39ff6"
+                    ],
+                    [
+                        "...",
+                        "vol-007bd29707d7f6d23"
+                    ],
+                    [
+                        "...",
+                        "vol-007e96a2def54c591"
+                    ],
+                    [
+                        "...",
+                        "vol-00b6e77b915a6a75c"
+                    ],
+                    [
+                        "...",
+                        "vol-00b764f5cda2001df"
+                    ],
+                    [
+                        "...",
+                        "vol-012c25dd0000c70a1"
+                    ],
+                    [
+                        "...",
+                        "vol-013122f6e59cb59a6"
+                    ],
+                    [
+                        "...",
+                        "vol-015393c2e465a5b3e"
+                    ],
+                    [
+                        "...",
+                        "vol-01c132a066cd206cc"
+                    ],
+                    [
+                        "...",
+                        "vol-01f670e7c34bc13d9"
+                    ],
+                    [
+                        "...",
+                        "vol-0254d7bedf47ee9ea"
+                    ],
+                    [
+                        "...",
+                        "vol-02ae65c619f878d7a"
+                    ],
+                    [
+                        "...",
+                        "vol-02c84099a324d4c83"
+                    ],
+                    [
+                        "...",
+                        "vol-02ea0c04f4abf639b"
+                    ],
+                    [
+                        "...",
+                        "vol-02f487c7bb55f47ce"
+                    ],
+                    [
+                        "...",
+                        "vol-02f9759c49e68a3c3"
+                    ],
+                    [
+                        "...",
+                        "vol-03736714e004ee285"
+                    ],
+                    [
+                        "...",
+                        "vol-03c1d7bae00c0f643"
+                    ],
+                    [
+                        "...",
+                        "vol-03c31df4785a59254"
+                    ],
+                    [
+                        "...",
+                        "vol-03dfbb95804e23ed6"
+                    ],
+                    [
+                        "...",
+                        "vol-042697c3175cdbdb4"
+                    ],
+                    [
+                        "...",
+                        "vol-0442d6139282a32d1"
+                    ],
+                    [
+                        "...",
+                        "vol-04552e6683938d91f"
+                    ],
+                    [
+                        "...",
+                        "vol-04aceb305fd7a1e5e"
+                    ],
+                    [
+                        "...",
+                        "vol-04d5f856801b5bda3"
+                    ],
+                    [
+                        "...",
+                        "vol-056432882df709cda"
+                    ],
+                    [
+                        "...",
+                        "vol-0581bc189fe3a9fc7"
+                    ],
+                    [
+                        "...",
+                        "vol-05a7f5e3eb25d58b0"
+                    ],
+                    [
+                        "...",
+                        "vol-05b26fcd026ec6024"
+                    ],
+                    [
+                        "...",
+                        "vol-05b3b66e9887b2853"
+                    ],
+                    [
+                        "...",
+                        "vol-062926521aae5ff6f"
+                    ],
+                    [
+                        "...",
+                        "vol-06844f7734542d0f0"
+                    ],
+                    [
+                        "...",
+                        "vol-06b4b7e8af596f3f1"
+                    ],
+                    [
+                        "...",
+                        "vol-06c48771adb271293"
+                    ],
+                    [
+                        "...",
+                        "vol-070ec67534520263e"
+                    ],
+                    [
+                        "...",
+                        "vol-0768fa686217dd24e"
+                    ],
+                    [
+                        "...",
+                        "vol-07b41367e2aa6e4d8"
+                    ],
+                    [
+                        "...",
+                        "vol-07e4ab888bfe9d85b"
+                    ],
+                    [
+                        "...",
+                        "vol-07e6ce66a08ab691b"
+                    ],
+                    [
+                        "...",
+                        "vol-081a2bd3cc25dfc4b"
+                    ],
+                    [
+                        "...",
+                        "vol-08226c57794ed4e19"
+                    ],
+                    [
+                        "...",
+                        "vol-083910bd25e3fdccc"
+                    ],
+                    [
+                        "...",
+                        "vol-08b010eb6c4d82442"
+                    ],
+                    [
+                        "...",
+                        "vol-08df49eaa4a53732d"
+                    ],
+                    [
+                        "...",
+                        "vol-08e3da2db8ea85383"
+                    ],
+                    [
+                        "...",
+                        "vol-09557d53b46d168a1"
+                    ],
+                    [
+                        "...",
+                        "vol-098ac00226c3e8126"
+                    ],
+                    [
+                        "...",
+                        "vol-09cf3924aff073901"
+                    ],
+                    [
+                        "...",
+                        "vol-0a311be651137697b"
+                    ],
+                    [
+                        "...",
+                        "vol-0a49cc3239bf0e049"
+                    ],
+                    [
+                        "...",
+                        "vol-0aba81392cef64cf5"
+                    ],
+                    [
+                        "...",
+                        "vol-0ace7222da9044334"
+                    ],
+                    [
+                        "...",
+                        "vol-0ad5f713c84e3a7f9"
+                    ],
+                    [
+                        "...",
+                        "vol-0b0497803ac3a0907"
+                    ],
+                    [
+                        "...",
+                        "vol-0b06554873607bac2"
+                    ],
+                    [
+                        "...",
+                        "vol-0b15d49d910709fbe"
+                    ],
+                    [
+                        "...",
+                        "vol-0b1bbc00adadd2a39"
+                    ],
+                    [
+                        "...",
+                        "vol-0b57e0a31296d800a"
+                    ],
+                    [
+                        "...",
+                        "vol-0b64d4c50e5e4e226"
+                    ],
+                    [
+                        "...",
+                        "vol-0bac43b6347e784fa"
+                    ],
+                    [
+                        "...",
+                        "vol-0bb557e6559fbc140"
+                    ],
+                    [
+                        "...",
+                        "vol-0bf4da0654255c900"
+                    ],
+                    [
+                        "...",
+                        "vol-0c12317da758b862f"
+                    ],
+                    [
+                        "...",
+                        "vol-0c1aff07464c32454"
+                    ],
+                    [
+                        "...",
+                        "vol-0c219b0c51a20cfdb"
+                    ],
+                    [
+                        "...",
+                        "vol-0c5cd0ef92e7aa380"
+                    ],
+                    [
+                        "...",
+                        "vol-0cdcd3e3f515f5cfe"
+                    ],
+                    [
+                        "...",
+                        "vol-0d00cba3439a52de8"
+                    ],
+                    [
+                        "...",
+                        "vol-0d304728022cad747"
+                    ],
+                    [
+                        "...",
+                        "vol-0dd802ad7aaf35048"
+                    ],
+                    [
+                        "...",
+                        "vol-0e24094644e98e321"
+                    ],
+                    [
+                        "...",
+                        "vol-0e2653e1444449a80"
+                    ],
+                    [
+                        "...",
+                        "vol-0e5fe7e8ca8da09fe"
+                    ],
+                    [
+                        "...",
+                        "vol-0f10f0eb04aea4578"
+                    ],
+                    [
+                        "...",
+                        "vol-0f14eab0019438e0f"
+                    ],
+                    [
+                        "...",
+                        "vol-0f8045f212448edcd"
+                    ],
+                    [
+                        "...",
+                        "vol-0f971057e58393141"
+                    ]
+                ],
+                "region": "eu-central-1"
+            }
+        },
+        {
+            "height": 1,
+            "width": 18,
+            "y": 29,
+            "x": 0,
+            "type": "text",
+            "properties": {
+                "markdown": "# EBS",
+                "background": "transparent"
+            }
+        },
+        {
+            "height": 9,
+            "width": 9,
+            "y": 30,
+            "x": 9,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [
+                        "AWS/EBS",
+                        "VolumeWriteOps",
+                        "VolumeId",
+                        "vol-0027a8a59a03c5d46"
+                    ],
+                    [
+                        "...",
+                        "vol-004e741a158f39ff6"
+                    ],
+                    [
+                        "...",
+                        "vol-007bd29707d7f6d23"
+                    ],
+                    [
+                        "...",
+                        "vol-007e96a2def54c591"
+                    ],
+                    [
+                        "...",
+                        "vol-00b6e77b915a6a75c"
+                    ],
+                    [
+                        "...",
+                        "vol-00b764f5cda2001df"
+                    ],
+                    [
+                        "...",
+                        "vol-012c25dd0000c70a1"
+                    ],
+                    [
+                        "...",
+                        "vol-013122f6e59cb59a6"
+                    ],
+                    [
+                        "...",
+                        "vol-015393c2e465a5b3e"
+                    ],
+                    [
+                        "...",
+                        "vol-01c132a066cd206cc"
+                    ],
+                    [
+                        "...",
+                        "vol-01f670e7c34bc13d9"
+                    ],
+                    [
+                        "...",
+                        "vol-0254d7bedf47ee9ea"
+                    ],
+                    [
+                        "...",
+                        "vol-02ae65c619f878d7a"
+                    ],
+                    [
+                        "...",
+                        "vol-02c84099a324d4c83"
+                    ],
+                    [
+                        "...",
+                        "vol-02ea0c04f4abf639b"
+                    ],
+                    [
+                        "...",
+                        "vol-02f487c7bb55f47ce"
+                    ],
+                    [
+                        "...",
+                        "vol-02f9759c49e68a3c3"
+                    ],
+                    [
+                        "...",
+                        "vol-03736714e004ee285"
+                    ],
+                    [
+                        "...",
+                        "vol-03c1d7bae00c0f643"
+                    ],
+                    [
+                        "...",
+                        "vol-03c31df4785a59254"
+                    ],
+                    [
+                        "...",
+                        "vol-03dfbb95804e23ed6"
+                    ],
+                    [
+                        "...",
+                        "vol-042697c3175cdbdb4"
+                    ],
+                    [
+                        "...",
+                        "vol-0442d6139282a32d1"
+                    ],
+                    [
+                        "...",
+                        "vol-04552e6683938d91f"
+                    ],
+                    [
+                        "...",
+                        "vol-04aceb305fd7a1e5e"
+                    ],
+                    [
+                        "...",
+                        "vol-04d5f856801b5bda3"
+                    ],
+                    [
+                        "...",
+                        "vol-056432882df709cda"
+                    ],
+                    [
+                        "...",
+                        "vol-0581bc189fe3a9fc7"
+                    ],
+                    [
+                        "...",
+                        "vol-05a7f5e3eb25d58b0"
+                    ],
+                    [
+                        "...",
+                        "vol-05b26fcd026ec6024"
+                    ],
+                    [
+                        "...",
+                        "vol-05b3b66e9887b2853"
+                    ],
+                    [
+                        "...",
+                        "vol-062926521aae5ff6f"
+                    ],
+                    [
+                        "...",
+                        "vol-06844f7734542d0f0"
+                    ],
+                    [
+                        "...",
+                        "vol-06b4b7e8af596f3f1"
+                    ],
+                    [
+                        "...",
+                        "vol-06c48771adb271293"
+                    ],
+                    [
+                        "...",
+                        "vol-070ec67534520263e"
+                    ],
+                    [
+                        "...",
+                        "vol-0768fa686217dd24e"
+                    ],
+                    [
+                        "...",
+                        "vol-07b41367e2aa6e4d8"
+                    ],
+                    [
+                        "...",
+                        "vol-07e4ab888bfe9d85b"
+                    ],
+                    [
+                        "...",
+                        "vol-07e6ce66a08ab691b"
+                    ],
+                    [
+                        "...",
+                        "vol-081a2bd3cc25dfc4b"
+                    ],
+                    [
+                        "...",
+                        "vol-08226c57794ed4e19"
+                    ],
+                    [
+                        "...",
+                        "vol-083910bd25e3fdccc"
+                    ],
+                    [
+                        "...",
+                        "vol-08b010eb6c4d82442"
+                    ],
+                    [
+                        "...",
+                        "vol-08df49eaa4a53732d"
+                    ],
+                    [
+                        "...",
+                        "vol-08e3da2db8ea85383"
+                    ],
+                    [
+                        "...",
+                        "vol-09557d53b46d168a1"
+                    ],
+                    [
+                        "...",
+                        "vol-098ac00226c3e8126"
+                    ],
+                    [
+                        "...",
+                        "vol-09cf3924aff073901"
+                    ],
+                    [
+                        "...",
+                        "vol-0a311be651137697b"
+                    ],
+                    [
+                        "...",
+                        "vol-0a49cc3239bf0e049"
+                    ],
+                    [
+                        "...",
+                        "vol-0aba81392cef64cf5"
+                    ],
+                    [
+                        "...",
+                        "vol-0ace7222da9044334"
+                    ],
+                    [
+                        "...",
+                        "vol-0ad5f713c84e3a7f9"
+                    ],
+                    [
+                        "...",
+                        "vol-0b0497803ac3a0907"
+                    ],
+                    [
+                        "...",
+                        "vol-0b06554873607bac2"
+                    ],
+                    [
+                        "...",
+                        "vol-0b15d49d910709fbe"
+                    ],
+                    [
+                        "...",
+                        "vol-0b1bbc00adadd2a39"
+                    ],
+                    [
+                        "...",
+                        "vol-0b57e0a31296d800a"
+                    ],
+                    [
+                        "...",
+                        "vol-0b64d4c50e5e4e226"
+                    ],
+                    [
+                        "...",
+                        "vol-0bac43b6347e784fa"
+                    ],
+                    [
+                        "...",
+                        "vol-0bb557e6559fbc140"
+                    ],
+                    [
+                        "...",
+                        "vol-0bf4da0654255c900"
+                    ],
+                    [
+                        "...",
+                        "vol-0c12317da758b862f"
+                    ],
+                    [
+                        "...",
+                        "vol-0c1aff07464c32454"
+                    ],
+                    [
+                        "...",
+                        "vol-0c219b0c51a20cfdb"
+                    ],
+                    [
+                        "...",
+                        "vol-0c5cd0ef92e7aa380"
+                    ],
+                    [
+                        "...",
+                        "vol-0cdcd3e3f515f5cfe"
+                    ],
+                    [
+                        "...",
+                        "vol-0d00cba3439a52de8"
+                    ],
+                    [
+                        "...",
+                        "vol-0d304728022cad747"
+                    ],
+                    [
+                        "...",
+                        "vol-0dd802ad7aaf35048"
+                    ],
+                    [
+                        "...",
+                        "vol-0e24094644e98e321"
+                    ],
+                    [
+                        "...",
+                        "vol-0e2653e1444449a80"
+                    ],
+                    [
+                        "...",
+                        "vol-0e5fe7e8ca8da09fe"
+                    ],
+                    [
+                        "...",
+                        "vol-0f10f0eb04aea4578"
+                    ],
+                    [
+                        "...",
+                        "vol-0f14eab0019438e0f"
+                    ],
+                    [
+                        "...",
+                        "vol-0f8045f212448edcd"
+                    ],
+                    [
+                        "...",
+                        "vol-0f971057e58393141"
+                    ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-central-1",
+                "period": 300,
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 9,
+            "width": 9,
+            "y": 39,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [
+                        "AWS/EBS",
+                        "BurstBalance",
+                        "VolumeId",
+                        "vol-0027a8a59a03c5d46"
+                    ],
+                    [
+                        "...",
+                        "vol-004e741a158f39ff6"
+                    ],
+                    [
+                        "...",
+                        "vol-007bd29707d7f6d23"
+                    ],
+                    [
+                        "...",
+                        "vol-007e96a2def54c591"
+                    ],
+                    [
+                        "...",
+                        "vol-00b6e77b915a6a75c"
+                    ],
+                    [
+                        "...",
+                        "vol-00b764f5cda2001df"
+                    ],
+                    [
+                        "...",
+                        "vol-012c25dd0000c70a1"
+                    ],
+                    [
+                        "...",
+                        "vol-013122f6e59cb59a6"
+                    ],
+                    [
+                        "...",
+                        "vol-015393c2e465a5b3e"
+                    ],
+                    [
+                        "...",
+                        "vol-01c132a066cd206cc"
+                    ],
+                    [
+                        "...",
+                        "vol-01f670e7c34bc13d9"
+                    ],
+                    [
+                        "...",
+                        "vol-0254d7bedf47ee9ea"
+                    ],
+                    [
+                        "...",
+                        "vol-02ae65c619f878d7a"
+                    ],
+                    [
+                        "...",
+                        "vol-02c84099a324d4c83"
+                    ],
+                    [
+                        "...",
+                        "vol-02ea0c04f4abf639b"
+                    ],
+                    [
+                        "...",
+                        "vol-02f487c7bb55f47ce"
+                    ],
+                    [
+                        "...",
+                        "vol-02f9759c49e68a3c3"
+                    ],
+                    [
+                        "...",
+                        "vol-03736714e004ee285"
+                    ],
+                    [
+                        "...",
+                        "vol-03c1d7bae00c0f643"
+                    ],
+                    [
+                        "...",
+                        "vol-03c31df4785a59254"
+                    ],
+                    [
+                        "...",
+                        "vol-03dfbb95804e23ed6"
+                    ],
+                    [
+                        "...",
+                        "vol-042697c3175cdbdb4"
+                    ],
+                    [
+                        "...",
+                        "vol-0442d6139282a32d1"
+                    ],
+                    [
+                        "...",
+                        "vol-04552e6683938d91f"
+                    ],
+                    [
+                        "...",
+                        "vol-04aceb305fd7a1e5e"
+                    ],
+                    [
+                        "...",
+                        "vol-04d5f856801b5bda3"
+                    ],
+                    [
+                        "...",
+                        "vol-056432882df709cda"
+                    ],
+                    [
+                        "...",
+                        "vol-0581bc189fe3a9fc7"
+                    ],
+                    [
+                        "...",
+                        "vol-05a7f5e3eb25d58b0"
+                    ],
+                    [
+                        "...",
+                        "vol-05b26fcd026ec6024"
+                    ],
+                    [
+                        "...",
+                        "vol-05b3b66e9887b2853"
+                    ],
+                    [
+                        "...",
+                        "vol-062926521aae5ff6f"
+                    ],
+                    [
+                        "...",
+                        "vol-06844f7734542d0f0"
+                    ],
+                    [
+                        "...",
+                        "vol-06b4b7e8af596f3f1"
+                    ],
+                    [
+                        "...",
+                        "vol-06c48771adb271293"
+                    ],
+                    [
+                        "...",
+                        "vol-070ec67534520263e"
+                    ],
+                    [
+                        "...",
+                        "vol-0768fa686217dd24e"
+                    ],
+                    [
+                        "...",
+                        "vol-07b41367e2aa6e4d8"
+                    ],
+                    [
+                        "...",
+                        "vol-07e4ab888bfe9d85b"
+                    ],
+                    [
+                        "...",
+                        "vol-07e6ce66a08ab691b"
+                    ],
+                    [
+                        "...",
+                        "vol-081a2bd3cc25dfc4b"
+                    ],
+                    [
+                        "...",
+                        "vol-08226c57794ed4e19"
+                    ],
+                    [
+                        "...",
+                        "vol-083910bd25e3fdccc"
+                    ],
+                    [
+                        "...",
+                        "vol-08b010eb6c4d82442"
+                    ],
+                    [
+                        "...",
+                        "vol-08df49eaa4a53732d"
+                    ],
+                    [
+                        "...",
+                        "vol-08e3da2db8ea85383"
+                    ],
+                    [
+                        "...",
+                        "vol-09557d53b46d168a1"
+                    ],
+                    [
+                        "...",
+                        "vol-098ac00226c3e8126"
+                    ],
+                    [
+                        "...",
+                        "vol-09cf3924aff073901"
+                    ],
+                    [
+                        "...",
+                        "vol-0a311be651137697b"
+                    ],
+                    [
+                        "...",
+                        "vol-0a49cc3239bf0e049"
+                    ],
+                    [
+                        "...",
+                        "vol-0aba81392cef64cf5"
+                    ],
+                    [
+                        "...",
+                        "vol-0ace7222da9044334"
+                    ],
+                    [
+                        "...",
+                        "vol-0ad5f713c84e3a7f9"
+                    ],
+                    [
+                        "...",
+                        "vol-0b0497803ac3a0907"
+                    ],
+                    [
+                        "...",
+                        "vol-0b06554873607bac2"
+                    ],
+                    [
+                        "...",
+                        "vol-0b15d49d910709fbe"
+                    ],
+                    [
+                        "...",
+                        "vol-0b1bbc00adadd2a39"
+                    ],
+                    [
+                        "...",
+                        "vol-0b57e0a31296d800a"
+                    ],
+                    [
+                        "...",
+                        "vol-0b64d4c50e5e4e226"
+                    ],
+                    [
+                        "...",
+                        "vol-0bac43b6347e784fa"
+                    ],
+                    [
+                        "...",
+                        "vol-0bb557e6559fbc140"
+                    ],
+                    [
+                        "...",
+                        "vol-0bf4da0654255c900"
+                    ],
+                    [
+                        "...",
+                        "vol-0c12317da758b862f"
+                    ],
+                    [
+                        "...",
+                        "vol-0c1aff07464c32454"
+                    ],
+                    [
+                        "...",
+                        "vol-0c219b0c51a20cfdb"
+                    ],
+                    [
+                        "...",
+                        "vol-0c5cd0ef92e7aa380"
+                    ],
+                    [
+                        "...",
+                        "vol-0cdcd3e3f515f5cfe"
+                    ],
+                    [
+                        "...",
+                        "vol-0d00cba3439a52de8"
+                    ],
+                    [
+                        "...",
+                        "vol-0d304728022cad747"
+                    ],
+                    [
+                        "...",
+                        "vol-0dd802ad7aaf35048"
+                    ],
+                    [
+                        "...",
+                        "vol-0e24094644e98e321"
+                    ],
+                    [
+                        "...",
+                        "vol-0e2653e1444449a80"
+                    ],
+                    [
+                        "...",
+                        "vol-0e5fe7e8ca8da09fe"
+                    ],
+                    [
+                        "...",
+                        "vol-0f10f0eb04aea4578"
+                    ],
+                    [
+                        "...",
+                        "vol-0f14eab0019438e0f"
+                    ],
+                    [
+                        "...",
+                        "vol-0f8045f212448edcd"
+                    ],
+                    [
+                        "...",
+                        "vol-0f971057e58393141"
+                    ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-central-1",
+                "period": 300,
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 9,
+            "width": 9,
+            "y": 39,
+            "x": 9,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [
+                        "AWS/EBS",
+                        "VolumeIdleTime",
+                        "VolumeId",
+                        "vol-0027a8a59a03c5d46"
+                    ],
+                    [
+                        "...",
+                        "vol-004e741a158f39ff6"
+                    ],
+                    [
+                        "...",
+                        "vol-007bd29707d7f6d23"
+                    ],
+                    [
+                        "...",
+                        "vol-007e96a2def54c591"
+                    ],
+                    [
+                        "...",
+                        "vol-00b6e77b915a6a75c"
+                    ],
+                    [
+                        "...",
+                        "vol-00b764f5cda2001df"
+                    ],
+                    [
+                        "...",
+                        "vol-012c25dd0000c70a1"
+                    ],
+                    [
+                        "...",
+                        "vol-013122f6e59cb59a6"
+                    ],
+                    [
+                        "...",
+                        "vol-015393c2e465a5b3e"
+                    ],
+                    [
+                        "...",
+                        "vol-01c132a066cd206cc"
+                    ],
+                    [
+                        "...",
+                        "vol-01f670e7c34bc13d9"
+                    ],
+                    [
+                        "...",
+                        "vol-0254d7bedf47ee9ea"
+                    ],
+                    [
+                        "...",
+                        "vol-02ae65c619f878d7a"
+                    ],
+                    [
+                        "...",
+                        "vol-02c84099a324d4c83"
+                    ],
+                    [
+                        "...",
+                        "vol-02ea0c04f4abf639b"
+                    ],
+                    [
+                        "...",
+                        "vol-02f487c7bb55f47ce"
+                    ],
+                    [
+                        "...",
+                        "vol-02f9759c49e68a3c3"
+                    ],
+                    [
+                        "...",
+                        "vol-03736714e004ee285"
+                    ],
+                    [
+                        "...",
+                        "vol-03c1d7bae00c0f643"
+                    ],
+                    [
+                        "...",
+                        "vol-03c31df4785a59254"
+                    ],
+                    [
+                        "...",
+                        "vol-03dfbb95804e23ed6"
+                    ],
+                    [
+                        "...",
+                        "vol-042697c3175cdbdb4"
+                    ],
+                    [
+                        "...",
+                        "vol-0442d6139282a32d1"
+                    ],
+                    [
+                        "...",
+                        "vol-04552e6683938d91f"
+                    ],
+                    [
+                        "...",
+                        "vol-04aceb305fd7a1e5e"
+                    ],
+                    [
+                        "...",
+                        "vol-04d5f856801b5bda3"
+                    ],
+                    [
+                        "...",
+                        "vol-056432882df709cda"
+                    ],
+                    [
+                        "...",
+                        "vol-0581bc189fe3a9fc7"
+                    ],
+                    [
+                        "...",
+                        "vol-05a7f5e3eb25d58b0"
+                    ],
+                    [
+                        "...",
+                        "vol-05b26fcd026ec6024"
+                    ],
+                    [
+                        "...",
+                        "vol-05b3b66e9887b2853"
+                    ],
+                    [
+                        "...",
+                        "vol-062926521aae5ff6f"
+                    ],
+                    [
+                        "...",
+                        "vol-06844f7734542d0f0"
+                    ],
+                    [
+                        "...",
+                        "vol-06b4b7e8af596f3f1"
+                    ],
+                    [
+                        "...",
+                        "vol-06c48771adb271293"
+                    ],
+                    [
+                        "...",
+                        "vol-070ec67534520263e"
+                    ],
+                    [
+                        "...",
+                        "vol-0768fa686217dd24e"
+                    ],
+                    [
+                        "...",
+                        "vol-07b41367e2aa6e4d8"
+                    ],
+                    [
+                        "...",
+                        "vol-07e4ab888bfe9d85b"
+                    ],
+                    [
+                        "...",
+                        "vol-07e6ce66a08ab691b"
+                    ],
+                    [
+                        "...",
+                        "vol-081a2bd3cc25dfc4b"
+                    ],
+                    [
+                        "...",
+                        "vol-08226c57794ed4e19"
+                    ],
+                    [
+                        "...",
+                        "vol-083910bd25e3fdccc"
+                    ],
+                    [
+                        "...",
+                        "vol-08b010eb6c4d82442"
+                    ],
+                    [
+                        "...",
+                        "vol-08df49eaa4a53732d"
+                    ],
+                    [
+                        "...",
+                        "vol-08e3da2db8ea85383"
+                    ],
+                    [
+                        "...",
+                        "vol-09557d53b46d168a1"
+                    ],
+                    [
+                        "...",
+                        "vol-098ac00226c3e8126"
+                    ],
+                    [
+                        "...",
+                        "vol-09cf3924aff073901"
+                    ],
+                    [
+                        "...",
+                        "vol-0a311be651137697b"
+                    ],
+                    [
+                        "...",
+                        "vol-0a49cc3239bf0e049"
+                    ],
+                    [
+                        "...",
+                        "vol-0aba81392cef64cf5"
+                    ],
+                    [
+                        "...",
+                        "vol-0ace7222da9044334"
+                    ],
+                    [
+                        "...",
+                        "vol-0ad5f713c84e3a7f9"
+                    ],
+                    [
+                        "...",
+                        "vol-0b0497803ac3a0907"
+                    ],
+                    [
+                        "...",
+                        "vol-0b06554873607bac2"
+                    ],
+                    [
+                        "...",
+                        "vol-0b15d49d910709fbe"
+                    ],
+                    [
+                        "...",
+                        "vol-0b1bbc00adadd2a39"
+                    ],
+                    [
+                        "...",
+                        "vol-0b57e0a31296d800a"
+                    ],
+                    [
+                        "...",
+                        "vol-0b64d4c50e5e4e226"
+                    ],
+                    [
+                        "...",
+                        "vol-0bac43b6347e784fa"
+                    ],
+                    [
+                        "...",
+                        "vol-0bb557e6559fbc140"
+                    ],
+                    [
+                        "...",
+                        "vol-0bf4da0654255c900"
+                    ],
+                    [
+                        "...",
+                        "vol-0c12317da758b862f"
+                    ],
+                    [
+                        "...",
+                        "vol-0c1aff07464c32454"
+                    ],
+                    [
+                        "...",
+                        "vol-0c219b0c51a20cfdb"
+                    ],
+                    [
+                        "...",
+                        "vol-0c5cd0ef92e7aa380"
+                    ],
+                    [
+                        "...",
+                        "vol-0cdcd3e3f515f5cfe"
+                    ],
+                    [
+                        "...",
+                        "vol-0d00cba3439a52de8"
+                    ],
+                    [
+                        "...",
+                        "vol-0d304728022cad747"
+                    ],
+                    [
+                        "...",
+                        "vol-0dd802ad7aaf35048"
+                    ],
+                    [
+                        "...",
+                        "vol-0e24094644e98e321"
+                    ],
+                    [
+                        "...",
+                        "vol-0e2653e1444449a80"
+                    ],
+                    [
+                        "...",
+                        "vol-0e5fe7e8ca8da09fe"
+                    ],
+                    [
+                        "...",
+                        "vol-0f10f0eb04aea4578"
+                    ],
+                    [
+                        "...",
+                        "vol-0f14eab0019438e0f"
+                    ],
+                    [
+                        "...",
+                        "vol-0f8045f212448edcd"
+                    ],
+                    [
+                        "...",
+                        "vol-0f971057e58393141"
+                    ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-central-1",
+                "period": 300,
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 9,
+            "width": 9,
+            "y": 49,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "view": "timeSeries",
+                "stacked": false,
+                "metrics": [
+                    [
+                        "AWS/DynamoDB",
+                        "ConsumedReadCapacityUnits",
+                        "TableName",
+                        "terraform-lock"
+                    ],
+                    [
+                        ".",
+                        "ConsumedWriteCapacityUnits",
+                        ".",
+                        "."
+                    ]
+                ],
+                "region": "eu-central-1"
+            }
+        },
+        {
+            "height": 1,
+            "width": 18,
+            "y": 48,
+            "x": 0,
+            "type": "text",
+            "properties": {
+                "markdown": "# Dynamo DB",
+                "background": "transparent"
+            }
+        },
+        {
+            "height": 9,
+            "width": 9,
+            "y": 49,
+            "x": 9,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [
+                        "AWS/DynamoDB",
+                        "SuccessfulRequestLatency",
+                        "TableName",
+                        "terraform-lock",
+                        "Operation",
+                        "PutItem"
+                    ],
+                    [
+                        "...",
+                        "GetItem"
+                    ],
+                    [
+                        "...",
+                        "DeleteItem"
+                    ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-central-1",
+                "period": 300,
+                "setPeriodToTimeRange": true
+            }
+        },
+        {
+            "height": 1,
+            "width": 18,
+            "y": 58,
+            "x": 0,
+            "type": "text",
+            "properties": {
+                "markdown": "# ELB",
+                "background": "transparent"
+            }
+        },
+        {
+            "height": 3,
+            "width": 18,
+            "y": 59,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [
+                        "AWS/ELB",
+                        "HealthyHostCount",
+                        "Namespace",
+                        "AWS"
+                    ],
+                    [
+                        ".",
+                        "UnHealthyHostCount",
+                        ".",
+                        "."
+                    ]
+                ],
+                "view": "singleValue",
+                "stacked": false,
+                "region": "eu-central-1",
+                "period": 300,
+                "setPeriodToTimeRange": true
+            }
+        },
+        {
+            "height": 9,
+            "width": 9,
+            "y": 62,
+            "x": 9,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [
+                        "AWS/ELB",
+                        "RequestCount",
+                        "Namespace",
+                        "AWS",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "Latency",
+                        ".",
+                        ".",
+                        {
+                            "yAxis": "right",
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "SurgeQueueLength",
+                        ".",
+                        "."
+                    ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-central-1",
+                "period": 300,
+                "setPeriodToTimeRange": true,
+                "stat": "Sum"
+            }
+        },
+        {
+            "height": 9,
+            "width": 9,
+            "y": 62,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [
+                        "AWS/ELB",
+                        "Latency",
+                        "LoadBalancerName",
+                        "a1943577369c449159e07ef4edefb578"
+                    ],
+                    [
+                        "...",
+                        "a2148d98e22bc44cc84ec82c62527057"
+                    ],
+                    [
+                        "...",
+                        "a317badd12b4b42db99afb80240e0cd1"
+                    ],
+                    [
+                        "...",
+                        "a40f067378f5f4ba8896bb8dcc76b6a6"
+                    ],
+                    [
+                        "...",
+                        "a52ae71b2b3824665b203ace2bfded76"
+                    ],
+                    [
+                        "...",
+                        "a55c4ed0522b646f6804deefc5187f31"
+                    ],
+                    [
+                        "...",
+                        "a58f067f232c349b8b1fbf4c41bd2a3d"
+                    ],
+                    [
+                        "...",
+                        "a604f5f7210cb492ba3b357ecabba419"
+                    ],
+                    [
+                        "...",
+                        "a69d5d5af14d84b6da030cbaf4cbe138"
+                    ],
+                    [
+                        "...",
+                        "a74e9e8b9b8704eacab326053ada9c84"
+                    ],
+                    [
+                        "...",
+                        "a828ae4c8c5bd4217b90af05df504383"
+                    ],
+                    [
+                        "...",
+                        "a937e16428aa64f4487d962dbcc4afa0"
+                    ],
+                    [
+                        "...",
+                        "aa3aa405a005444b49d5b2f0b4bdf612"
+                    ],
+                    [
+                        "...",
+                        "aa6ded2c0fcdb4715a440af77055d07f"
+                    ],
+                    [
+                        "...",
+                        "abc147b78e38049e3be944b39f7e0f2a"
+                    ],
+                    [
+                        "...",
+                        "ac4655696ff594bab938c57ea16daeec"
+                    ],
+                    [
+                        "...",
+                        "ad026c499bc8149c2b5676638cedee52"
+                    ],
+                    [
+                        "...",
+                        "ad141aa3e6b294a5d8288a374dc10e16"
+                    ],
+                    [
+                        "...",
+                        "adb2c25986d8c4e6f832dcc752783299"
+                    ],
+                    [
+                        "...",
+                        "ae197c22ad86f4100be2b47cae731b40"
+                    ],
+                    [
+                        "...",
+                        "aef24ec0c3235424b95bd5573463f5c6"
+                    ],
+                    [
+                        "...",
+                        "af84aff716d074a5cb5a9ce276d5c3fd"
+                    ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-central-1",
+                "period": 300,
+                "setPeriodToTimeRange": true,
+                "stat": "Sum"
+            }
+        },
+        {
+            "height": 9,
+            "width": 9,
+            "y": 71,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [
+                        "AWS/ELB",
+                        "RequestCount",
+                        "LoadBalancerName",
+                        "a1943577369c449159e07ef4edefb578",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "a2148d98e22bc44cc84ec82c62527057",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "a317badd12b4b42db99afb80240e0cd1",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "a40f067378f5f4ba8896bb8dcc76b6a6",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "a52ae71b2b3824665b203ace2bfded76",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "a55c4ed0522b646f6804deefc5187f31",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "a58f067f232c349b8b1fbf4c41bd2a3d",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "a604f5f7210cb492ba3b357ecabba419",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "a69d5d5af14d84b6da030cbaf4cbe138",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "a74e9e8b9b8704eacab326053ada9c84",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "a828ae4c8c5bd4217b90af05df504383",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "a937e16428aa64f4487d962dbcc4afa0",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "aa3aa405a005444b49d5b2f0b4bdf612",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "aa6ded2c0fcdb4715a440af77055d07f",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "abc147b78e38049e3be944b39f7e0f2a",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "ac4655696ff594bab938c57ea16daeec",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "ad026c499bc8149c2b5676638cedee52",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "ad141aa3e6b294a5d8288a374dc10e16",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "adb2c25986d8c4e6f832dcc752783299",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "ae197c22ad86f4100be2b47cae731b40",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "aef24ec0c3235424b95bd5573463f5c6",
+                        {
+                            "stat": "Sum"
+                        }
+                    ],
+                    [
+                        "...",
+                        "af84aff716d074a5cb5a9ce276d5c3fd",
+                        {
+                            "stat": "Sum"
+                        }
+                    ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-central-1",
+                "period": 300,
+                "setPeriodToTimeRange": true,
+                "stat": "Sum"
+            }
+        },
+        {
+            "height": 10,
+            "width": 9,
+            "y": 81,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [
+                        "AWS/NetworkELB",
+                        "ActiveFlowCount",
+                        "LoadBalancer",
+                        "net/aa6ded2c0fcdb4715a440af77055d07f/506606d47fed0bd8",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "PeakPacketsPerSecond",
+                        ".",
+                        ".",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "NewFlowCount",
+                        ".",
+                        ".",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "UnhealthyRoutingFlowCount",
+                        ".",
+                        ".",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ],
+                    [
+                        ".",
+                        "PortAllocationErrorCount",
+                        ".",
+                        ".",
+                        {
+                            "region": "eu-central-1"
+                        }
+                    ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-central-1",
+                "stat": "Average",
+                "period": 300
+            }
+        },
+        {
+            "height": 1,
+            "width": 18,
+            "y": 80,
+            "x": 0,
+            "type": "text",
+            "properties": {
+                "markdown": "# Network ELB",
+                "background": "transparent"
+            }
+        },
+        {
+            "height": 10,
+            "width": 9,
+            "y": 81,
+            "x": 9,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [
+                        "AWS/NetworkELB",
+                        "ConsumedLCUs",
+                        "LoadBalancer",
+                        "net/aa6ded2c0fcdb4715a440af77055d07f/506606d47fed0bd8",
+                        {
+                            "yAxis": "left",
+                            "region": "eu-central-1"
+                        }
+                    ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-central-1",
+                "stat": "Average",
+                "period": 300
+            }
+        },
+        {
+            "height": 10,
+            "width": 9,
+            "y": 91,
+            "x": 9,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [
+                        "AWS/NetworkELB",
+                        "ConsumedLCUs",
+                        "LoadBalancer",
+                        "net/aa6ded2c0fcdb4715a440af77055d07f/506606d47fed0bd8",
+                        {
+                            "yAxis": "left",
+                            "region": "eu-central-1"
+                        }
+                    ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-central-1",
+                "stat": "Average",
+                "period": 300
+            }
+        },
+        {
+            "height": 10,
+            "width": 9,
+            "y": 102,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "view": "timeSeries",
+                "stacked": false,
+                "metrics": [
+                    [
+                        "AWS/NATGateway",
+                        "ActiveConnectionCount",
+                        "NatGatewayId",
+                        "nat-0c43f747cdfeb0eb5"
+                    ],
+                    [
+                        "...",
+                        "nat-0d2103121e2af8d24"
+                    ],
+                    [
+                        "...",
+                        "nat-0580f86bf1e67e3c1"
+                    ],
+                    [
+                        "...",
+                        "nat-019e9c5d79d56ba4f"
+                    ],
+                    [
+                        "...",
+                        "nat-02d8305e50a4af956"
+                    ],
+                    [
+                        "...",
+                        "nat-03ec80dafe78c55c8"
+                    ],
+                    [
+                        "...",
+                        "nat-0466710f987d9d0c5"
+                    ],
+                    [
+                        "...",
+                        "nat-0477186b0346d9b09"
+                    ],
+                    [
+                        "...",
+                        "nat-04f949422e8708748"
+                    ],
+                    [
+                        "...",
+                        "nat-05cf8112f3ba49d2d"
+                    ],
+                    [
+                        "...",
+                        "nat-06388e681cf9ef022"
+                    ],
+                    [
+                        "...",
+                        "nat-078f7f3fc6e642c78"
+                    ],
+                    [
+                        "...",
+                        "nat-0aa4e7e384c6cf1cf"
+                    ],
+                    [
+                        "...",
+                        "nat-0c49db278d644c5c4"
+                    ],
+                    [
+                        "...",
+                        "nat-0ec404ac508efd6fa"
+                    ],
+                    [
+                        "...",
+                        "nat-0f2c5007de7e2d9ab"
+                    ],
+                    [
+                        "...",
+                        "nat-0f55e706768e4f0f3"
+                    ],
+                    [
+                        "...",
+                        "nat-0f76193aa63f3946c"
+                    ]
+                ],
+                "region": "eu-central-1"
+            }
+        },
+        {
+            "height": 1,
+            "width": 18,
+            "y": 101,
+            "x": 0,
+            "type": "text",
+            "properties": {
+                "markdown": "# NAT Gateway",
+                "background": "transparent"
+            }
+        }
+    ]
+}
