@@ -1,0 +1,32 @@
+grafana:
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Loki
+          type: loki
+          access: proxy
+          url: "http://loki-gateway:80"
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          url: "http://prometheus-server:80"
+
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+        - name: "dashboards"
+          orgId: 1
+          folder: ""
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards
+            foldersFromFilesStructure: true
+
+  dashboardsConfigMaps:
+    kubernetes: "monitoring-dashboards-kubernetes"
+    prometheus: "monitoring-dashboards-prometheus"
+    loki: "monitoring-dashboards-loki"

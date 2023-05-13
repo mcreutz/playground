@@ -1,0 +1,8 @@
+apiVersion: v2
+description: Grafana for Kubernetes monitoring
+name: my-grafana
+version: 0.0.1
+dependencies:
+  - name: grafana
+    repository: https://grafana.github.io/helm-charts
+    version: 6.56.2

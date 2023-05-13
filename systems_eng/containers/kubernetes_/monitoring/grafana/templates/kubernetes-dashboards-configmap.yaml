@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: monitoring-dashboards-kubernetes
+  namespace: monitoring
+data:
+  1-k8s-for-prometheus-dashboard-20211010_rev1.json: |
+    {{  .Files.Get "dashboards/Kubernetes/1-k8s-for-prometheus-dashboard-20211010_rev1.json" | nindent 4 }}
+  1-kubernetes-deployment-statefulset-daemonset-metrics_rev1.json: |
+    {{  .Files.Get "dashboards/Kubernetes/1-kubernetes-deployment-statefulset-daemonset-metrics_rev1.json" | nindent 4 }}
+  k8s-storage-volumes-namespace_rev6.json: |
+    {{  .Files.Get "dashboards/Kubernetes/k8s-storage-volumes-namespace_rev6.json" | nindent 4 }}
+  kubernetes-apiserver_rev1.json: |
+    {{  .Files.Get "dashboards/Kubernetes/kubernetes-apiserver_rev1.json" | nindent 4 }}
+  kubernetes-cluster_rev1: |
+    {{  .Files.Get "dashboards/Kubernetes/kubernetes-cluster_rev1.json" | nindent 4 }}
+  kubernetes-cluster-monitoring-via-prometheus_rev1.json: |
+    {{  .Files.Get "dashboards/Kubernetes/kubernetes-cluster-monitoring-via-prometheus_rev1.json" | nindent 4 }}
+  kubernetes-cluster-monitoring-via-prometheus_rev3: |
+    {{  .Files.Get "dashboards/Kubernetes/kubernetes-cluster-monitoring-via-prometheus_rev3.json" | nindent 4 }}
+  kubernetes-cluster-monitoring-via-prometheus_rev3.json: |
+    {{  .Files.Get "dashboards/Kubernetes/kubernetes-cluster-monitoring-via-prometheus_rev3.json" | nindent 4 }}
+  kubernetes-cluster-monitoring-via-prometheus_rev3.json: |
+    {{  .Files.Get "dashboards/Kubernetes/kubernetes-cluster-monitoring-via-prometheus_rev3.json" | nindent 4 }}
+  kubernetes-cluster-monitoring-via-prometheus_rev3.json: |
+    {{  .Files.Get "dashboards/Kubernetes/kubernetes-cluster-monitoring-via-prometheus_rev3.json" | nindent 4 }}
