@@ -18,9 +18,9 @@ data:
     {{  .Files.Get "dashboards/Kubernetes/kubernetes-cluster-monitoring-via-prometheus_rev1.json" | nindent 4 }}
   kubernetes-cluster-monitoring-via-prometheus_rev3: |
     {{  .Files.Get "dashboards/Kubernetes/kubernetes-cluster-monitoring-via-prometheus_rev3.json" | nindent 4 }}
-  kubernetes-cluster-monitoring-via-prometheus_rev3.json: |
-    {{  .Files.Get "dashboards/Kubernetes/kubernetes-cluster-monitoring-via-prometheus_rev3.json" | nindent 4 }}
-  kubernetes-cluster-monitoring-via-prometheus_rev3.json: |
-    {{  .Files.Get "dashboards/Kubernetes/kubernetes-cluster-monitoring-via-prometheus_rev3.json" | nindent 4 }}
-  kubernetes-cluster-monitoring-via-prometheus_rev3.json: |
-    {{  .Files.Get "dashboards/Kubernetes/kubernetes-cluster-monitoring-via-prometheus_rev3.json" | nindent 4 }}
+  kubernetes-cluster-prometheus_rev1.json: |
+    {{  .Files.Get "dashboards/Kubernetes/kubernetes-cluster-prometheus_rev1.json" | nindent 4 }}
+  kubernetes-nodes_rev1.json: |
+    {{  .Files.Get "dashboards/Kubernetes/kubernetes-nodes_rev1.json" | nindent 4 }}
+  pod-metrics_rev2.json: |
+    {{  .Files.Get "dashboards/Kubernetes/pod-metrics_rev2.json" | nindent 4 }}

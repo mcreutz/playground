@@ -1,15 +1,22 @@
 extraScrapeConfigs: |
   - job_name: loki
     static_configs:
-      - targets: ['loki-gateway:80']
-    scrape_interval: 5s
-    scrape_timeout: 5s
-    metrics_path: /metrics
-    scheme: http
+      - targets: ['loki:3100']
+  - job_name: 'promtail'
+    kubernetes_sd_configs:
+      - role: pod
     relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_target]
-        target_label: target
-      - target_label: __address__
-        replacement: loki-gateway:80
+      - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_name]
+        regex: promtail
+        action: keep
+      - source_labels: [__meta_kubernetes_pod_container_port_number]
+        action: keep
+        regex: 3101
+      - action: labelmap
+        regex: __meta_kubernetes_pod_label_(.+)
+      - source_labels: [__meta_kubernetes_namespace]
+        action: replace
+        target_label: kubernetes_namespace
+      - source_labels: [__meta_kubernetes_pod_name]
+        action: replace
+        target_label: kubernetes_pod_name
