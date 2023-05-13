@@ -1,0 +1,15 @@
+extraScrapeConfigs: |
+  - job_name: loki
+    static_configs:
+      - targets: ['loki-gateway:80']
+    scrape_interval: 5s
+    scrape_timeout: 5s
+    metrics_path: /metrics
+    scheme: http
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: target
+      - target_label: __address__
+        replacement: loki-gateway:80

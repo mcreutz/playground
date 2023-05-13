@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: monitoring-dashboards-loki
+  namespace: monitoring
+data:
+  logging-dashboard-via-loki_rev2.json: |
+    {{  .Files.Get "dashboards/Loki/logging-dashboard-via-loki_rev2.json" | nindent 4 }}
+  loki-dashboard-quick-search_rev2.json: |
+    {{  .Files.Get "dashboards/Loki/loki-dashboard-quick-search_rev2.json" | nindent 4 }}
+  loki-promtail_rev1.json: |
+    {{  .Files.Get "dashboards/Loki/loki-promtail_rev1.json" | nindent 4 }}
+  loki-stack-monitoring-promtail-loki_rev5.json: |
+    {{  .Files.Get "dashboards/Loki/loki-stack-monitoring-promtail-loki_rev5.json" | nindent 4 }}
+  loki2-0-global-metrics_rev1.json: |
+    {{  .Files.Get "dashboards/Loki/loki2-0-global-metrics_rev1.json" | nindent 4 }}
+    

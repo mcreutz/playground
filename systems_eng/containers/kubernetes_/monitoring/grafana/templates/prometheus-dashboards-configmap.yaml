@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: monitoring-dashboards-prometheus
+  namespace: monitoring
+data:
+  prometheus-2-0-overview_rev2.json: |
+    {{  .Files.Get "dashboards/Prometheus/prometheus-2-0-overview_rev2.json" | nindent 4 }}
+  prometheus-stats_rev2.json: |
+    {{  .Files.Get "dashboards/Prometheus/prometheus-stats_rev2.json" | nindent 4 }}

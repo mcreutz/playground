@@ -1,9 +1,7 @@
 releases:
-  - name: grafana
-    chart: grafana/grafana
+  - name: my-grafana
+    chart: ./grafana
     namespace: monitoring
-    values:
-      - grafana-values.yaml.gotpl
 
   - name: loki
     chart: grafana/loki
