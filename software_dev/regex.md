@@ -38,7 +38,7 @@ Syntax | Description | Example
 ## Escaping
 Syntax | Description | Example
 --- | --- | ---
-\ | Escape character, used to match any of the above characters literally
+\ | Escape character, used to escape control characters | /\./ matches a period, not any character
 
 ## Combination of Expressions
 Syntax | Description | Example
