@@ -32,6 +32,11 @@ whoami  # show current user
 who  # show logged-in users
 passwd  # change active user's password
 
+# Add user
+useradd -m <username>  # -m to create home folder
+passwd <username>
+usermod -aG sudo <username>  # add user to sudo group
+
 # Disk management
 du
 df
