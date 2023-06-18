@@ -38,10 +38,12 @@ $ go install
 
 
 ## Tools
-- go install -v github.com/ramya-rao-a/go-outline@latest  
-- go install -v github.com/go-delve/delve/cmd/dlv@latest
-- go install -v github.com/rogpeppe/godef@latest
-- go install -v github.com/stamblerre/gocode@latest
-- go install -v golang.org/x/tools/gopls@latest  # Go Language Server
-- go install -v golang.org/x/tools/cmd/goimports@latest
-- go install -v honnef.co/go/tools/cmd/staticcheck@latest
+```bash
+go install github.com/ramya-rao-a/go-outline@latest  # shows code outline
+go install github.com/go-delve/delve/cmd/dlv@latest  # debugger
+go install github.com/rogpeppe/godef@latest  # go to definition
+go install github.com/stamblerre/gocode@latest  # code completion
+go install golang.org/x/tools/gopls@latest  # Language Server
+go install golang.org/x/tools/cmd/goimports@latest  # auto add imports
+go install honnef.co/go/tools/cmd/staticcheck@latest  # linter
+```
