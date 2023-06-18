@@ -86,12 +86,12 @@ git revert <commit-hash>
 ---
 
 ## Remotes
-### Push local commits of active branch to remote repo
+Push local commits of the active branch to the remote repo
 ```bash
 git push
 ```
 
-Push local commits of specific branch to remote repo
+Push local commits of a specific branch to the remote repo
 ```bash
 git push <branch-name>
 ```
