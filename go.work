@@ -1,7 +1,7 @@
 go 1.20
 
 use (
-	./software_dev/algorithms/leetcode
+	./software_dev/algos_and_ds/leetcode
 	./software_dev/go/benchmark
 	./software_dev/go/mymodule
 	./software_dev/go/oop
