@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Shebangs
-# Need to be in the first line of the script, runs the script in an separate
-# shell when scrpt file is executed. Use 'source' command to execure a script 
-# in the current shell.
+# Needs to be in the first line of the script, runs the script in an separate
+# shell when script file is executed. Use 'source' command to execure a script 
+# file in the current shell.
 # #!/bin/bash
 # #!/bin/sh
 # #!/usr/bin/bash
@@ -12,8 +12,9 @@
 
 
 # Output a string
-echo Hello World
-echo "Hello World"
+echo Hello World  # Actually two variables
+echo 'Hello World'  # Single quotes PREVENT variable substitution ($<varname>) and escaping of special characters
+echo "Hello World"  # Double quotes ALLOW variable substitution ($<varname>) and escaping of special characters
 
 
 # Variables
