@@ -1,6 +1,7 @@
 # A reference file for a GitHub Actions workflow
 
-name: <workflow_name>
+name: my_workflow # name of the workflow, optional
+run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }} # name each run of the workflow, optional
 
 on: # events that trigger the workflow
   push:
@@ -13,28 +14,34 @@ env: # variables that are valid for all jobs, use as $VAR_NAME, or ${{ env.VAR_N
   VAR_NAME: 12345
   ANOTHER_VAR: another_value
 
-jobs:
+jobs: # jobs run in parallel, use 'needs:' no run in sequence
   some_job:
-    runs-on: self-hosted # only when not using matrix strategy, default is ubuntu-latest
-    strategy: # strategy is used to run the job for multiple configurations
-      matrix: # will run the job for all possible combinations
-        os: [ubuntu-18.04, macos-11, windows-2022] # os is a built-in variable
-        python_version: ["3.10"] # "3.8", "3.9"  # python_version is a custom variable
+    name: Some job # optional
+    runs-on: self-hosted # only when not using matrix strategy, default is 'ubuntu-latest'
+    strategy: # run the job for multiple configurations
+      matrix: # run the job for all possible combinations of parameters
+        os: [ubuntu-18.04, macos-11, windows-2022] # 'os' is a built-in variable
+        python_version: ["3.8", "3.9", "3.10"] # 'python_version' is a custom variable
+
     steps:
-      - name: Checkout repository # name is optional
-        uses: actions/checkout@v2 # 'uses' calls an external action, 'actions/' are actions from GitHub
-      - uses: ruby/setup-ruby@v1 # calling an action from the marketplace
-        if: ${{ <expression> }} # if is used to only run a step or job if the expression ${{ ... }} is true
-        with: # 'with' is used to pass parameters to the action
+      - name: Checkout repository # optional
+        uses: actions/checkout@v2 # calls an external action, 'actions/...' are actions provided by the GitHub-team
+      - uses: ruby/setup-ruby@v1 # calling an action from the marketplace / another GitHub user
+        if: ${{ <expression> }} # only run a job or step, if the expression ${{ ... }} is true
+        with: # pass parameters to the action
           bundler-cache: true
-      - name: Set up Python ${{ matrix.python_version }} # when using a variable from a context (eg. matrix), use ${{ context_name.variable_name }}
+      - name: Set up Python ${{ matrix.python_version }} # for variables from a context (eg. matrix), use ${{ context_name.variable_name }} syntax
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python_version }}
           cache: "pip"
+    # steps exiting with a non-zero exit code stop the job, unless 'continue-on-error: true' is set for the step
+  # jobs are successful, if all steps are successful
 
   some_other_job:
     runs-on: ubuntu-latest
+    needs: [some_job] # this job will run only after 'some_job' was completed successfully
+
     steps:
       - uses: actions/checkout@v2
       - name: Run a one-line script
