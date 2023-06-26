@@ -1,0 +1,45 @@
+# A reference file for a GitHub Actions workflow
+
+name: <workflow_name>
+
+on: # events that trigger the workflow
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    events: [opened, synchronize, reopened]
+
+env: # variables that are valid for all jobs, use as $VAR_NAME, or ${{ env.VAR_NAME }}
+  VAR_NAME: 12345
+  ANOTHER_VAR: another_value
+
+jobs:
+  some_job:
+    runs-on: self-hosted # only when not using matrix strategy, default is ubuntu-latest
+    strategy: # strategy is used to run the job for multiple configurations
+      matrix: # will run the job for all possible combinations
+        os: [ubuntu-18.04, macos-11, windows-2022] # os is a built-in variable
+        python_version: ["3.10"] # "3.8", "3.9"  # python_version is a custom variable
+    steps:
+      - name: Checkout repository # name is optional
+        uses: actions/checkout@v2 # 'uses' calls an external action, 'actions/' are actions from GitHub
+      - uses: ruby/setup-ruby@v1 # calling an action from the marketplace
+        if: ${{ <expression> }} # if is used to only run a step or job if the expression ${{ ... }} is true
+        with: # 'with' is used to pass parameters to the action
+          bundler-cache: true
+      - name: Set up Python ${{ matrix.python_version }} # when using a variable from a context (eg. matrix), use ${{ context_name.variable_name }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python_version }}
+          cache: "pip"
+
+  some_other_job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run a one-line script
+        run: echo Hello, world!
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
