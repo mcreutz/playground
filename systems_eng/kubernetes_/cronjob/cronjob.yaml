@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: my-cronjob
+spec:
+  schedule: "*/2 * * * *" # run at minute, hour, day of month, month, day of week, '*' means "every", '*/5' means "every 5"
+  concurrencyPolicy: Forbid # run current job concurrently, if last job still running: Forbid, Replace, Allow
+  successfulJobsHistoryLimit: 3 # how many successful jobs to keep, older ones will be deleted
+  failedJobsHistoryLimit: 1 # how many failed jobs to keep, older ones will be deleted
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: my-cronjob
+        spec:
+          containers:
+            - name: helloworld
+              image: hello-world:latest
+              imagePullPolicy: IfNotPresent
+          restartPolicy: Never # restart policy for the pod: Never, OnFailure, Always
