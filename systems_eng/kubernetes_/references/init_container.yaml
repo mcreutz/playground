@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-init-container-job
+spec:
+  template:
+    spec:
+      containers: # only runs after all init-containers have completed successfully
+        - name: my-app-container
+          image: busybox:1.28
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "echo The app is running! && sleep 10"]
+      initContainers: # run sequentailly in given order, failed init-container will prevent subsequent init- and app-containers from starting
+        - name: my-init-container-1
+          image: busybox:1.28
+          imagePullPolicy: IfNotPresent
+          command:
+            ["sh", "-c", "echo The init container 1 is running! && sleep 10"]
+        - name: my-init-container-2
+          image: busybox:1.28
+          imagePullPolicy: IfNotPresent
+          command:
+            ["sh", "-c", "echo The init container 2 is running! && sleep 10"]
+      restartPolicy: Never # for all containers within the pod: Always(default), OnFailure, Never
+  backoffLimit: 4 # specifies the number of retries before marking this job failed, defaults to 6
