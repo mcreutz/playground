@@ -5,11 +5,17 @@ metadata:
 spec:
   template:
     spec:
-      containers: # only runs after all init-containers have completed successfully
-        - name: my-app-container
+      containers: # run in parallel, but only after all init-containers have completed successfully
+        - name: my-app-container-1
           image: busybox:1.28
           imagePullPolicy: IfNotPresent
-          command: ["sh", "-c", "echo The app is running! && sleep 10"]
+          command:
+            ["sh", "-c", "echo The app container 1 is running! && sleep 60"]
+        - name: my-app-container-2
+          image: busybox:1.28
+          imagePullPolicy: IfNotPresent
+          command:
+            ["sh", "-c", "echo The app container 2 is running! && sleep 60"]
       initContainers: # run sequentailly in given order, failed init-container will prevent subsequent init- and app-containers from starting
         - name: my-init-container-1
           image: busybox:1.28
