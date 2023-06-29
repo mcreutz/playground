@@ -17,7 +17,17 @@ env: # variables that are valid for all jobs, use as $VAR_NAME, or ${{ env.VAR_N
 jobs: # jobs run in parallel, use 'needs:' no run in sequence
   some_job:
     name: Some job # optional
-    runs-on: self-hosted # only when not using matrix strategy, default is 'ubuntu-latest'
+    runs-on: self-hosted # only specify, when not using matrix strategy, default is 'ubuntu-latest'
+    environment: staging_environment # optional, define environment in repository and enforce environment protection rules
+    container: # optional, run the job in a container. Short form: 'container: python:3.11'
+      image: python:3.11
+      env:
+        MY_KEY: some_value
+      ports:
+        - 80
+      volumes:
+        - my_docker_volume:/volume_mount
+      options: --cpus 1
     strategy: # run the job for multiple configurations
       matrix: # run the job for all possible combinations of parameters
         os: [ubuntu-18.04, macos-11, windows-2022] # 'os' is a built-in variable
@@ -25,12 +35,9 @@ jobs: # jobs run in parallel, use 'needs:' no run in sequence
 
     steps:
       - name: Checkout repository # optional
-        uses: actions/checkout@v2 # calls an external action, 'actions/...' are actions provided by the GitHub-team
-      - uses: ruby/setup-ruby@v1 # calling an action from the marketplace / another GitHub user
-        if: ${{ <expression> }} # only run a job or step, if the expression ${{ ... }} is true
-        with: # pass parameters to the action
-          bundler-cache: true
+        uses: actions/checkout@v2 # calls an external action, 'actions/...' are actions provided by GitHub itself
       - name: Set up Python ${{ matrix.python_version }} # for variables from a context (eg. matrix), use ${{ context_name.variable_name }} syntax
+        if: ${{ <expression> }} # only run a job or step, if the expression ${{ ... }} is true
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python_version }}
