@@ -57,8 +57,8 @@ done
 
 
 # Concatenation of commands
-command_1 && command_2  # && only executes the second command, if the first one exited with code 1 (means successful)
-command_1 || command_2  # || only executes the second command, if the first one exited with code 0 (means failed)
+command_1 && command_2  # && only executes the second command, if the first one exited with code 0 (means successful)
+command_1 || command_2  # || only executes the second command, if the first one exited with a non-zero code (means failed)
 command_1 ; command_2  # ; runs both commands in the given order, regardless of the exit codes
 
 
@@ -67,7 +67,7 @@ cd .. \
     && cd ..
 
 
-# Available varibles
+# Available variables
 $HOME
 
 
@@ -75,30 +75,31 @@ $HOME
 ## equality
 ==, !=
 
-## comparison
+## size
 <=, >=, <, >
 
 ## bitwise
-&, |, ^(XOR)
+&, |, ^  # AND, OR, XOR
 
 ## logical
-&&, ||
+&&, ||  # AND, OR
 
 ## strings
--z  # resolves to true, if following string has length zero:  foo="bar"; [ -z "$foo" ]
--n  # resolves to false, if following string has length zero
+-z  # resolves to true, if following string has length zero:  foo=""; [ -z "$foo" ]
+-n  # resolves to false, if following string has length zero:  foo="bar"; [ -n "$foo" ]
 
 
 # evaluations
-(command)
-((arithmetic expression))
+(command)  # run command in a subshell
+((arithmetic expression))  # evaluate arithmetic expression
+$(command)  # command substitution, substitute command with its output
 
 
 # Slicing
 
 
 # Exit with code
-exit 1  # If no exit command is given at the end and last command was successful, the script will exit with code 1 (means successful)
+exit 1  # If no exit command is given at the end and last command was successful, the script will exit with code 0 (means successful)
 
 
 # Environment variables
