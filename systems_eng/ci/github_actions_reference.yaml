@@ -4,7 +4,7 @@ name: my_workflow # name of the workflow, optional
 run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }} # name each run of the workflow, optional
 
 on: # events that trigger the workflow
-  push:
+  push: # merging a PR also triggers the push event
     branches: [main]
   pull_request:
     branches: [main]
@@ -17,7 +17,7 @@ env: # variables that are valid for all jobs, use as $VAR_NAME, or ${{ env.VAR_N
 jobs: # jobs run in parallel, use 'needs:' no run in sequence
   some_job:
     name: Some job # optional
-    runs-on: self-hosted # only specify, when not using matrix strategy, default is 'ubuntu-latest'
+    runs-on: self-hosted # omit if using the matrix strategy, default is 'ubuntu-latest'
     environment: staging_environment # optional, define environment in repository and enforce environment protection rules
     container: # optional, run the job in a container. Short form: 'container: python:3.11'
       image: python:3.11
