@@ -38,8 +38,8 @@ passwd <username>
 usermod -aG sudo <username>  # add user to sudo group
 
 # Disk management
+df -H  # show disk usage
 du
-df
 
 # Memory
 free  # show memeory usage
@@ -68,3 +68,4 @@ tar -xf <file>  # extract archive
 * `gzip`-  \ gunzip \ tar
 * `awk`- 
 * `tr` - replace characters in output: echo "$PATH" | tr ':' '\n'
+* `watch`- periodically run a command and show output
