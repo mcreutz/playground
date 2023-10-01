@@ -77,21 +77,14 @@
 - Deployment for stateful Pods (eg. databases)
 - Not easy to work with, so databases are often hosted outside of Kubernetes
 
-
-
+## ReplicaSet (rs)
+- Abstraction layer on top of a Pod, managing the the underlying Pods in terms of replicas
+- In practice, you create ReplicaSets, not Pods
 
 
 # todo
 - kubeadm
-- helm charts
-- kubectl
-- minicube
-- deployment controller
-- proxy
-- logs
-- exec
-- replicaSet
 
 
-point local docker cli to minikube docker daemon
+point local docker cli to minikube docker daemon:
 eval $(minikube -p minikube docker-env)
