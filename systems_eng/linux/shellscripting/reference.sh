@@ -2,43 +2,64 @@
 
 # Shebangs
 # Needs to be in the first line of the script, runs the script in an separate
-# shell when script file is executed. Use 'source' command to execure a script 
-# file in the current shell.
+#   shell when script file is executed. Use 'source' command to execure a script 
+#   file in the current shell. Examples:
 # #!/bin/bash
 # #!/bin/sh
 # #!/usr/bin/bash
-# #!/bin/bash -ex
+# #!/bin/bash -ex  # -e: Exit on error, -x: Print each command before executing it
 # #!/usr/bin/env bash
+
+
+# Execute a script file
+source ./script.sh  # run in current shell
+. ./script.sh  # run in current shell
+bash ./script.sh  # run in subshell using bash
+sh ./script.sh  # run in subshell using sh
+./script.sh  # run in subshell using shebang of script file (e.g. #!/bin/bash as first line in script file)
 
 
 # Output a string
 echo Hello World  # Actually two variables
-echo 'Hello World'  # Single quotes PREVENT variable substitution ($<varname>) and escaping of special characters
 echo "Hello World"  # Double quotes ALLOW variable substitution ($<varname>) and escaping of special characters
+echo 'Hello World'  # Single quotes PREVENT variable substitution ($<varname>) and escaping of special characters
 
 
-# Variables
-MY_VAR = myvalue
-MY_VAR = "my value"
-echo $MY_VAR  # "variable substitution", short syntax
-echo ${MY_VAR}  # full syntax
-echo "$MY_VAR"  # double quoting preserves whitespaces in strings
-echo '$MY_VAR'  # -> $MY_VAR
-cd "$HOME"/Documents
-cd ${HOME}/Document
+# Variable declaration and assignment
+MY_VAR=myvalue  # No spaces around the equal sign
+MY_VAR="my value"  # Double quotes allow whitespaces in strings
 
 
-# Execute command
-<command>
-$(<command>)  # “command substitution”, substitutes the given command with its output
+# Variable substitution
+echo $MY_VAR  # variable substitution (short syntax)
+echo "$MY_VAR"  # substitute and use value as string. double quotes preserve whitespaces in strings, substititions are still performed
+echo "${MY_VAR}bar"  # curly braces are used to separate variable name from the rest of the string (full syntax)
+echo '$MY_VAR'  # single quoting preserves everything literally, no substitutions are performed
 
-# Variable scope
-export
+
+# Environment variables
+export MY_VAR = "my value"  # Export variable to make it available for all commands executed in the current shell and subshells
+printenv  # Show all environment variables for the active user, that have a value set
+env EDITOR=vim xterm  # Run a command under modified environment
+
+
+# Command substitution
+MY_DATE=$(date)  # executes the command in a subshell and substitutes the command with its output (command substitution)
+MY_DATE=`date`  # equivalent to $(date), but deprecated
+
+
+# Arithmetic substitution
+$((2 + 3))  # evaluates the given arithmetic expression and substitutes the expression with its result
+$[2 + 3]  # equivalent to the above, but deprecated
 
 
 # Conditional execution
-if [ <condition> ]; then
-  <commands>
+if [ $FOO == "bar" ]; then
+  date
+elif [ $FOO == "baz" ]; then
+  pwd
+else
+  whoami
 fi
 
 
@@ -60,6 +81,11 @@ done
 command_1 && command_2  # && only executes the second command, if the first one exited with code 0 (means successful)
 command_1 || command_2  # || only executes the second command, if the first one exited with a non-zero code (means failed)
 command_1 ; command_2  # ; runs both commands in the given order, regardless of the exit codes
+
+
+# Command grouping
+{ command_1; command_2; }  # executes the commands in the current shell
+( command_1; command_2; )  # executes the commands in a subshell
 
 
 # Line break
@@ -89,26 +115,86 @@ $HOME
 -n  # resolves to false, if following string has length zero:  foo="bar"; [ -n "$foo" ]
 
 
-# evaluations
-(command)  # run command in a subshell
-((arithmetic expression))  # evaluate arithmetic expression
-$(command)  # command substitution, substitute command with its output
-
-
 # Slicing
 
 
-# Exit with code
-exit 1  # If no exit command is given at the end and last command was successful, the script will exit with code 0 (means successful)
+# Functions
+my_function() {
+  echo "Hello World"
+}
+my_function  # Call function
 
 
-# Environment variables
-printenv  # Show all environment variables for the active user, that have a value set
-env  # Run a command under modified environment: $ env EDITOR=vim xterm
+# Reading command line arguments
+$0  # Name of the script
+$1  # First argument
+$2  # Second argument
+$@  # All arguments
+$#  # Number of arguments
+$?  # Exit code of last command
+# Example: ./myScript.sh foo -b baz
+#   $0 -> ./myScript.sh
+#   $1 -> foo
+#   $2 -> -b
+#   $3 -> baz
+
+
+# Parsing command line arguments
+getopts
+
+
+# Exiting
+set -e  # Exit on error of any command
+exit 0  # Exit with code 0 (means successful)
+exit 1  # Exit with code != 0 (means failed)
+# If no exit command is given at the end and last command was successful, the script will exit with code 0
+
+
+# Trapping
+trap my_function EXIT  # Run 'my_function' on event 'EXIT'. Can also run a command or semicolon-separated list on commands.
+# Some possible events:
+#   EXIT: Run when the shell exits (regardless of exit status)
+#   ERR: Run on error
+#   0: Run when a command returns a zero exit status
+#   DEBUG: Run before every command
+#   RETURN: Run when a shell function or a script executed with the . or source commands finishes executing
+#   SIGINT: Run when the shell receives a SIGINT signal (generated by the Ctrl-C key sequence)
+#   SIGTERM: Run when the shell receives a SIGTERM signal (usually generated with the kill command)
+#   SIGKILL: Run when the shell receives a SIGKILL signal (usually generated with the kill command)
+#   SIGSTOP: Run when the shell receives a SIGSTOP signal (usually generated with the kill command)
+
+
+# Arrays
+my_array=(foo bar baz)  # Create array
+echo ${my_array[0]}  # Print first element
+echo ${my_array[1]}  # Print second element
+echo ${my_array[2]}  # Print third element
+echo ${my_array[@]}  # Print all elements
+echo ${#my_array[@]}  # Print number of elements
+echo ${my_array[@]:1:2}  # Print elements 1 and 2
+echo ${my_array[@]:1}  # Print elements 1 to end
+echo ${my_array[@]::2}  # Print elements 0 and 1
+echo ${my_array[@]::-1}  # Print elements 0 and 1
+echo ${my_array[@]:(-1)}  # Print last element
+echo ${my_array[@]:(-2)}  # Print last two elements
+echo ${my_array[@]:(-2):1}  # Print second last element
+echo ${my_array[@]:(-2):2}  # Print second and third last element
+
+
+# 
+test
 
 
 # Test for availability of features / vars
 test -z "$TARGET_DIR" && { echo "Fatal Error: No TARGET_DIR set" ; exit 1 ; }
+
+
+# Check if a command is available
+if command -v some_command &> /dev/null; then
+    echo "some_command is available"
+else
+    echo "some_command is not available"
+fi
 
 
 # Select parent dir
@@ -134,22 +220,20 @@ command >> file  # Append to file
 
 
 # Useful commands and programs
-curl / wget
-echo  # create output from string
+curl / wget  # download/upload files from the network/internet. Can also be used to send HTTP requests. 
 grep  # filter lines for text or regex
-history  # Command history
-jq
-less / more
-mount | column -t  # Column formatted table of active mounts
-passwd
-printenv
-pushd / popd
-pwd
-sed
-tail -f  # Open textfile and stream file updates
-tar
-tee
-test
+history  # command history
+jq  # JSON processor
+less / more  # view text files
+mount | column -t  # column formatted table of active mounts
+passwd  # change password of local user accounts
+pushd / popd  # Push current directory to stack and change to given directory / Pop directory from stack and change to it
+pwd  # print working directory
+sed  # stream editor
+tail -f  # open textfile and stream file updates
+tar  # create and extract archives
+tee  # write to file and print to stdout
+test  # testing file existence and properties. Also strings and integers.
 truncate -s 0 filename  # Remove content of file up to given size is reached. Good to clear a file without deleting it.
 yq
 
@@ -169,9 +253,17 @@ $@ delivers all parameters, ./someScript.sh foo bar, $@ -> foo bar
 "$@" delivers all parameters, each one in double quotes
 
 
-# misc
-exec
+# Manage shell options and positional parameters
+set -e  # Exit on error of any command
+set -x  # Print each command before executing it
+set -u  # Exit on usage of undefined variable
+set -o pipefail  # Exit on error of any command in a pipe
+set +x  # Disable printing of each command before executing it
+set  # Show all shell options and positional parameters
 
+
+# misc
+exec # Replace the current shell with the given command, e.g. switch to a different shell. Example: exec zsh
 
 
 # References
