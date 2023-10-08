@@ -27,7 +27,7 @@ set -o pipefail  # Exit on error of any command in a pipe
 set  # Show all shell options and positional parameters
 
 
-# Command line arguments
+# Accessing command line arguments
 $0  # Name of the script
 $1  # First argument
 $2  # Second argument
@@ -43,10 +43,16 @@ getopts  # Parsing command line arguments
 
 
 # Functions
-my_function() {  # define function
-  echo "Hello World"
+my_function() {
+  echo "$1"
+  echo "$2"
+  local MY_LOCAL_VAR="my value"  # local variables are only available in the function
+  MY_GLOBAL_VAR="my value"  # global variables are available in the function and in the calling scope
+  return 42  # End function and return exit code 0-255, similar to exit-code. Code is assigned to '$?'.
 }
-my_function  # call function
+my_function "Hello" "World"  # call function with arguments
+echo $?  # print exit code of last command
+my_result=$(my_function "Hello" "World")  # call function and store its output (not return value!) in variable
 
 
 # Variables
