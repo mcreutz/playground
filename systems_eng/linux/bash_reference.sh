@@ -46,8 +46,8 @@ getopts  # Parsing command line arguments
 my_function() {
   echo "$1"
   echo "$2"
-  local MY_LOCAL_VAR="my value"  # local variables are only available in the function
-  MY_GLOBAL_VAR="my value"  # global variables are available in the function and in the calling scope
+  local my_local_var="my value"  # local variables are only available in the function
+  my_global_var="my value"  # global variables are available in the function and in the calling scope
   return 42  # End function and return exit code 0-255, similar to exit-code. Code is assigned to '$?'.
 }
 my_function "Hello" "World"  # call function with arguments
@@ -57,18 +57,21 @@ my_result=$(my_function "Hello" "World")  # call function and store its output (
 
 # Variables
 ## Declaration and assignment
-MY_VAR=myvalue  # No spaces around the equal sign. Names are case sensitive, use uppercase by convention
-unset MY_VAR  # Delete a variable
+my_var=myvalue  # No spaces around the equal sign. Names are case sensitive. Scope is the current shell, not subshells.
+unset MY_VAR  # delete variable
+
+## Naming conventions
+# Environment variables and constants are usually UPPER_CASE_WITH_UNDERSCORES
+# Local variables are usually lower_case_with_underscores
 
 ## Strings
-MY_VAR=HelloWorld  # No quotes needed for strings without whitespaces
-MY_VAR="my value"  # Double quotes allow whitespaces in strings
-MY_VAR="my
-value"  # Double quotes allow line breaks in strings
-MY_VAR='my value'  # Single quotes preserve everything literally. Multiple lines are not possible.
+my_var=HelloWorld  # No quotes needed for strings without whitespaces
+my_var="my value"  # Double quotes allow whitespaces in strings
+my_var="my value"  # Double quotes allow line breaks in strings
+my_var='my value'  # Single quotes preserve everything literally. Multiple lines are not possible.
 
 ## Integers
-MY_VAR=123
+my_var=123
 
 ## Arrays, slicing
 # data types are not enforced, arrays can contain mixed types
@@ -87,19 +90,19 @@ echo ${my_array[@]:(-2):1}  # Print second last element
 echo ${my_array[@]:(-2):2}  # Print second and third last element
 
 ## Associative arrays
-declare -A MY_VAR=( [foo]=bar [baz]=qux )  # No quotes needed for associative arrays
-echo ${MY_VAR[foo]}  # Print value of key 'foo'
-echo ${MY_VAR[@]}  # Print all values
-echo ${!MY_VAR[@]}  # Print all keys
-echo ${#MY_VAR[@]}  # Print number of elements
-unset MY_VAR[foo]  # Delete element with key 'foo'
-unset MY_VAR  # Delete entire array
+declare -A my_var=( [foo]=bar [baz]=qux )  # No quotes needed for associative arrays
+echo ${my_var[foo]}  # Print value of key 'foo'
+echo ${my_var[@]}  # Print all values
+echo ${!my_var[@]}  # Print all keys
+echo ${#my_var[@]}  # Print number of elements
+unset my_var[foo]  # Delete element with key 'foo'
+unset my_var  # Delete entire array
 
 ## Variable substitution
-echo $MY_VAR  # variable substitution (short syntax)
-echo "$MY_VAR"  # substitute and use value as string. double quotes preserve whitespaces in strings, substititions are still performed
-echo "${MY_VAR}bar"  # curly braces are used to separate variable name from the rest of the string (full syntax)
-echo '$MY_VAR'  # single quoting preserves everything literally, no substitutions are performed
+echo $my_var  # variable substitution (short syntax)
+echo "$my_var"  # substitute and use value as string. double quotes preserve whitespaces in strings, substititions are still performed
+echo "${my_var}bar"  # curly braces are used to separate variable name from the rest of the string (full syntax)
+echo '$my_var'  # single quoting preserves everything literally, no substitutions are performed
 
 
 # Environment variables
@@ -119,11 +122,11 @@ $HISTFILE  # History file
 
 # Command execution
 ## Command substitution
-MY_DATE=$(date)  # executes the command in a subshell and substitutes the command with its output (command substitution)
-MY_DATE=`date`  # equivalent to $(date), but deprecated
+my_date=$(date)  # executes the command in a subshell and substitutes the command with its output (command substitution)
+my_date=`date`  # equivalent to $(date), but deprecated
 
 ## Redirecting a command's in- and output
-mycommand_1 | mycommand_2  # Pipe output of mycommand_1 to input of mycommand_2
+mycommand_1 | mycommand_2  # Pipe output of mycommand_1 to input of mycommand_2, mycommand_2 runs in a subshell
 mycommand > file  # Write to file (replace previous content or create if file does not exist)
 mycommand >> file  # Append to file
 mycommand > /dev/null  # Discard output
@@ -160,13 +163,13 @@ fi
 
 # Working with strings
 ## Concatenation of strings
-MY_VAR="foo"
-MY_VAR+="bar"  # MY_VAR is now "foobar"
+my_var="foo"
+my_var+="bar"  # my_var is now "foobar"
 
 ## Counting in strings
-MY_VAR="foo bar baz"
-${#MY_VAR}  # length of string
-${MY_VAR//[^ ]}  # number of spaces in string
+my_var="foo bar baz"
+${#my_var}  # length of string
+${my_var//[^ ]}  # number of spaces in string
 
 ## Multiline string literals
 cat <<EOF > file  # to a file. EOF is a delimiter, can be any string
@@ -174,7 +177,7 @@ line 1
 line 2
 EOF
 
-read -r -d '' MY_VAR <<EOF  # to a variable.
+read -r -d '' my_var <<EOF  # to a variable.
 line 1
 line 2
 EOF
@@ -185,23 +188,23 @@ line 2
 EOF
 
 ## String manipulation
-${MY_VAR:0:3}  # Get first 3 characters
-${MY_VAR:3}  # Get characters 3 to end
-${MY_VAR: -3}  # Get last 3 characters
-${MY_VAR: -3:2}  # Get last 3 characters
-${#MY_VAR}  # Get length of string
-${MY_VAR/foo}  # Remove first occurence of 'foo'
-${MY_VAR//foo}  # Remove all occurences of 'foo'
-${MY_VAR/#foo}  # Remove prefix 'foo'
-${MY_VAR/%foo}  # Remove suffix 'foo'
-${MY_VAR/foo/bar}  # Replace first occurence of 'foo' with 'bar'
-${MY_VAR//foo/bar}  # Replace all occurences of 'foo' with 'bar'
-${MY_VAR/#foo/bar}  # Replace prefix 'foo' with 'bar'
-${MY_VAR/%foo/bar}  # Replace suffix 'foo' with 'bar'
-${MY_VAR^}  # Uppercase first character
-${MY_VAR^^}  # Uppercase all characters
-${MY_VAR,}  # Lowercase first character
-${MY_VAR,,}  # Lowercase all characters
+${my_var:0:3}  # Get first 3 characters
+${my_var:3}  # Get characters 3 to end
+${my_var: -3}  # Get last 3 characters
+${my_var: -3:2}  # Get last 3 characters
+${#my_var}  # Get length of string
+${my_var/foo}  # Remove first occurence of 'foo'
+${my_var//foo}  # Remove all occurences of 'foo'
+${my_var/#foo}  # Remove prefix 'foo'
+${my_var/%foo}  # Remove suffix 'foo'
+${my_var/foo/bar}  # Replace first occurence of 'foo' with 'bar'
+${my_var//foo/bar}  # Replace all occurences of 'foo' with 'bar'
+${my_var/#foo/bar}  # Replace prefix 'foo' with 'bar'
+${my_var/%foo/bar}  # Replace suffix 'foo' with 'bar'
+${my_var^}  # Uppercase first character
+${my_var^^}  # Uppercase all characters
+${my_var,}  # Lowercase first character
+${my_var,,}  # Lowercase all characters
 
 ## String formatting with printf
 %[flags][width][.precision]specifier  # conversion specification
@@ -241,36 +244,36 @@ $((2 + 3))  # evaluates the given arithmetic expression and substitutes the expr
 $[2 + 3]  # equivalent to the above, but deprecated
 
 ## Incrementing and decrementing
-MY_VAR=0
-MY_VAR+=1  # MY_VAR is now 1
-MY_VAR-=1  # MY_VAR is now 0
-((MY_VAR++))  # MY_VAR is now 1
-((MY_VAR--))  # MY_VAR is now 0
+my_var=0
+my_var+=1  # my_var is now 1
+my_var-=1  # my_var is now 0
+((my_var++))  # my_var is now 1
+((my_var--))  # my_var is now 0
 
 
 # Constrol structures
 ## Conditional execution
-if [ $FOO == "bar" ]; then  # single brackets are a shorthand for the 'test' command
+if [ $foo == "bar" ]; then  # single brackets are a shorthand for the 'test' command
   date
-elif [[ $FOO == "bar" && $BAR == "baz" ]]; then  # double brackets allow more advanced conditionals
+elif [[ $foo == "bar" && $bar == "baz" ]]; then  # double brackets allow more advanced conditionals
   pwd
 else
   whoami
 fi
 
 ## Loops
-while [ $FOO == "bar" ]; do
+while [ $foo == "bar" ]; do
   mycommand_1
   mycommand_2
 done
 
-until [ $FOO == "bar" ]; do
+until [ $foo == "bar" ]; do
   mycommand_1
   mycommand_2
 done
 
-for var in "Red Green Blue"; do
-  echo $var
+for color in "Red Green Blue"; do
+  echo $color
 done
 
 
