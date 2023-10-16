@@ -3,11 +3,10 @@
 # Shebang
 # Runs the script in an separate shell when script file is executed.
 # Needs to be in the first line of the script file.
-#!/bin/bash
-#!/bin/sh
+#!/bin/sh  # Use old shell interpreter
 #!/usr/bin/bash
-#!/bin/bash -ex  # -e: Exit on error, -x: Print each command before executing it
-#!/usr/bin/env bash
+#!/bin/bash -ex  # Adding options. -e: Exit on error, -x: Print each command before executing it
+#!/usr/bin/env bash  # run command 'bash' from env, more portable but no options possible
 
 
 # Execute a script file
@@ -58,7 +57,7 @@ my_result=$(my_function "Hello" "World")  # call function and store its output (
 # Variables
 ## Declaration and assignment
 my_var=myvalue  # No spaces around the equal sign. Names are case sensitive. Scope is the current shell, not subshells.
-unset MY_VAR  # delete variable
+unset my_var  # delete variable
 
 ## Naming conventions
 # Environment variables and constants are usually UPPER_CASE_WITH_UNDERSCORES
