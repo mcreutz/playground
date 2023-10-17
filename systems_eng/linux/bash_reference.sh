@@ -124,18 +124,6 @@ $HISTFILE  # History file
 my_date=$(date)  # executes the command in a subshell and substitutes the command with its output (command substitution)
 my_date=`date`  # equivalent to $(date), but deprecated
 
-## Redirecting a command's in- and output
-mycommand_1 | mycommand_2  # Pipe output of mycommand_1 to input of mycommand_2, mycommand_2 runs in a subshell
-mycommand > file  # Write to file (replace previous content or create if file does not exist)
-mycommand >> file  # Append to file
-mycommand > /dev/null  # Discard output
-mycommand 2> file  # Write error output to file
-mycommand 2>&1  # Redirect error output to standard output
-mycommand 2>/dev/null  # Discard error output
-mycommand &> file  # Write standard and error output to file
-mycommand < file  # Read from file
-mycommand <<< "my input"  # Pass string as input to command
-
 ## Concatenation of commands
 command_1 && command_2  # && only executes the second command, if the first one exited with code 0 (means successful)
 command_1 || command_2  # || only executes the second command, if the first one exited with a non-zero code (means failed)
@@ -144,6 +132,21 @@ command_1 ; command_2  # ; runs both commands in the given order, regardless of 
 ## Command grouping
 { command_1; command_2; }  # executes the commands in the current shell
 ( command_1; command_2; )  # executes the commands in a subshell
+
+# Redirecting standard streams
+mycommand_1 | mycommand_2  # Redirect standard output of mycommand_1 to standard input of mycommand_2, mycommand_2 runs in a subshell
+mycommand > file  # Write standard output of command to file (replace previous content or create if file does not exist)
+mycommand >> file  # Append standard output of command to file, create if file does not exist
+mycommand > /dev/null  # Discard output
+mycommand < file  # Read from file
+mycommand <<< "my input"  # Pass string as input to command
+mycommand 1> file  # Redirect standard output of command to file
+mycommand 2> file  # Redirect error output of command to file
+mycommand &> file  # Redirect standard and error output of command to file
+mycommand 1>&2  # Redirect standard output to error output
+mycommand 2>&1  # Redirect error output to standard output
+mycommand 2>&1 1> file  # Redirect standard output and error output to file
+
 
 ## Aliases
 alias myalias="mycommand --option"  # create alias
