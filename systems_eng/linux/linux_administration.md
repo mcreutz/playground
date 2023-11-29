@@ -71,15 +71,27 @@
 # Ignore aliases
 - command <command>  # execute command, ignoring aliases
 
+# Kernel Modules
+* `lsmod` - list loaded kernel modules
+* `modinfo` - show information about a kernel module
+* `modprobe` - load a kernel module
+* `rmmod` - unload a kernel module
+
+# Logs
+* `dmesg` - show kernel messages
+* `journalctl` - show systemd logs
+* `tail -f /var/log/syslog` - show syslog messages
+
 # Useful commands and programs
 * `awk`- 
 * curl / wget  # download/upload files from the network/internet. Can also be used to send HTTP requests. 
-* `date`- 
-* grep  # filter lines for text or regex
-* `gzip`-  \ gunzip \ tar
+* `date` - 
+* `grep` - filter lines for text or regex
+* `gzip` -  \ `gunzip` \ `tar`
 * `head` / `tail`- 
-* `history`- command history
-* jq / yq # JSON processor / YAML processor
+* `history` - command history
+* `jq` /  - JSON processor
+* `yq` - YAML processor
 * `less` `more` - view text files
 * mount | column -t  # column formatted table of active mounts
 * passwd  # change password of local user accounts
@@ -94,6 +106,8 @@
 * `tr` - replace characters in output: echo "$PATH" | tr ':' '\n'
 * truncate -s 0 filename  # Remove content of file up to given size is reached. Good to clear a file without deleting it.* 
 * `watch`- periodically run a command and show output
+* find /path/to/dir -name "filaname.*" -exec rm -rf {} \;  # find and delete files
+
 
 # shortcuts
 !nnn  # Run command no nnn from command history
