@@ -107,11 +107,10 @@
 * truncate -s 0 filename  # Remove content of file up to given size is reached. Good to clear a file without deleting it.* 
 * `watch`- periodically run a command and show output
 * find /path/to/dir -name "filaname.*" -exec rm -rf {} \;  # find and delete files
-fstab
-lsmod
-modprobe
-cat filesystems
-screen
+# fstab and crypt eqivalent
+# cat filesystems
+# screen
+# cryptutility
 
 # shortcuts
 !nnn  # Run command no nnn from command history
