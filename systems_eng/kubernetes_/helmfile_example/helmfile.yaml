@@ -3,6 +3,8 @@ repositories:
     url: https://grafana.github.io/helm-charts
   - name: prometheus-community
     url: https://prometheus-community.github.io/helm-charts
+  - name: traefik
+    url: https://helm.traefik.io/traefik
 
 releases:
   - name: namespaces
@@ -10,14 +12,16 @@ releases:
     namespace: default
   - name: kube-prometheus-stack
     chart: prometheus-community/kube-prometheus-stack
+    version: 55.5.0
     namespace: monitoring
     needs:
-      - default/namespaces
+      - default/namespaces  # syntax: <namespace>/<release-name>
     disableValidationOnInstall: true # needed for CRDs installatino with this chart
     # values:
     #   - monitoring/kube-prometheus-stack-values.yaml
   - name: loki
     chart: grafana/loki
+    version: 5.41.4
     namespace: monitoring
     needs:
       - default/namespaces
@@ -27,8 +31,21 @@ releases:
     disableValidationOnInstall: true # needed for CRDs installatino with this chart
   - name: promtail
     chart: grafana/promtail
+    version: 6.15.3
     namespace: monitoring
     needs:
       - default/namespaces
     values:
       - monitoring/promtail-values.yaml
+  - name: traefik
+    chart: traefik/traefik
+    version: 26.0.0
+    namespace: ingress
+    needs:
+      - default/namespaces
+  - name: ingress
+    chart: ./ingress
+    namespace: ingress
+    needs:
+      - default/namespaces
+      - ingress/traefik
