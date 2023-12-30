@@ -1,0 +1,7 @@
+prometheus:
+  prometheusSpec:
+    ## How long to retain metrics
+    retention: 48h
+
+    ## Maximum size of metrics
+    retentionSize: "600MB"

@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  namespace: avalanche
+  name: podmonitor-avalanche
+  labels:
+    release: promstack
+    app.kubernetes.io/instance: promstack
+spec:
+  namespaceSelector: {}
+  selector:
+    matchLabels:
+      app: avalanche
+  podMetricsEndpoints:
+  - port: http
+    path: /metrics
+    interval: 2s
