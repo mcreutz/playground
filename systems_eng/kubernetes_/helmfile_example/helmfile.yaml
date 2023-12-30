@@ -15,8 +15,8 @@ releases:
     version: 55.5.0
     namespace: monitoring
     needs:
-      - default/namespaces  # syntax: <namespace>/<release-name>
-    disableValidationOnInstall: true # needed for CRDs installatino with this chart
+      - default/namespaces # syntax: <namespace>/<release-name>
+    disableValidationOnInstall: true # needed for CRDs installation with this chart: https://github.com/prometheus-community/helm-charts/issues/2217
     # values:
     #   - monitoring/kube-prometheus-stack-values.yaml
   - name: loki
