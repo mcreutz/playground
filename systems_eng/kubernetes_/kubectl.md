@@ -1,183 +1,177 @@
 # kubectl
 
 ## Create Objects on a Cluster
-#### Create an object from a file
-```shell
+### Create an object from a file
+```bash
 kubectl create -f <filename>
 ```
 * `-k <directory>`  (directory with kustomization.yaml file)
 
-#### Create an object from a file (updates if existing)
-```shell
-kubectl apply -f <filename>
-```
-* `-k <directory>`  (directory with kustomization.yaml file)
-
-#### Run a particular image on the cluster
-```shell
+### Run a particular image on the cluster
+```bash
 kubectl run <name> --image=<image>
 ```
 
 ## Read Objects from a Cluster
-#### List all objects of type <resource>
-```shell
+### List all objects of type <resource>
+```bash
 kubectl get <resource>
 ```
 
 
 ## Modify existing Objects on a Cluster
-#### Edit existing object in default editor
-```shell
+### Edit existing object in default editor
+```bash
 kubectl edit <resource> <object-name>
 ```
-#### Update existing object from file (creates new if not existing)
-```shell
+### Update existing object from file (creates new if not existing)
+```bash
 kubectl apply -f <filename>
 ```
-#### Replace object from file
-```shell
+### Replace object from file
+```bash
 kubectl replace -f <filename>
 ```
-#### Patch object with JSON or YAML patch
-```shell
+### Patch object with JSON or YAML patch
+```bash
 kubectl patch <resource> <object-name> -p <patch>
 ```
-#### Modify attribute of existing object
-```shell
+### Modify attribute of existing object
+```bash
 kubectl set <attribute> <resource> <object-name> <value>
 ```
-#### Add a new label to an object
-```shell
+### Add a new label to an object
+```bash
 kubectl label <resource> <object-name> <label-key>=<label-value>
 ```
-#### Add a new annotation to an object
-```shell
+### Add a new annotation to an object
+```bash
 kubectl annotate <resource> <object-name> <annotation-key>=<annotation-value>
 ```
-#### Show rollout status of a resource
-```shell
+### Show rollout status of a resource
+```bash
 kubectl rollout status <resource> <object-name>
 ```
 
 ## Delete Objects on a Cluster
-#### Delete existing object
-```shell
+### Delete existing object
+```bash
 kubectl delete <resource> <object-name>
 ```
 
 ## Inspect Objects on a Cluster
-#### Show details of a specific resource or group of resources
-```shell
+### Show details of a specific resource or group of resources
+```bash
 kubectl describe <resource> <object-name>
 ```
-#### Print the logs from a container in a pod
-```shell
+### Print the logs from a container in a pod
+```bash
 kubectl logs <resource> <object-name>
 ```
-#### Show events from all resources in current namespace
-```shell
+### Show events from all resources in current namespace
+```bash
 kubectl events
 ```
-#### Run a new pod for debugging purpose
-```shell
+### Run a new pod for debugging purpose
+```bash
 kubectl debug <pod>
 ```
-#### Attach to a running container
-```shell
+### Attach to a running container
+```bash
 kubectl attach <podname> -i
 ```
-#### Execute a command on a container in a pod
-```shell
+### Execute a command on a container in a pod
+```bash
 kubectl exec <podname> -- command
 ```
-#### Diff file against Kubernetes server
-```shell
+### Diff file against Kubernetes server
+```bash
 kubectl diff -f <filename>
 ```
 ## Inspect Resources
-#### List the fields for supported resources
-```shell
+### List the fields for supported resources
+```bash
 kubectl explain <resource>
 ```
-#### Print the supported API resources on the server
-```shell
+### Print the supported API resources on the server
+```bash
 kubectl api-resources
 ```
 
 ## Cluster Management Commands
-#### Display addresses of the master and services
-```shell
+### Display addresses of the master and services
+```bash
 kubectl cluster-info
 ```
-#### Show metrics for a given node
-```shell
+### Show metrics for a given node
+```bash
 kubectl top node
 ```
-#### Mark node as unschedulable
-```shell
+### Mark node as unschedulable
+```bash
 kubectl cordon <node>
 ```
-#### Mark node as schedulable
-```shell
+### Mark node as schedulable
+```bash
 kubectl uncordon <node>
 ```
-#### Drain node in preparation for maintenance
-```shell
+### Drain node in preparation for maintenance
+```bash
 kubectl drain <node>
 ```
-#### Update the taints on one or more nodes
-```shell
+### Update the taints on one or more nodes
+```bash
 kubectl taint <resource> <object-name> <key>=<value>:<effect>
 ```
 
 ## Auth
-#### Modify certificate resources
-```shell
+### Modify certificate resources
+```bash
 kubectl certificate
 ```
-#### Check if the current user has permissions to do an action
-```shell
+### Check if the current user has permissions to do an action
+```bash
 kubectl auth can-i <verb> <resource>
 ```
 
 ## Scaling
-#### Scale a resource
-```shell
+### Scale a resource
+```bash
 kubectl scale <resource> <object-name> --replicas=<count>
 ```
-#### Auto-scale a resource
-```shell
+### Auto-scale a resource
+```bash
 kubectl autoscale <resource> <object-name> --min=<count> --max=<count> --cpu-percent=<percent>
 ```
 
 ## Networking
-####  Forward one or more local ports to a pod
-```shell
+###  Forward one or more local ports to a pod
+```bash
 kubectl port-forward <resource> <object-name> <port>:<target-port>
 ```
-#### Take a replication controller, service, deployment or pod and expose it as a new Kubernetes service
-```shell
+### Take a replication controller, service, deployment or pod and expose it as a new Kubernetes service
+```bash
 kubectl expose <resource> <object-name> --port=<port> --target-port=<target-port> --type=<service-type>
 ```
-#### Run a proxy to the Kubernetes API server
-```shell
+### Run a proxy to the Kubernetes API server
+```bash
 kubectl proxy
 ```
-#### Copy files and directories to and from containers
-```shell
+### Copy files and directories to and from containers
+```bash
 kubectl cp <resource> <object-name>:<src-path> <dest-path>
 ```
 
 ## Other
-#### Wait for a specific condition on one or many resources
-```shell
+### Wait for a specific condition on one or many resources
+```bash
 kubectl wait <resource> <object-name> --for=<condition>
 ```
-#### Build a kustomization target from a directory or a remote url
-```shell
+### Build a kustomization target from a directory or a remote url
+```bash
 kubectl kustomize <directory>
 ```
-#### Modify kubeconfig files
-```shell
+### Modify kubeconfig files
+```bash
 kubectl config 
 ```
