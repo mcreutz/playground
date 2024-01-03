@@ -34,8 +34,10 @@ kubectl replace -f <filename>
 ```
 ### Patch object with JSON or YAML patch
 ```bash
-kubectl patch <resource> <object-name> -p <patch>
+kubectl patch <resource> <object-name> --patch-file=<patch-file>
 ```
+You can add entries to lists and maps, if the [object definition](https://raw.githubusercontent.com/kubernetes/kubernetes/master/api/openapi-spec/swagger.json) has `"x-kubernetes-patch-strategy": "merge"` defined for that element. If not, you can only replace the whole list or map.
+
 ### Modify attribute of existing object
 ```bash
 kubectl set <attribute> <resource> <object-name> <value>
