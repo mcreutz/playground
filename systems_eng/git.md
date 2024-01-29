@@ -139,6 +139,18 @@ Rename branch
 git branch -m new-name
 ```
 
+Delete a local branch
+```bash
+git branch -d <name>
+```
+
+Delete a remote branch
+```bash
+git push remote_name -d remote_branch_name
+```
+---
+
+## Merging
 Merge another branch into the current one
 ```bash
 git merge <name>
@@ -153,17 +165,9 @@ Abort a conflicted merge
 ```bash
 git merge --abort
 ```
+---
 
-Delete a local branch
-```bash
-git branch -d <name>
-```
-
-Delete a remote branch
-```bash
-git push remote_name -d remote_branch_name
-```
-
+## Rebasing
 Integrate all commits of another branch into the current one. This modifies the git history, so only use on local commits and never on commits that were already pushed to a remote repo.
 ```bash
 git rebase <name>
