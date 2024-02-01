@@ -133,6 +133,9 @@ command_1 ; command_2  # ; runs both commands in the given order, regardless of 
 { command_1; command_2; }  # executes the commands in the current shell
 ( command_1; command_2; )  # executes the commands in a subshell
 
+## Run commands in parallel
+command1 & command2 & command3 & wait  # run commands in parallel and wait for all to finish
+
 # Redirecting standard streams
 mycommand_1 | mycommand_2  # Redirect standard output of mycommand_1 to standard input of mycommand_2, mycommand_2 runs in a subshell
 mycommand > file  # Write standard output of command to file (replace previous content or create if file does not exist)
@@ -297,8 +300,11 @@ done
 ## Pattern matching for strings
 =~  # Expressions need to be enclosed in double brackets
 
-## Bitwise
-&, |, ^, ~, <<, >>, &=, |=, ^=, ~=, <<=, >>=  # bitwise AND, OR, XOR, NOT, left shift, right shift, assignments
+## Bitwise comparison for integers
+&, |, ^, ~, <<, >>  # bitwise AND, OR, XOR, NOT, left shift, right shift
+
+## Bitwise assignment for integers
+&=, |=, ^=, ~=, <<=, >>=
 
 ## Logical opeartors
 &&, ||, !  # logical AND, OR, NOT, can be used in double brackets and double parentheses
