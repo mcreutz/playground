@@ -10,15 +10,17 @@ releases:
   - name: namespaces
     chart: ./namespaces
     namespace: default
+    wait: true # wait for the release to be running before moving on to the next
   - name: kube-prometheus-stack
     chart: prometheus-community/kube-prometheus-stack
     version: 55.5.0
     namespace: monitoring
-    needs:
-      - default/namespaces # syntax: <namespace>/<release-name>
-    disableValidationOnInstall: true # needed for CRDs installation with this chart: https://github.com/prometheus-community/helm-charts/issues/2217
     # values:
     #   - monitoring/kube-prometheus-stack-values.yaml
+    disableValidationOnInstall: true # needed for CRDs installation with this chart: https://github.com/prometheus-community/helm-charts/issues/2217
+    needs:
+      - default/namespaces # syntax: <namespace>/<release-name>
+    wait: true
   - name: loki
     chart: grafana/loki
     version: 5.41.4
@@ -29,23 +31,28 @@ releases:
     values:
       - monitoring/loki-values.yaml
     disableValidationOnInstall: true # needed for CRDs installatino with this chart
+    wait: true
   - name: promtail
     chart: grafana/promtail
     version: 6.15.3
     namespace: monitoring
-    needs:
-      - default/namespaces
     values:
       - monitoring/promtail-values.yaml
-  - name: traefik
-    chart: traefik/traefik
-    version: 26.0.0
-    namespace: ingress
     needs:
       - default/namespaces
-  - name: ingress
-    chart: ./ingress
-    namespace: ingress
-    needs:
-      - default/namespaces
-      - ingress/traefik
+    wait: true
+  - name: busybox
+    chart: ./kustom_busybox
+    namespace: default
+  # - name: traefik
+  #   chart: traefik/traefik
+  #   version: 26.0.0
+  #   namespace: ingress
+  #   needs:
+  #     - default/namespaces
+  # - name: ingress
+  #   chart: ./ingress
+  #   namespace: ingress
+  #   needs:
+  #     - default/namespaces
+  #     - ingress/traefik
