@@ -1,30 +1,30 @@
 Create files and folders structure for a new project
-```console
+```shell
 poetry new <project name>
 ```
 
 Initialize a pre-existing project
-```console
+```shell
 cd <pre-existing-project>
 poetry init
 ```
 
 Activate environment for current directory (create if not exists)
-```console
+```shell
 poetry shell [--group <name>]
 ```
 
 Add dependency to active environment
-```console
+```shell
 poetry add <dependency> [--group <name>]
 ```
 
 Install dependencies for active environment
-```console
+```shell
 poetry install [--with <name>]
 ```
 
 Create requirements.txt file
-```console
+```shell
 poetry export --format requirements.txt --output requirements.txt [--with <name>]
 ```
