@@ -13,11 +13,12 @@
 source ./script.sh  # run in current shell
 . ./script.sh  # run in current shell, shorthand for 'source'
 bash ./script.sh  # run in subshell using bash
+bash -e -x ./script.sh  # run in subshell using bash with options
 sh ./script.sh  # run in subshell using sh
 ./script.sh  # run in subshell using shebang of script file (e.g. #!/bin/bash as first line in script file). File needs to be executable.
 
 
-# Manage shell options and positional parameters
+# Manage shell options
 set -e  # Exit on error of any command
 set -x  # Print each command before executing it
 set +x  # Disable printing of each command before executing it
@@ -329,6 +330,13 @@ set -e  # Exit on error of any command
 exit 0  # Exit with code 0 (means successful)
 exit 1  # Exit with code != 0 (means failed)
 # If no exit command is given at the end and last command was successful, the script will exit with code 0
+
+
+# Debugging
+set -x  # Print each command before executing it
+trap 'echo "Error: Script failed at line $LINENO"' ERR  # Run on error
+trap read DEBUG  # Hit enter to continue after each command
+trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG  # Print next command and execute on hitting enter
 
 
 # misc
