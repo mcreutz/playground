@@ -8,7 +8,6 @@ kind: Namespace
 metadata:
   name: mongodb
 ---
-# PV to be used with Minikube
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -47,6 +46,10 @@ data:
   MONGO_PASSWORD: "mypassword"
 
   init-mongo.js: |
+    // This script is executed by the MongoDB image on the first run
+    // It creates a non-root user for a given database
+    // The database is automatically created on first use
+
     const MONGO_INITDB_ROOT_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
     const MONGO_INITDB_ROOT_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
     const MONGO_INITDB_DATABASE = process.env.MONGO_INITDB_DATABASE;
@@ -54,8 +57,8 @@ data:
     const MONGO_USERNAME = process.env.MONGO_USERNAME;
     const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 
-    use("admin");
     db.auth(MONGO_INITDB_ROOT_USERNAME, MONGO_INITDB_ROOT_PASSWORD);
+    use("admin");
     print("Checking if user exists.");
     if (db.getUser(MONGO_USERNAME) == null) {
       print("User does not exist, creating.");
@@ -89,7 +92,8 @@ spec:
         - name: mongodb
           image: mongo
           ports:
-            - containerPort: 27017
+            - name: mongodb
+              containerPort: 27017
           env:
             - name: MONGO_INITDB_DATABASE
               valueFrom:
@@ -132,7 +136,7 @@ spec:
             name: mongodb-config
             items:
               - key: "init-mongo.js"
-                path: "init-mongo.js" # Executed by MongoDB image on first run
+                path: "init-mongo.js"
         - name: mongodb-data
           persistentVolumeClaim:
             claimName: mongodb-pvc
@@ -148,4 +152,4 @@ spec:
   ports:
     - protocol: TCP
       port: 27017
-      targetPort: 27017
+      targetPort: mongodb
