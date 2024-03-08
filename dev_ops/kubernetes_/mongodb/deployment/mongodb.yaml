@@ -1,0 +1,151 @@
+# This is an example of a MongoDB deployment in Kubernetes.
+# It will not scale beyond one replica, but many features missing in packged variants (helmchart, operator, etc.) can be implemented here.
+# To scale beyond one replica, you will need to change the deployment to a StatefulSet and add a headless service.
+# Storage is configured to be used with Minikube. Beware that files will not be removed from disk when the PV is deleted and will be present in re-created PVs.
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mongodb
+---
+# PV to be used with Minikube
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongodb-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data/mongodb
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pvc
+  namespace: mongodb
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongodb-config
+  namespace: mongodb
+data:
+  MONGO_INITDB_DATABASE: "admin"
+  MONGO_INITDB_ROOT_USERNAME: "admin"
+  MONGO_INITDB_ROOT_PASSWORD: "password"
+  MONOG_DB_NAME: "mydatabase"
+  MONGO_USERNAME: "myuser"
+  MONGO_PASSWORD: "mypassword"
+
+  init-mongo.js: |
+    const MONGO_INITDB_ROOT_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
+    const MONGO_INITDB_ROOT_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
+    const MONGO_INITDB_DATABASE = process.env.MONGO_INITDB_DATABASE;
+    const MONGO_DB_NAME = process.env.MONGO_DB_NAME;
+    const MONGO_USERNAME = process.env.MONGO_USERNAME;
+    const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
+
+    use("admin");
+    db.auth(MONGO_INITDB_ROOT_USERNAME, MONGO_INITDB_ROOT_PASSWORD);
+    print("Checking if user exists.");
+    if (db.getUser(MONGO_USERNAME) == null) {
+      print("User does not exist, creating.");
+      db.createUser({
+        user: MONGO_USERNAME,
+        pwd: MONGO_PASSWORD,
+        roles: [{ role: "readWrite", db: MONGO_DB_NAME }]
+      });
+      print("User created.");
+    }
+    else {
+      print("User already exists.");
+    };
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  namespace: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-config
+                  key: MONGO_INITDB_DATABASE
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-config
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-config
+                  key: MONGO_INITDB_ROOT_PASSWORD
+            - name: MONGO_DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-config
+                  key: MONOG_DB_NAME
+            - name: MONGO_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-config
+                  key: MONGO_USERNAME
+            - name: MONGO_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-config
+                  key: MONGO_PASSWORD
+          volumeMounts:
+            - name: mongodb-config
+              mountPath: /docker-entrypoint-initdb.d
+            - name: mongodb-data
+              mountPath: /data/db
+      volumes:
+        - name: mongodb-config
+          configMap:
+            name: mongodb-config
+            items:
+              - key: "init-mongo.js"
+                path: "init-mongo.js" # Executed by MongoDB image on first run
+        - name: mongodb-data
+          persistentVolumeClaim:
+            claimName: mongodb-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+  namespace: mongodb
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
