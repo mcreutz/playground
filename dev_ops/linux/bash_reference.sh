@@ -69,6 +69,9 @@ my_var=HelloWorld  # No quotes needed for strings without whitespaces
 my_var="my value"  # Double quotes allow whitespaces in strings
 my_var="my value"  # Double quotes allow line breaks in strings
 my_var='my value'  # Single quotes preserve everything literally. Multiple lines are not possible.
+my_var="line 1
+line 2
+line 3"  # Multiline strings are possible with double quotes
 
 ## Integers
 my_var=123
