@@ -1,12 +1,10 @@
 # Git
 ## Setup
-User
+User data
 ```bash
 git config --global user.name "Mona Lisa"
 git config --global user.name
 > Mona Lisa
-```
-```bash
 git config --global user.email "email@example.com"
 git config --global user.email
 > email@example.com
@@ -22,7 +20,6 @@ MacOS Keychain
 ```bash
 git config --global credential.helper osxkeychain
 ```
----
 
 ## Repo initialization
 Initialize git in current directory
@@ -34,7 +31,6 @@ Clone remote repository to local drive
 ```bash
 git clone <url> [<local_path>]
 ```
----
 
 ## Staging and comitting modifications
 Show modifications
@@ -62,12 +58,6 @@ Commit staged/indexed changes
 git commit [-m <message>]
 ```
 
-Move the working directory to the state of a previous commit
-```bash
-git checkout <commit-hash>
-```
----
-
 ## Undoing/removing from version control
 Remove a file from version control but keep it in the filesystem
 ```bash
@@ -83,7 +73,27 @@ Undo a commit that was already pushed to a remote repo (commits an inverse commi
 ```bash
 git revert <commit-hash>
 ```
----
+
+## Navigating commits
+List existing commits
+```bash
+git log
+```
+
+Show the content of a commit
+```bash
+git show <commit-hash>
+```
+
+Move the working directory to the state of an existing commit
+```bash
+git checkout <commit-hash>
+```
+
+Move the working directory back to the latest commit
+```bash
+git checkout <current-branch-name>
+```
 
 ## Remotes
 Push local commits of the active branch to the remote repo
@@ -115,7 +125,6 @@ Get URL of remote
 ```bash
 git remote get-url <remote-name>
 ```
----
 
 ## Branching
 List branches
@@ -131,7 +140,7 @@ git branch <name>
 Switch to other branch
 ```bash
 git switch <name> [-c to create and switch]
-git checkout <name> (deprecated)
+# deprecated: git checkout <name>
 ```
 
 Rename branch
@@ -148,7 +157,6 @@ Delete a remote branch
 ```bash
 git push remote_name -d remote_branch_name
 ```
----
 
 ## Merging
 Merge another branch into the current one
@@ -165,14 +173,12 @@ Abort a conflicted merge
 ```bash
 git merge --abort
 ```
----
 
 ## Rebasing
 Integrate all commits of another branch into the current one. This modifies the git history, so only use on local commits and never on commits that were already pushed to a remote repo.
 ```bash
 git rebase <name>
 ```
----
 
 ## Nice reference
 https://education.github.com/git-cheat-sheet-education.pdf
