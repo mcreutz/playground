@@ -14,4 +14,4 @@ nodes:
     containerPath: /files
 
 ## Example command to create a cluster
-kind create cluster --name my-cluster
+kind create cluster --name my-cluster --config config.yaml
