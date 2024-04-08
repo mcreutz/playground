@@ -48,7 +48,9 @@ data:
   init-mongo.js: |
     // This script is executed by the MongoDB image on the first run
     // It creates a non-root user for a given database
-    // The database is automatically created on first use
+    // The database is automatically created when data is inserted
+    // The root user is created by MongoDB itself from the provided environment variables
+    // To change the config on an existing database, modify the script and run it manually in the container: "mongosh -f /docker-entrypoint-initdb.d/init-mongo.js"
 
     const MONGO_INITDB_ROOT_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
     const MONGO_INITDB_ROOT_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
