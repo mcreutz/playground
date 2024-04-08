@@ -64,9 +64,10 @@ Remove a file from version control but keep it in the filesystem
 git rm --cached <file>
 ```
 
-Undo last commit and keep local changes if it was not pushed to a remote repo (--hard to remove changes from working directory as well)
+Delete local commits and keep local changes if it was not pushed to a remote repo ('--hard' to remove changes from working directory as well)
 ```bash
-git reset HEAD~1
+git reset HEAD~1  # remove last commit, HEAD~2 for the last 2, etc.
+git reset <commit-hash>  # remove all commits up to the specified commit
 ```
 
 Undo a commit that was already pushed to a remote repo (commits an inverse commit)
