@@ -8,7 +8,7 @@ uint uint8 uint16 uint32 uint64 uintptr  // 22, 33
 byte // alias for uint8
 
 rune // alias for int32
-     // represents a Unicode code point
+     // represents an Unicode code point
 
 float32 float64  // 3.142
 

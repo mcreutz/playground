@@ -1,39 +1,39 @@
 ## Cli
 Initialize the module
-```console
-$ go mod init <module name>
+```bash
+go mod init <module name>
 ```
 
 Download a package and add it to go.mod
-```console
-$ go get <example.com/packagename>[@version]
+```bash
+go get <example.com/packagename>[@version]
 ```
 
 Install all dependencies from source code and add them to go.mod (also remove unused dependencies from go.mod)
-```console
-$ go mod tidy
+```bash
+go mod tidy
 ```
 
 Run tests
-```console
-$ go test
+```bash
+go test
 ```
 
 Run application
-```console
-$ go run <module name> | <main file>
+```bash
+go run <module name> | <main file>
 ```
 
 Build application
-```console
+```bash
 export GOOS=linux  # or darwin, windows, etc.
 export GOARCH=amd64  # or 386, arm, arm64, etc.
-$ go build <module name>
+go build <module name>
 ```
 
 Install the application (builds and installs the application to where exactly?)
-```console
-$ go install
+```bash
+go install
 ```
 
 
