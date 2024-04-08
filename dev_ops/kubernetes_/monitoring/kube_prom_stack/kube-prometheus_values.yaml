@@ -1,7 +1,12 @@
 prometheus:
   prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          resources:
+            requests:
+              storage: 10Gi  # 'retentionSize' should be ~1GB below this
     ## How long to retain metrics
-    retention: 48h
-
+    retention: 30d  # 24h is default
     ## Maximum size of metrics
-    retentionSize: "600MB"
+    retentionSize: "500MB"  # should be ~1GB below PVC size
