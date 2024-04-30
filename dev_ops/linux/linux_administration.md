@@ -3,13 +3,13 @@
 - nmap -sn 192.168.0.0/24
 
 ## Portscan
-- nmap <url>
-- nmap 192.168.0.1-10
-- nmap 192.168.0.1/13
-- nmap –p80 192.168.0.1
-- nmap –p1-200 192.168.0.1
-- nmap –F 192.168.0.1  # Scan (Fast) the most common ports
-- nmap –p– 192.168.0.1  # scan all ports (1 – 65535)
+- nmap <host>  # Scan the most common ports
+- nmap 192.168.0.1-10  # a range of hosts
+- nmap 192.168.0.1/13  # a range of hosts in CIDR notation
+- nmap –p80 <host>  # Scan a specific port
+- nmap –p1-200 <host>  # Scan a range of ports
+- nmap –F <host>  # Scan (Fast) the most common ports
+- nmap –p– <host>  # scan all ports (1 – 65535)
 
 # Find process listening on port
 - netstat -anv | grep <port>  # gets the PID
@@ -37,7 +37,7 @@
 - whoami  # show current user
 - who  # show logged-in users
 - useradd -m <username>  # -m to create home folder
-- passwd <username> # change password
+- passwd <username> # change password of local user accounts
 - usermod -aG sudo <username>  # add user to sudo group
 
 # Disk management
@@ -45,6 +45,7 @@
 - du
 - fdisk -l  # list disks
 - mount  # show mounted disks
+* mount | column -t  # column formatted table of active mounts
 - umount  # unmount disk
 - parted  # partition editor
 - mkfs  # create filesystem
@@ -59,7 +60,7 @@
 - ifconfig  # list all network interfaces
 - netstat  # show network traffic
 - nslookup <domain>  # get domain information
-- curl / wget
+- curl / wget  # download/upload files from the network/internet. Can also be used to send HTTP requests. 
 
 # Firewall
 - iptables
@@ -83,8 +84,7 @@
 * `tail -f /var/log/syslog` - show syslog messages
 
 # Useful commands and programs
-* `awk`- 
-* curl / wget  # download/upload files from the network/internet. Can also be used to send HTTP requests. 
+* `awk` - text processing
 * `date` - 
 * `grep` - filter lines for text or regex
 * `gzip` -  \ `gunzip` \ `tar`
@@ -93,8 +93,6 @@
 * `jq` /  - JSON processor
 * `yq` - YAML processor
 * `less` `more` - view text files
-* mount | column -t  # column formatted table of active mounts
-* passwd  # change password of local user accounts
 * `ps`- 
 * pushd / popd  # Push current directory to stack and change to given directory / Pop directory from stack and change to it
 * pwd  # print working directory
