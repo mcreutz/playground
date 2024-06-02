@@ -68,8 +68,13 @@
 
 # Archiving
 - tar -xf <file>  # extract archive
+- gzip <file>  # compress archive
+- gzip -d <file>  # decompress archive
+- gunzip <file>  # decompress archive
 
-# Ignore aliases
+# Aliases
+- alias  # show aliases
+- alias <alias>="<command>"  # create alias
 - command <command>  # execute command, ignoring aliases
 
 # Kernel Modules
@@ -83,22 +88,44 @@
 * `journalctl` - show systemd logs
 * `tail -f /var/log/syslog` - show syslog messages
 
+# Package management
+* `apt list --installed` - list installed packages
+
+# Navigating directories
+cd /path/to/directory  # Change directory
+cd ..  # Change to parent directory
+cd -  # Change to previous directory
+cd /  # Change to root directory
+cd ~  # Change to home directory
+pwd  # Print current working directory
+pushd /path/to/directory  # Change directory and push current directory to stack
+popd  # Pop directory from stack and change to it
+dirs  # Print directory stack
+dirs -c  # Clear directory stack
+
+# Command history
+history  # show command history
+!!  # Run the last command
+!-1  # Run the last command
+!-2  # Run the second last command
+!n  # Run the nth command
+HISTTIMEFORMAT="%F %T "  # set history timestamp format, %F is date, %T is time. Bash only.
+HISTSIZE=1000  # set history size
+HISTFILESIZE=1000  # set history file size
+history -i  # show timestamps in history, zsh only
+history -c  # clear history
+ date  # type a space in front of the command to prevent it from being saved in history
+
+
 # Useful commands and programs
 * `awk` - text processing
 * `date` - 
 * `grep` - filter lines for text or regex
-* `gzip` -  \ `gunzip` \ `tar`
 * `head` / `tail`- 
-* `history` - command history
 * `jq` /  - JSON processor
 * `yq` - YAML processor
 * `less` `more` - view text files
-* `ps`- 
-* pushd / popd  # Push current directory to stack and change to given directory / Pop directory from stack and change to it
-* pwd  # print working directory
-* sed  # stream editor
 * tail -f  # open textfile and stream file updates
-* tar  # create and extract archives
 * tee  # write to file and print to stdout
 * test  # testing file existence and properties. Also strings and integers.
 * `tr` - replace characters in output: echo "$PATH" | tr ':' '\n'
@@ -107,12 +134,12 @@
 * find /path/to/dir -name "filaname.*" -exec rm -rf {} \;  # find and delete files
 # fstab and crypt eqivalent
 # cat filesystems
-# screen
 # cryptutility
+* tmux  # terminal multiplexer
+* <command> | column -t  # change output to column formatted table
+
 
 # shortcuts
-!nnn  # Run command no nnn from command history
-!!  # Last command
 -  # Previous directory
 .  # Current directory
 ..  # Parent directory

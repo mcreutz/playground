@@ -54,7 +54,6 @@ my_function "Hello" "World"  # call function with arguments
 echo $?  # print exit code of last command
 my_result=$(my_function "Hello" "World")  # call function and store its output (not return value!) in variable
 
-
 # Variables
 ## Declaration and assignment
 my_var=myvalue  # No spaces around the equal sign. Names are case sensitive. Scope is the current shell, not subshells.
