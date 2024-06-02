@@ -132,6 +132,10 @@ history -c  # clear history
 * truncate -s 0 filename  # Remove content of file up to given size is reached. Good to clear a file without deleting it.* 
 * `watch`- periodically run a command and show output
 * find /path/to/dir -name "filaname.*" -exec rm -rf {} \;  # find and delete files
+* `wc`  # word count
+* `wc -l`  # line count
+* `find /path/to/dir -type f -name "*.log" | wc -l`  # count files in dir including subdirs
+* `xargs` - build and execute command lines from standard input
 # fstab and crypt eqivalent
 # cat filesystems
 # cryptutility
