@@ -39,6 +39,7 @@ tqdm = "^4.64.0"
 impacket = "^0.10.0"
 pysmb = "^1.2.8"
 smbprotocol = "^1.10.1"
+kubernetes = "^29.0.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
