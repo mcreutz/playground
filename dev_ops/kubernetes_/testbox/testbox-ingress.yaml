@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: textbox-ingress
+  namespace: default
+spec:
+  ingressClassName: public
+  rules:
+    - http:
+        paths:
+          - path: /testbox
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: testserver-service
+                port:
+                  number: 80
