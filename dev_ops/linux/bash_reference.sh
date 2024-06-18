@@ -152,7 +152,8 @@ mycommand &> file  # Redirect standard and error output of command to file
 mycommand 1>&2  # Redirect standard output to error output
 mycommand 2>&1  # Redirect error output to standard output
 mycommand 2>&1 1> file  # Redirect standard output and error output to file
-
+mycommand | sudo tee file  # Write to file with sudo
+mycommand | sudo tee -a file  # Append to file with sudo
 
 ## Aliases
 alias myalias="mycommand --option"  # create alias

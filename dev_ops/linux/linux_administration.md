@@ -122,19 +122,19 @@ history -c  # clear history
 * `date` - 
 * `grep` - filter lines for text or regex
 * `head` / `tail`- 
+* tail -f  # open textfile and stream file updates
 * `jq` /  - JSON processor
 * `yq` - YAML processor
 * `less` `more` - view text files
-* tail -f  # open textfile and stream file updates
 * tee  # write to file and print to stdout
 * test  # testing file existence and properties. Also strings and integers.
 * `tr` - replace characters in output: echo "$PATH" | tr ':' '\n'
 * truncate -s 0 filename  # Remove content of file up to given size is reached. Good to clear a file without deleting it.* 
 * `watch`- periodically run a command and show output
 * find /path/to/dir -name "filaname.*" -exec rm -rf {} \;  # find and delete files
+* `find /path/to/dir -type f -name "*.log" | wc -l`  # count files in dir including subdirs
 * `wc`  # word count
 * `wc -l`  # line count
-* `find /path/to/dir -type f -name "*.log" | wc -l`  # count files in dir including subdirs
 * `xargs` - build and execute command lines from standard input
 # fstab and crypt eqivalent
 # cat filesystems
