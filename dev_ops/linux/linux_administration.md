@@ -34,8 +34,9 @@
 - sudo su -  # Switch to root with root environment. User password is prompted
 
 # User management
-- whoami  # show current user
+- `whoami`  # show current user
 - who  # show logged-in users
+- `cat /etc/passwd`  # show all users
 - useradd -m <username>  # -m to create home folder
 - passwd <username> # change password of local user accounts
 - usermod -aG sudo <username>  # add user to sudo group
