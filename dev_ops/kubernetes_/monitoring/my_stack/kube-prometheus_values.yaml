@@ -1,8 +1,12 @@
 prometheus:
+  service:
+    nodePort: 30090 # default is 30090
+    type: NodePort
   prometheusSpec:
     storageSpec:
       volumeClaimTemplate:
         spec:
+          storageClassName: "microk8s-hostpath-retain"
           resources:
             requests:
               storage: 10Gi # 'retentionSize' should be ~1GB below this
@@ -12,13 +16,20 @@ prometheus:
     retentionSize: 9GB # should be ~1GB below PVC size, "" is default
 
 grafana:
-  ingress:
-    enabled: true
-    ingressClassName: nginx
-    annotations:
-      kubernetes.io/ingress.class: nginx
-      kubernetes.io/tls-acme: "true"
-    path: /grafana
+  # ingress:
+  #   enabled: true
+  #   ingressClassName: nginx
+  #   annotations:
+  #     kubernetes.io/ingress.class: nginx
+  #     kubernetes.io/tls-acme: "true"
+  #   path: /grafana/?(.*)
+  #   hosts:
+  #     - server02.fritz.box
+
+  # grafana.ini:
+  #   server:
+  #     root_url: http://192.168.0.15:3000/grafana # this host can be localhost
+
   additionalDataSources:
     - name: Loki
       type: loki

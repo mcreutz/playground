@@ -3,7 +3,7 @@ loki:
   commonConfig:
     replication_factor: 1
   storage:
-    type: "filesystem"
+    type: filesystem
   schemaConfig:
     configs:
       - from: "2024-01-01"
@@ -14,8 +14,19 @@ loki:
         object_store: filesystem # we're storing on filesystem so there's no real persistence here.
         schema: v13
   auth_enabled: false
+  compactor:
+    retention_enabled: true
+    delete_request_store: filesystem
+    compaction_interval: 1440m # 1440min = 24h
+    retention_delete_delay: 2h
+    retention_delete_worker_count: 4
+  limits_config:
+    retention_period: 48h # 720h # 30 days, min is 24h
 singleBinary:
   replicas: 1
+  persistence:
+    size: 10Gi # 10Gi is default
+    storageClass: "microk8s-hostpath-retain"
 # Need to configure the SimpleScalable deployment mode, although it is not used
 read:
   replicas: 0
@@ -23,3 +34,5 @@ backend:
   replicas: 0
 write:
   replicas: 0
+# compactor:
+#   replicas: 1
