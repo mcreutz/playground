@@ -1,0 +1,5 @@
+#@ load("@ytt:data", "data")
+---
+- op: replace
+  path: /spec/replicas  #! this is a comment for humans
+  value: #@ data.values.appOne.scalingFactor

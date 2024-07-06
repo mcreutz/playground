@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-2
+  namespace: ytt-kapp
+  labels:
+    app: app-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-2
+  template:
+    metadata:
+      labels:
+        app: app-2
+    spec:
+      containers:
+      - name: app-2-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80

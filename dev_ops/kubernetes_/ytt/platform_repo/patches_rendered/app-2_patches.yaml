@@ -1,0 +1,9 @@
+- op: replace
+  path: /spec/template/spec/containers/0/image
+  value: ubuntu:latest
+- op: replace
+  path: /spec/template/spec/containers/0/command
+  value:
+  - tail
+  - -f
+  - /dev/null

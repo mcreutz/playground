@@ -1,0 +1,9 @@
+---
+appOne:
+  scalingFactor: 1
+appTwo:
+  image: "ubuntu:latest"
+  command:
+    - "tail"
+    - "-f"
+    - "/dev/null"

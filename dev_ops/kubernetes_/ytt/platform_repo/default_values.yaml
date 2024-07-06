@@ -1,0 +1,10 @@
+#@data/values-schema
+#! These are the default values for the platform
+#! This file also defines the schema for the values
+---
+appOne:
+  scalingFactor: 9
+appTwo:
+  image: "busybox:99"
+  command:
+    - "date"

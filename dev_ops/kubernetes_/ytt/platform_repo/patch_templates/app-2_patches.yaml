@@ -1,0 +1,9 @@
+#@ load("@ytt:data", "data")
+---
+#! this is a comment for humans
+- op: replace
+  path: /spec/template/spec/containers/0/image  #! attention: array index used
+  value: #@ data.values.appTwo.image
+- op: replace
+  path: /spec/template/spec/containers/0/command
+  value: #@ data.values.appTwo.command
