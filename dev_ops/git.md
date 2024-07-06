@@ -121,6 +121,14 @@ git merge <name>
 
 # Merge two branches
 git merge <destination> <source>
+```
+
+Preview the conflicts of a merge
+```bash
+git branch temp
+git switch temp
+git merge <branch-to-merge> --no-ff --no-commit
+```
 
 # Abort a conflicted merge
 git merge --abort
@@ -133,36 +141,59 @@ git rebase <name>
 ```
 
 ## Stashing
+Stash the changes in the working directory in a new stash
 ```bash
-# List stashes
-git stash list
-
-# Stash the changes in the working directory in a new stash
 git stash push
 git stash  # same as `git stash push`
 git stash -u  # include untracked files
 git stash push <file>  # stash a single file
 # deprecated: git stash save  # same as `git stash push`
-
-# Export a stash to a patch file
-git stash show -p stash@{n} > patch.diff
-
-# show details of a stash
-git stash show stash@{n}
-
-# Apply a stash
-git stash apply  # apply the last stash
-git stash apply stash@{n}  # apply a specific stash
-git stash pop  # apply the last stash and delete it
-
-# Apply a stash from a patch file
-git apply patch.diff  # without `stash` command
-
-# Delete a stash
-git stash drop  # remove the last stash
-git stash drop stash@{n}  # Remove a specific stash
 ```
 
+List stashes
+```bash
+git stash list
+```
+
+Show the content of a stash
+```bash
+git stash show  # show an overview of the last stash
+git stash show stash@{<number>}  # show an overview of a specific stash
+git stash show -p stash@{<number>}  # show the actual changes of a specific stash
+```
+
+Apply the last stash
+```bash
+git stash apply
+```
+
+Apply a specific stash
+```bash
+git stash apply stash@{<number>}
+```
+
+git stash pop  # apply the last stash and delete it
+
+
+Remove the last stash
+```bash
+git stash drop
+```
+
+Remove a specific stash
+```bash
+git stash drop stash@{<number>}
+```
+
+Export a stash as a patch file
+```bash
+git stash show -p stash@{<number>} > <file>
+```
+
+Import a patch file as a stash
+```bash
+git apply <file>
+```
 
 ## Nice reference
 https://education.github.com/git-cheat-sheet-education.pdf
