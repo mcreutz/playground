@@ -28,3 +28,8 @@ Create requirements.txt file
 ```shell
 poetry export --format requirements.txt --output requirements.txt [--with <name>]
 ```
+
+Show a list of all dependencies
+```bash
+poetry show [--tree] [--with dev]
+```
