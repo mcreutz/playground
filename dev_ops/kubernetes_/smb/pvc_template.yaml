@@ -1,0 +1,13 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc-smb-<share-name>
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi # placeholder, will not be used
+  volumeName: pv-smb-<share-name>
+  storageClassName: smb-<namespace>-<share-name> # must match the one in the pv
