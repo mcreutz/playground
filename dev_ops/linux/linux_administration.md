@@ -261,6 +261,7 @@ history -c  # clear history
 # cryptutility
 * tmux  # terminal multiplexer
 * <command> | column -t  # change output to column formatted table
+* stat <file>  # show stats, like size, permissions, access timestamps etc.
 
 
 # shortcuts
