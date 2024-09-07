@@ -1,5 +1,5 @@
 # Manage certificate-based SSH connections
-### Create a key pair on the client
+## Create a key pair on the client
 ```bash
 ssh-keygen -t ED25519 -C "your_email@example.com" -f ~/.ssh/id_ed25519_something
 ```
@@ -10,13 +10,13 @@ ssh-keygen -t ED25519 -C "your_email@example.com" -f ~/.ssh/id_ed25519_something
 - will prompt for a filename if none is provided
 - will prompt for a passphrase
 
-### Copy the public key to the remote server
+## Copy the public key to the remote server
 ```bash
 ssh-copy-id -i ~/.ssh/id_ed25519_something.pub user@remote_host
 ```
 This will copy (append) the content of the public key file to the file ~/.ssh/authorized_keys on the remote host
 
-### Configure the SSH server on the remote host
+## Configure the SSH server on the remote host
 ```bash
 sudo nano /etc/ssh/sshd_config
 ```
@@ -25,12 +25,12 @@ Uncommment and change the following settings
 - PubkeyAuthentication yes
 - AuthorizedKeysFile .ssh/authorized_keys
 
-### Restart the SSH server
+## Restart the SSH server
 ```bash
-sudo systemctl restart sshd
+sudo service ssh restart
 ```
 
-### Edit the clients SSH configuration file
+## Edit the clients SSH configuration file
 ```bash
 cat <<EOF >> ~/.ssh/config
 Host my_remote_host
@@ -41,15 +41,15 @@ Host my_remote_host
 EOF
 ```
 
-### Connect to the remote host
+## Connect to the remote host
 ```bash
 ssh my_remote_host
 ```
 
-### Add the host keys to the clients known_hosts file
+## Add the host keys to the clients known_hosts file
 When connecting to a remote host for the first time, you will be prompted if you want to add the host key to the known_hosts file.
 If you want to add the host key manually, you can use the following command:
 ```bash
-ssh-keyscan -H remote_host >> ~/.ssh/known_hosts
+ssh-keyscan -H <remote_host> >> ~/.ssh/known_hosts
 ```
-This will copy (append) the host keys from `/etc/ssh` on the remote host to the known_hosts file on the client. The most secure way to do this (preventing MITM attacks) is to copy the host keys manually from the remote host to the client.
+This will copy (append) the host keys from `/etc/ssh` on the <remote_host> to the known_hosts file on the client. The most secure way to do this (preventing MITM attacks) is to copy the host keys manually from the remote host to the client.

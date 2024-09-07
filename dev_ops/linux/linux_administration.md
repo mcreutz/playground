@@ -117,7 +117,7 @@ sudo netplan apply : Applies the current Netplan configuration.
 - netstat -anv | grep <port>  # gets the PID
 - ps -A | grep <pid>
 
-# User management
+## User management
 - whoami  # show current user
 - who  # show logged-in users
 - `cat /etc/passwd`  # show all users
@@ -125,6 +125,7 @@ sudo netplan apply : Applies the current Netplan configuration.
 - passwd <username> # change password of local user accounts
 - usermod -aG sudo <username>  # add user to sudo group
 w : Shows which users are logged in.
+who -aH : Shows who is logged in.
 sudo adduser <username> : Creates a new user.
 sudo deluser <username> : Deletes a user.
 sudo passwd <username> : Sets or changes the password for a user.
