@@ -24,6 +24,11 @@ Install dependencies for active environment
 poetry install [--with <name>]
 ```
 
+Remove dependency from active enviroment
+```shell
+poetry remove <dependency> [--group <name>]
+```
+
 Create requirements.txt file
 ```shell
 poetry export --format requirements.txt --output requirements.txt [--with <name>]
