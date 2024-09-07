@@ -13,7 +13,6 @@ dash = "^2.6.1"
 dash-core-components = "^2.0.0"
 dash-html-components = "^2.0.0"
 dash-daq = "^0.5.0"
-dask = {extras = ["all"], version = "^2022.8.0"}
 Django = "^4.1"
 fastapi = {extras = ["all"], version = "^0.83.0"}
 ib-insync = "^0.9.70"
@@ -33,13 +32,19 @@ scikit-learn = "^1.1.2"
 seaborn = "^0.11.2"
 SQLAlchemy = "^1.4.40"
 statsmodels = "^0.13.2"
-tensorflow = "^2.9.1"
+# tensorflow = "^2.9.1"
 tqdm = "^4.64.0"
 # wxPython = "^4.2.0"
 impacket = "^0.10.0"
 pysmb = "^1.2.8"
 smbprotocol = "^1.10.1"
 kubernetes = "^29.0.0"
+dask = {extras = ["distributed"], version = "^2024.7.1"}
+wandb = "^0.17.8"
+schedule = "^1.2.2"
+
+[tool.poetry.group.dev]
+optional = true
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
