@@ -5,7 +5,7 @@ k create ns monitoring
 
 Install kube-prometheus-stack
 ```bash
-helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --version 60.4.0 -n monitoring -f ./kube-prometheus_values.yaml
+helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --version 60.4.0 -n monitoring -f  dev_ops/kubernetes_/monitoring/my_stack/kube-prometheus_values.yaml
 ```
 
 Install additional pod- and service-monitors

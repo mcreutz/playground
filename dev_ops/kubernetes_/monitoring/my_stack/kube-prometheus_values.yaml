@@ -3,6 +3,14 @@ prometheus:
     nodePort: 30090 # default is 30090
     type: NodePort
   prometheusSpec:
+    podMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelector: {}
+    podMonitorNamespaceSelector: {}
+
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector: {}
+    serviceMonitorNamespaceSelector: {}
+
     storageSpec:
       volumeClaimTemplate:
         spec:
