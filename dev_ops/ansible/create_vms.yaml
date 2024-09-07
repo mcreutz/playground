@@ -1,0 +1,59 @@
+---
+- name: Create VMs on Hetzner Cloud
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Create a network
+      hcloud_network:
+        api_token: "{{ hetzner_token }}"
+        name: my_network
+        ip_range: 10.0.0.0/16
+        state: present
+      register: network
+
+    - name: Create subnet
+      hcloud_network_subnet:
+        api_token: "{{ hetzner_token }}"
+        network: "{{ network.id }}"
+        type: server
+        ip_range: 10.0.1.0/24
+        network_zone: eu-central
+        state: present
+
+    - name: Create VM 1
+      hcloud_server:
+        api_token: "{{ hetzner_token }}"
+        name: vm1
+        server_type: cx11
+        image: ubuntu-20.04
+        location: nbg1
+        networks: "{{ network.id }}"
+        state: present
+      register: vm1
+
+    - name: Create VM 2
+      hcloud_server:
+        api_token: "{{ hetzner_token }}"
+        name: vm2
+        server_type: cx11
+        image: ubuntu-20.04
+        location: nbg1
+        networks: "{{ network.id }}"
+        state: present
+      register: vm2
+
+    - name: Create VM 3
+      hcloud_server:
+        api_token: "{{ hetzner_token }}"
+        name: vm3
+        server_type: cx11
+        image: ubuntu-20.04
+        location: nbg1
+        networks: "{{ network.id }}"
+        state: present
+      register: vm3
+
+    - name: Output VM information
+      debug:
+        msg: "VM 1: {{ vm1.server.public_net.ipv4_ip }} VM 2: {{ vm2.server.public_net.ipv4_ip }} VM 3: {{ vm3.server.public_net.ipv4_ip }}"
