@@ -9,6 +9,7 @@ Todo:
 """
 
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
 
 global_variable = 12
@@ -62,14 +63,14 @@ class MyClass1:
 
     def _method2(self, parameter_2="default_value"):
         """
-        protected, because one underscore. External acces possible only from 
+        protected, because one underscore. External acces possible only from
         inheriting classes
         """
         return parameter_2
 
     def __method3(self, parameter_3="default_value"):
         """
-        private, because two underscores. External acces NOT possible, 
+        private, because two underscores. External acces NOT possible,
         invisible
         """
         return parameter_3
@@ -84,20 +85,32 @@ class MyAbstractBaseClass(ABC):
 
 class MyClass2(MyClass1, MyAbstractBaseClass):
     """Inherits from MyClass1, MyInterface"""
+
     another_static_public_attribute = 1
 
     def another_method_1(self, parameter_1="default_value"):
         return parameter_1
 
 
-if __name__ == '__main__':
+@dataclass
+class MyDataClass:
+    """Dataclass"""
+
+    data_attribute_1: int
+    data_attribute_2: str
+
+
+if __name__ == "__main__":
     my_object_1 = MyClass1()
     my_object_2 = MyClass1("concrete_value")
 
     my_result_1 = my_object_1.method1("concrete_value")
 
     my_result_2 = my_object_1.class_method("loremipsum")
-    my_result_2 = MyClass1.class_method("loremipsum")   # Same as above
+    my_result_2 = MyClass1.class_method("loremipsum")  # Same as above
 
     my_class_value = my_object_1.static_public_attribute
     my_object_1_value = my_object_1.object_attribute
+
+    my_dataclass_object = MyDataClass(1, "string")
+    my_dataclass_result = my_dataclass_object.data_attribute_1
