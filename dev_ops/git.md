@@ -128,7 +128,6 @@ Preview the conflicts of a merge
 git branch temp
 git switch temp
 git merge <branch-to-merge> --no-ff --no-commit
-```
 
 # Abort a conflicted merge
 git merge --abort
@@ -194,6 +193,21 @@ Import a patch file as a stash
 ```bash
 git apply <file>
 ```
+
+## ToDo
+- fast-forward merge
+- interative rebase
+- squashing commits
+- git cherry-pick
+- difference between local and remote branches
+- git reflog
+- git bisect
+- git blame
+- git tag
+- git describe
+- workdirs
+- git hooks
+- git config
 
 ## Nice reference
 https://education.github.com/git-cheat-sheet-education.pdf
