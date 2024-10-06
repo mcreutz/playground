@@ -1,12 +1,8 @@
 prometheus:
-  service:
-    nodePort: 30090 # default is 30090
-    type: NodePort
   prometheusSpec:
     podMonitorSelectorNilUsesHelmValues: false
     podMonitorSelector: {}
     podMonitorNamespaceSelector: {}
-
     serviceMonitorSelectorNilUsesHelmValues: false
     serviceMonitorSelector: {}
     serviceMonitorNamespaceSelector: {}
@@ -23,21 +19,17 @@ prometheus:
     ## Maximum size of metrics
     retentionSize: 9GB # should be ~1GB below PVC size, "" is default
 
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations: {}
+    labels: {}
+    hosts:
+      - prometheus.server02.creutz.io
+    paths: []
+    tls: []
+
 grafana:
-  # ingress:
-  #   enabled: true
-  #   ingressClassName: nginx
-  #   annotations:
-  #     kubernetes.io/ingress.class: nginx
-  #     kubernetes.io/tls-acme: "true"
-  #   path: /grafana/?(.*)
-  #   hosts:
-  #     - server02.fritz.box
-
-  # grafana.ini:
-  #   server:
-  #     root_url: http://192.168.0.15:3000/grafana # this host can be localhost
-
   additionalDataSources:
     - name: Loki
       type: loki
@@ -49,3 +41,23 @@ grafana:
       jsonData:
         maxLines: 1000
       version: 1
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations: {}
+    labels: {}
+    hosts:
+      - grafana.server02.creutz.io
+    path: /
+    tls: []
+
+alertmanager:
+  ingress:
+    enabled: true
+    annotations: {}
+    labels: {}
+    hosts:
+      - alertmanager.server02.creutz.io
+    paths: []
+    tls: []

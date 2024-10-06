@@ -15,6 +15,7 @@ There are 4 types of metrics:
 
 #### Histograms
 - tbd
+
 #### Summaries
 - tbd
 

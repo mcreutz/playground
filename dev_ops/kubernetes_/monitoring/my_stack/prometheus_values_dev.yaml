@@ -1,0 +1,64 @@
+prometheus:
+  prometheusSpec:
+    podMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelector: {}
+    podMonitorNamespaceSelector: {}
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector: {}
+    serviceMonitorNamespaceSelector: {}
+
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          # storageClassName: "microk8s-hostpath-retain"
+          resources:
+            requests:
+              storage: 10Gi # 'retentionSize' should be ~1GB below this
+    ## How long to retain metrics
+    retention: 30d # 10d is default
+    ## Maximum size of metrics
+    retentionSize: 9GB # should be ~1GB below PVC size, "" is default
+
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    annotations: {}
+    labels: {}
+    hosts:
+      - prometheus.server01.creutz.io
+    paths: []
+    tls: []
+
+grafana:
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      url: http://loki:3100
+      access: proxy
+      isDefault: false
+      editable: false
+      orgId: 1
+      jsonData:
+        maxLines: 1000
+      version: 1
+
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    annotations: {}
+    labels: {}
+    hosts:
+      - grafana.server01.creutz.io
+    path: /
+    tls: []
+
+alertmanager:
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    annotations: {}
+    labels: {}
+    hosts:
+      - alertmanager.server01.creutz.io
+    paths: []
+    tls: []
