@@ -1,0 +1,1011 @@
+{
+  "annotations":
+    {
+      "list":
+        [
+          {
+            "builtIn": 1,
+            "datasource": { "type": "datasource", "uid": "grafana" },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard",
+          },
+        ],
+    },
+  "description": "Dashboard to monitor a QNAP NAS with SNMP",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "gnetId": 14572,
+  "graphTooltip": 0,
+  "id": 38,
+  "links": [],
+  "panels":
+    [
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "thresholds" },
+                "mappings": [],
+                "max": 100,
+                "min": 0,
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps":
+                      [
+                        { "color": "green", "value": null },
+                        { "color": "red", "value": 80 },
+                      ],
+                  },
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 5, "w": 8, "x": 0, "y": 0 },
+        "id": 10,
+        "options":
+          {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions":
+              { "calcs": ["lastNotNull"], "fields": "", "values": false },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto",
+            "text": {},
+          },
+        "pluginVersion": "11.0.0",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": 'systemCPU_UsageEX{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter"}',
+              "instant": true,
+              "interval": "",
+              "legendFormat": "System",
+              "refId": "A",
+            },
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": "cpuUsage{job='snmp-exporter-prometheus-snmp-exporter',instance='$Device'}",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "CPU {{cpuIndex}}",
+              "refId": "B",
+            },
+          ],
+        "title": "Current CPU",
+        "type": "gauge",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "continuous-GrYlRd" },
+                "mappings": [],
+                "max": 2000000000,
+                "min": 0,
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps":
+                      [
+                        { "color": "green", "value": null },
+                        { "color": "red", "value": 80 },
+                      ],
+                  },
+                "unit": "decbytes",
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 5, "w": 4, "x": 8, "y": 0 },
+        "id": 34,
+        "interval": "1m",
+        "options":
+          {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions":
+              { "calcs": ["lastNotNull"], "fields": "", "values": false },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto",
+            "text": {},
+          },
+        "pluginVersion": "11.0.0",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": 'systemTotalMem{instance="192.168.0.17", job="snmp-exporter-prometheus-snmp-exporter"} -on() systemAvailableMem{instance="192.168.0.17", job="snmp-exporter-prometheus-snmp-exporter"}',
+              "instant": false,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A",
+            },
+          ],
+        "title": "Memory",
+        "type": "gauge",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "thresholds" },
+                "mappings": [],
+                "max": 100,
+                "min": 0,
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps":
+                      [
+                        { "color": "green", "value": null },
+                        { "color": "red", "value": 80 },
+                      ],
+                  },
+                "unit": "%",
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 7, "w": 4, "x": 12, "y": 0 },
+        "id": 12,
+        "interval": "5m",
+        "options":
+          {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions":
+              { "calcs": ["lastNotNull"], "fields": "", "values": false },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto",
+            "text": {},
+          },
+        "pluginVersion": "11.0.0",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": '100 - ((sysVolumeFreeSizeEX{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter", sysVolumeIndexEX="1"} /on() volumeCapacity{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter", volumeIndex="1"}) * 100)',
+              "instant": false,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A",
+            },
+          ],
+        "title": "DataVol1",
+        "type": "gauge",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "thresholds" },
+                "mappings": [],
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps": [{ "color": "green", "value": null }],
+                  },
+                "unit": "decbytes",
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 4, "w": 8, "x": 16, "y": 0 },
+        "id": 28,
+        "interval": "6m",
+        "options":
+          {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions":
+              { "calcs": ["lastNotNull"], "fields": "", "values": false },
+            "showPercentChange": false,
+            "text": {},
+            "textMode": "auto",
+            "wideLayout": true,
+          },
+        "pluginVersion": "11.0.0",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": 'diskCapacity{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter"}',
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Disk {{diskIndex}}",
+              "refId": "A",
+            },
+          ],
+        "title": "Disks",
+        "type": "stat",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "thresholds" },
+                "mappings": [],
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps":
+                      [
+                        { "color": "green", "value": null },
+                        { "color": "red", "value": 80 },
+                      ],
+                  },
+                "unit": "celsius",
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 3, "w": 8, "x": 16, "y": 4 },
+        "id": 18,
+        "interval": "1m",
+        "options":
+          {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions":
+              { "calcs": ["lastNotNull"], "fields": "", "values": false },
+            "showPercentChange": false,
+            "text": {},
+            "textMode": "auto",
+            "wideLayout": true,
+          },
+        "pluginVersion": "11.0.0",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": 'diskTemperture{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter"}',
+              "instant": false,
+              "interval": "",
+              "legendFormat": " ",
+              "range": true,
+              "refId": "A",
+            },
+          ],
+        "type": "stat",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "thresholds" },
+                "mappings": [],
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps": [{ "color": "green", "value": null }],
+                  },
+                "unit": "dtdhms",
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 4, "w": 3, "x": 0, "y": 5 },
+        "id": 24,
+        "interval": "1m",
+        "options":
+          {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions":
+              { "calcs": ["lastNotNull"], "fields": "", "values": false },
+            "showPercentChange": false,
+            "text": {},
+            "textMode": "auto",
+            "wideLayout": true,
+          },
+        "pluginVersion": "11.0.0",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": 'systemUptimeEX{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter"} / 100',
+              "instant": true,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A",
+            },
+          ],
+        "title": "Up Time",
+        "type": "stat",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "thresholds" },
+                "mappings":
+                  [
+                    {
+                      "options":
+                        {
+                          "0": { "text": "Up To Date" },
+                          "1": { "text": "Update Available" },
+                        },
+                      "type": "value",
+                    },
+                  ],
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps":
+                      [
+                        { "color": "green", "value": null },
+                        { "color": "red", "value": 1 },
+                      ],
+                  },
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 4, "w": 3, "x": 3, "y": 5 },
+        "id": 40,
+        "interval": "5m",
+        "options":
+          {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions":
+              { "calcs": ["lastNotNull"], "fields": "", "values": false },
+            "showPercentChange": false,
+            "text": {},
+            "textMode": "auto",
+            "wideLayout": true,
+          },
+        "pluginVersion": "11.0.0",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": "\r\nfirmwareUpgradeAvailable{instance=\"$Device\", job=\"snmp-exporter-prometheus-snmp-exporter\"}",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A",
+            },
+          ],
+        "title": "Firmware",
+        "type": "stat",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "thresholds" },
+                "mappings": [],
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps":
+                      [
+                        { "color": "green", "value": null },
+                        { "color": "red", "value": 80 },
+                      ],
+                  },
+                "unit": "celsius",
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 4, "w": 4, "x": 6, "y": 5 },
+        "id": 14,
+        "interval": "1m",
+        "options":
+          {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions":
+              { "calcs": ["lastNotNull"], "fields": "", "values": false },
+            "showPercentChange": false,
+            "text": {},
+            "textMode": "auto",
+            "wideLayout": true,
+          },
+        "pluginVersion": "11.0.0",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": "\r\nsystemTemperatureEX{instance=\"$Device\", job=\"snmp-exporter-prometheus-snmp-exporter\"}",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "System",
+              "refId": "A",
+            },
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": 'enclosureSystemTemp{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter"}',
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Enclosure",
+              "refId": "B",
+            },
+          ],
+        "title": "Temperatures",
+        "type": "stat",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "thresholds" },
+                "mappings": [],
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps":
+                      [
+                        { "color": "red", "value": null },
+                        { "color": "green", "value": 500 },
+                        { "color": "red", "value": 1500 },
+                      ],
+                  },
+                "unit": "rotrpm",
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 4, "w": 2, "x": 10, "y": 5 },
+        "id": 36,
+        "options":
+          {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions":
+              { "calcs": ["lastNotNull"], "fields": "", "values": false },
+            "showPercentChange": false,
+            "text": {},
+            "textMode": "auto",
+            "wideLayout": true,
+          },
+        "pluginVersion": "11.0.0",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": 'sysFanSpeedEX{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter"}',
+              "instant": true,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A",
+            },
+          ],
+        "title": "Fan Speed",
+        "type": "stat",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "thresholds" },
+                "mappings": [],
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps": [{ "color": "green", "value": null }],
+                  },
+                "unit": "deckbytes",
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 2, "w": 4, "x": 12, "y": 7 },
+        "id": 38,
+        "options":
+          {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions":
+              { "calcs": ["lastNotNull"], "fields": "", "values": false },
+            "showPercentChange": false,
+            "text": {},
+            "textMode": "auto",
+            "wideLayout": true,
+          },
+        "pluginVersion": "11.0.0",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": 'volumeCapacity{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter", volumeIndex="1"}',
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Total",
+              "refId": "A",
+            },
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": 'volumeCapacity{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter", volumeIndex="1"} -on() sysVolumeFreeSizeEX{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter", sysVolumeIndexEX="1"}',
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Filled",
+              "refId": "B",
+            },
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": 'sysVolumeFreeSizeEX{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter", sysVolumeIndexEX="1"}',
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Available",
+              "refId": "C",
+            },
+          ],
+        "type": "stat",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "thresholds" },
+                "mappings":
+                  [
+                    {
+                      "options":
+                        {
+                          "0": { "text": "Healthy" },
+                          "1": { "text": "Warning" },
+                          "2": { "text": "Abnormal" },
+                          "-1": { "text": "Error" },
+                        },
+                      "type": "value",
+                    },
+                  ],
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps":
+                      [
+                        { "color": "green", "value": null },
+                        { "color": "red", "value": 80 },
+                      ],
+                  },
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 2, "w": 8, "x": 16, "y": 7 },
+        "id": 30,
+        "options":
+          {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions":
+              { "calcs": ["lastNotNull"], "fields": "", "values": false },
+            "showPercentChange": false,
+            "text": {},
+            "textMode": "auto",
+            "wideLayout": true,
+          },
+        "pluginVersion": "11.0.0",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": 'diskSmartInfo{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter"}',
+              "instant": false,
+              "interval": "",
+              "legendFormat": " ",
+              "range": true,
+              "refId": "A",
+            },
+          ],
+        "type": "stat",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "palette-classic" },
+                "custom":
+                  {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "drawStyle": "line",
+                    "fillOpacity": 10,
+                    "gradientMode": "none",
+                    "hideFrom":
+                      { "legend": false, "tooltip": false, "viz": false },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": { "type": "linear" },
+                    "showPoints": "never",
+                    "spanNulls": false,
+                    "stacking": { "group": "A", "mode": "none" },
+                    "thresholdsStyle": { "mode": "off" },
+                  },
+                "mappings": [],
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps":
+                      [
+                        { "color": "green", "value": null },
+                        { "color": "red", "value": 80 },
+                      ],
+                  },
+                "unit": "%",
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 9 },
+        "id": 8,
+        "options":
+          {
+            "legend":
+              {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true,
+              },
+            "tooltip": { "maxHeight": 600, "mode": "multi", "sort": "none" },
+          },
+        "pluginVersion": "7.5.7",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": "systemCPU_UsageEX{job='snmp-exporter-prometheus-snmp-exporter',instance='$Device'}",
+              "interval": "",
+              "legendFormat": "System",
+              "refId": "A",
+            },
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": "cpuUsage{job='snmp-exporter-prometheus-snmp-exporter',instance='$Device'}",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "CPU {{cpuIndex}}",
+              "refId": "B",
+            },
+          ],
+        "title": "CPU Usage",
+        "type": "timeseries",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "palette-classic" },
+                "custom":
+                  {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "drawStyle": "line",
+                    "fillOpacity": 10,
+                    "gradientMode": "none",
+                    "hideFrom":
+                      { "legend": false, "tooltip": false, "viz": false },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": { "type": "linear" },
+                    "showPoints": "never",
+                    "spanNulls": false,
+                    "stacking": { "group": "A", "mode": "none" },
+                    "thresholdsStyle": { "mode": "off" },
+                  },
+                "mappings": [],
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps":
+                      [
+                        { "color": "green", "value": null },
+                        { "color": "red", "value": 80 },
+                      ],
+                  },
+                "unit": "decbytes",
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 9 },
+        "id": 32,
+        "interval": "1m",
+        "options":
+          {
+            "legend":
+              {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true,
+              },
+            "tooltip": { "maxHeight": 600, "mode": "multi", "sort": "none" },
+          },
+        "pluginVersion": "7.5.7",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": 'systemTotalMem{instance="192.168.0.17", job="snmp-exporter-prometheus-snmp-exporter"} -on() systemAvailableMem{instance="192.168.0.17", job="snmp-exporter-prometheus-snmp-exporter"}',
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Used",
+              "refId": "C",
+            },
+          ],
+        "title": "Memory Usage",
+        "type": "timeseries",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "palette-classic" },
+                "custom":
+                  {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "Packets",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "drawStyle": "line",
+                    "fillOpacity": 10,
+                    "gradientMode": "none",
+                    "hideFrom":
+                      { "legend": false, "tooltip": false, "viz": false },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": { "type": "linear" },
+                    "showPoints": "never",
+                    "spanNulls": false,
+                    "stacking": { "group": "A", "mode": "none" },
+                    "thresholdsStyle": { "mode": "off" },
+                  },
+                "mappings": [],
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps":
+                      [
+                        { "color": "green", "value": null },
+                        { "color": "red", "value": 80 },
+                      ],
+                  },
+                "unit": "short",
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 17 },
+        "id": 22,
+        "options":
+          {
+            "legend":
+              {
+                "calcs": ["lastNotNull"],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true,
+              },
+            "tooltip": { "maxHeight": 600, "mode": "multi", "sort": "none" },
+          },
+        "pluginVersion": "7.5.7",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": "irate(ifPacketsSentEX{job='snmp-exporter-prometheus-snmp-exporter',instance='$Device'}[5m])",
+              "interval": "",
+              "legendFormat": "Sent {{ifIndexEX}}",
+              "refId": "A",
+            },
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": "irate(ifPacketsReceivedEX{job='snmp-exporter-prometheus-snmp-exporter',instance='$Device'}[5m])",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Received {{ifIndexEX}}",
+              "refId": "B",
+            },
+          ],
+        "title": "Network Packets/Second",
+        "type": "timeseries",
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "fieldConfig":
+          {
+            "defaults":
+              {
+                "color": { "mode": "palette-classic" },
+                "custom":
+                  {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "drawStyle": "line",
+                    "fillOpacity": 10,
+                    "gradientMode": "none",
+                    "hideFrom":
+                      { "legend": false, "tooltip": false, "viz": false },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": { "type": "linear" },
+                    "showPoints": "never",
+                    "spanNulls": false,
+                    "stacking": { "group": "A", "mode": "none" },
+                    "thresholdsStyle": { "mode": "off" },
+                  },
+                "mappings": [],
+                "thresholds":
+                  {
+                    "mode": "absolute",
+                    "steps":
+                      [
+                        { "color": "green", "value": null },
+                        { "color": "red", "value": 80 },
+                      ],
+                  },
+                "unit": "rotrpm",
+              },
+            "overrides": [],
+          },
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 17 },
+        "id": 26,
+        "options":
+          {
+            "legend":
+              {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true,
+              },
+            "tooltip": { "maxHeight": 600, "mode": "multi", "sort": "none" },
+          },
+        "pluginVersion": "7.5.7",
+        "targets":
+          [
+            {
+              "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "exemplar": true,
+              "expr": "\r\nsysFanSpeedEX{instance=\"$Device\", job=\"snmp-exporter-prometheus-snmp-exporter\"}",
+              "interval": "",
+              "legendFormat": "Fan {{sysFanIndexEX}}",
+              "refId": "A",
+            },
+          ],
+        "title": "Fan Speed",
+        "type": "timeseries",
+      },
+    ],
+  "refresh": "1m",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating":
+    {
+      "list":
+        [
+          {
+            "current":
+              {
+                "selected": false,
+                "text": "192.168.0.17",
+                "value": "192.168.0.17",
+              },
+            "datasource": { "type": "prometheus", "uid": "prometheus" },
+            "definition": 'query_result(sum by (instance)(cpuUsage{job="snmp-exporter-prometheus-snmp-exporter"}))',
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "Device",
+            "options": [],
+            "query":
+              {
+                "query": 'query_result(sum by (instance)(cpuUsage{job="snmp-exporter-prometheus-snmp-exporter"}))',
+                "refId": "StandardVariableQuery",
+              },
+            "refresh": 1,
+            "regex": '.*instance="(.*?)".*',
+            "skipUrlSync": false,
+            "sort": 0,
+            "tagValuesQuery": "",
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false,
+          },
+        ],
+    },
+  "time": { "from": "now-1h", "to": "now" },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "",
+  "title": "QNAP SNMP Monitor",
+  "uid": "pwwviueMz",
+  "version": 11,
+  "weekStart": "",
+}

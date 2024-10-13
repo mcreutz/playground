@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: snmp-exporter-self-monitoring
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: snmp-exporter
+      app.kubernetes.io/name: prometheus-snmp-exporter
+  endpoints:
+    - port: http
+      scheme: http
+      path: /metrics
+  jobLabel: snmp-exporter-self-monitoring
