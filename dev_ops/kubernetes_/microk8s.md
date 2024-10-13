@@ -1,3 +1,8 @@
+Enabling the registry:
+```bash
+sudo microk8s enable registry
+```
+
 Pushing images to the internal image registry:
 ```bash
 docker tag <your-image-name>:<tag> <host>:32000/<your-image-name>:<tag>

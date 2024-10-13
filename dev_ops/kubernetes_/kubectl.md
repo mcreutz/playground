@@ -6,7 +6,6 @@
 kubectl create -f <filename>
 ```
 * `-k <directory>`  (directory with kustomization.yaml file)
-
 ### Run a particular image on the cluster
 ```bash
 kubectl run <name> --image=<image>
@@ -17,7 +16,6 @@ kubectl run <name> --image=<image>
 ```bash
 kubectl get <resource>
 ```
-
 
 ## Modify existing Objects on a Cluster
 ### Edit existing object in default editor
@@ -37,7 +35,6 @@ kubectl replace -f <filename>
 kubectl patch <resource> <object-name> --patch-file=<patch-file>
 ```
 You can add entries to lists and maps, if the [object definition](https://raw.githubusercontent.com/kubernetes/kubernetes/master/api/openapi-spec/swagger.json) has `"x-kubernetes-patch-strategy": "merge"` defined for that element. If not, you can only replace the whole list or map.
-
 ### Modify attribute of existing object
 ```bash
 kubectl set <attribute> <resource> <object-name> <value>
@@ -86,10 +83,11 @@ kubectl attach <podname> -i
 ```bash
 kubectl exec <podname> -- command
 ```
-### Diff file against Kubernetes server
+### Diff a manifest file against the corresponding object on the cluster
 ```bash
 kubectl diff -f <filename>
 ```
+
 ## Inspect Resources
 ### List the fields for supported resources
 ```bash
@@ -105,9 +103,9 @@ kubectl api-resources
 ```bash
 kubectl cluster-info
 ```
-### Show metrics for a given node
+### Show node metrics
 ```bash
-kubectl top node
+kubectl top node 
 ```
 ### Mark node as unschedulable
 ```bash
