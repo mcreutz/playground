@@ -1,0 +1,11 @@
+controller:
+  hostNetwork: true
+  hostPort:
+    enabled: true
+  dnsPolicy: ClusterFirstWithHostNet
+  service:
+    type: LoadBalancer
+    enabled: false
+
+tcp:
+  "5432": "postgres/postgres-postgresql-hl:5432"
