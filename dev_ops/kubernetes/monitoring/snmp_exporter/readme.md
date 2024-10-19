@@ -56,7 +56,7 @@ helm repo update
 helm install snmp-exporter prometheus-community/prometheus-snmp-exporter \
     --namespace monitoring \
     --version 5.5.1 \
-    --values dev_ops/kubernetes_/monitoring/snmp_exporter/values.yaml
+    --values dev_ops/kubernetes/monitoring/snmp_exporter/values.yaml
 ```
 
 ### Install the additional ServiceMonitor for self-monitoring

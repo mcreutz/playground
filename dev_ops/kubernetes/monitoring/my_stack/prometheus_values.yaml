@@ -21,13 +21,17 @@ prometheus:
 
   ingress:
     enabled: true
-    ingressClassName: nginx
-    annotations: {}
     labels: {}
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+    ingressClassName: nginx
     hosts:
       - prometheus.server02.creutz.io
     paths: []
-    tls: []
+    tls:
+      - hosts:
+          - "*.server02.creutz.io"
+        secretName: tls-server02-creutz-io
 
 grafana:
   additionalDataSources:
@@ -44,20 +48,29 @@ grafana:
 
   ingress:
     enabled: true
-    ingressClassName: nginx
-    annotations: {}
     labels: {}
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+    ingressClassName: nginx
     hosts:
       - grafana.server02.creutz.io
     path: /
-    tls: []
+    tls:
+      - hosts:
+          - "*.server02.creutz.io"
+        secretName: tls-server02-creutz-io
 
 alertmanager:
   ingress:
     enabled: true
-    annotations: {}
     labels: {}
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+    ingressClassName: nginx
     hosts:
       - alertmanager.server02.creutz.io
     paths: []
-    tls: []
+    tls:
+      - hosts:
+          - "*.server02.creutz.io"
+        secretName: tls-server02-creutz-io

@@ -20,7 +20,7 @@ prometheus:
     retentionSize: 9GB # should be ~1GB below PVC size, "" is default
 
   ingress:
-    enabled: true
+    enabled: false
     ingressClassName: nginx
     annotations: {}
     labels: {}
@@ -43,7 +43,7 @@ grafana:
       version: 1
 
   ingress:
-    enabled: true
+    enabled: false
     ingressClassName: nginx
     annotations: {}
     labels: {}
@@ -54,7 +54,7 @@ grafana:
 
 alertmanager:
   ingress:
-    enabled: true
+    enabled: false
     ingressClassName: nginx
     annotations: {}
     labels: {}
