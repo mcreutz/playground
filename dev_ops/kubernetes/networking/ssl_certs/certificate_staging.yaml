@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: certificate-server02-creutz-io-staging
+spec:
+  secretName: tls-server02-creutz-io-staging
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+    - "*.server02.creutz.io"

@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-demo
+  namespace: cert-manager
+  # -- Add this to instruct cert-manager to automatically issue a certificate for this Ingress, if not present
+  # annotations:
+  #   cert-manager.io/cluster-issuer: <cluster-issuer-name>
+spec:
+  ingressClassName: <ingress-class-name>
+  tls:
+    - hosts:
+        - "<host-name>" # e.g. app.mysite.com
+      secretName: tls-app-mysite-com
+  rules:
+    - host: "<host-name>" # e.g. app.mysite.com
+      http:
+        paths:
+          - path: /metrics
+            pathType: Prefix
+            backend:
+              service:
+                name: cert-manager
+                port:
+                  number: 9402
