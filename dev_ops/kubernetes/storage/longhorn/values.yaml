@@ -1,0 +1,12 @@
+csi:
+  kubeletRootDir: "/var/snap/microk8s/common/var/lib/kubelet" # use this for microk8s
+
+defaultSettings:
+  defaultDataPath: "/longhorn" # use this for microk8s
+
+ingress:
+  enabled: false
+
+metrics:
+  serviceMonitor:
+    enabled: false
