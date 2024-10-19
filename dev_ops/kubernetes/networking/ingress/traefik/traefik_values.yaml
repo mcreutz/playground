@@ -1,5 +1,5 @@
 ingressClass:
-  name: traefik
+  name: traefikkkk
 
 # providers:
 #   kubernetesCRD:
@@ -12,6 +12,10 @@ deployment:
 
 service:
   type: ClusterIP
+  spec:
+    # externalTrafficPolicy: Local
+  externalIPs:
+    - 192.168.0.10 # dirty but necessary for hostnetwork mode with traefik
 
 hostNetwork: true
 
