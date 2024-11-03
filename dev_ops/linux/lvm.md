@@ -1,4 +1,4 @@
-# Linux Logical Volume Management (LVM) Cheatsheet
+# Linux Logical Volume Manager (LVM)
 
 ## Overview
 LVM provides flexible disk space management by creating abstractions of physical storage:
@@ -6,7 +6,7 @@ LVM provides flexible disk space management by creating abstractions of physical
 - **VG (Volume Group)**: Groups of PVs that form a storage pool, always spans one or more complete PVs
 - **LV (Logical Volume)**: Virtual partitions created from VGs that can be formatted with a filesystem
 
-Key relationships between components:
+### Key relationships between components:
 Physical disk : partition -> 1 : N
 - A physical disk can have one or more partitions. Partitions can only be part of one physical disk.
 
@@ -23,12 +23,21 @@ Volume Group : Logical Volume -> 1 : N
 ## Physical Volumes (PV)
 ```bash
 # Create PV from disk or partition
-pvcreate /dev/sdb
-pvcreate /dev/sdc1
+pvcreate /dev/sdb  # Create PV from disk
+pvcreate /dev/sdc1  # Create PV from partition
 
 # Show PV info
-pvs         # Brief info
-pvdisplay   # Detailed info
+pvs /dev/sdb  # Brief info
+pvdisplay /dev/sdb  # Detailed info
+
+# Remove PV
+pvremove /dev/sdb
+
+# Rename PV
+pvrename /dev/sdb /dev/sdX
+
+# Display PV UUID
+blkid /dev/sdb
 ```
 
 ## Volume Groups (VG)
@@ -40,16 +49,20 @@ vgcreate vg_name /dev/sdb [/dev/sdc1]
 vgextend vg_name /dev/sdc1
 
 # Show VG info
-vgs         # Brief info  
-vgdisplay   # Detailed info
+vgs vg_name  # Brief info
+vgdisplay vg_name  # Detailed info
 
 # Remove PV from VG (requires unmounting)
 vgreduce vg_name /dev/sdb
+
+# Remove VG
+vgremove vg_name
+
+# Rename VG
+vgrename old_name new_name
 ```
 
 ## Logical Volumes (LV) 
-
-### Create LV
 ```bash
 # Create LV with specific size
 lvcreate -L 10G -n lv_name vg_name
@@ -58,64 +71,52 @@ lvcreate -L 10G -n lv_name vg_name
 lvcreate -l 100%FREE -n lv_name vg_name
 
 # Show LV info
-lvs         # Brief info
-lvdisplay   # Detailed info
+lvs /dev/vg_name/lv_name  # Brief info
+lvdisplay /dev/vg_name/lv_name  # Detailed info
+
+# Resize LV
+lvextend -L +1G /dev/vg_name/lv_name  # Extend by 1GB
+lvreduce -L -1G /dev/vg_name/lv_name  # Reduce by 1GB (requires unmounting)
+lvextend -l +100%FREE /dev/vg_name/lv_name  # Extend to use all available space
+lvextend -l +100%FREE /dev/vg_name/lv_name --resizefs  # Include filesystem resize
+resize2fs /dev/vg_name/lv_name  # Extend ext4 fs, might be `/dev/mapper/...`
+xfs_growfs /dev/vg_name/lv_name  # Extend xfs fs (only growing)
+
+# Remove LV
+lvremove /dev/vg_name/lv_name
+
+# Rename LV
+lvrename /dev/vg_name/old_name new_name
 ```
 
-### Extend/Reduce LV
-```bash
-# Extend by 1GB
-lvextend -L +1G /dev/vg_name/lv_name
-
-# Reduce by 1GB (requires unmounting)
-lvreduce -L -1G /dev/vg_name/lv_name
-
-# Extend to use all available space
-lvextend -l +100%FREE /dev/vg_name/lv_name
-```
-
-### Resize Filesystem After LV Changes
-```bash
-# For ext4
-resize2fs /dev/vg_name/lv_name
-
-# For xfs (only growing)
-xfs_growfs /dev/vg_name/lv_name
-```
-
+## Example Usage
 ### Create and Mount New LV
 ```bash
-# Create PV
-pvcreate /dev/sdb
-
-# Create VG
-vgcreate vg_data /dev/sdb
-
-# Create LV
-lvcreate -L 10G -n lv_data vg_data
-
-# Format LV with filesystem
-mkfs.ext4 /dev/vg_data/lv_data
-
-# Mount LV
+pvcreate /dev/sdb  # Create PV
+vgcreate vg_data /dev/sdb  # Create VG
+lvcreate -L 10G -n lv_data vg_data  # Create LV
+mkfs.ext4 /dev/vg_data/lv_data  # Format LV with filesystem
 mkdir /mnt/data
-mount /dev/vg_data/lv_data /mnt/data
+mount /dev/vg_data/lv_data /mnt/data  # Mount LV
 ```
 
 ### Remove LV, VG and PV
 ```bash
-# Unmount
-umount /mnt/data
-
-# Remove LV
-lvremove /dev/vg_data/lv_data
-
-# Remove VG
-vgremove vg_data
-
-# Remove PV
-pvremove /dev/sdb
+umount /mnt/data  # Unmount
+lvremove /dev/vg_data/lv_data  # Remove LV
+vgremove vg_data  # Remove VG
+pvremove /dev/sdb  # Remove PV
 ```
+
+## Additional Tips and Best Practices:
+- Always leave free space in Volume Groups for future expansion or emergencies
+- Always backup data before resizing
+- Monitor free space with `vgs` and `lvs`
+- LV paths are typically in `/dev/vg_name/lv_name`
+- Use `lsblk` to see block device hierarchy
+- Database servers: Separate LV for database files
+- Web servers: Separate LV for web content
+- Backup servers: Large LV for backup storage
 
 ### Directories that often get their own LV:
 - / (root filesystem)
@@ -172,17 +173,6 @@ lvconvert --merge /dev/vg_system/snap_test
 lvremove /dev/vg_system/snap_test
 ```
 
-### Snapshot Sizing Guidelines
-- Size based on expected changes during snapshot lifetime
-- Too small = snapshot fails if it fills up
-- Typical sizes: 10-20% of original LV
-- Monitor usage with lvs command
-
-### Snapshot Performance Impact
-- Reads are fast, writes are slower
-- Performance impact increases as snapshot fills up
-- Monitor with iostat or vmstat commands
-
 ### Snapshot monitoring
 ```bash
 # Watch snapshot usage
@@ -194,23 +184,34 @@ if [ $(lvs -o snap_percent --noheadings snap_root) -gt 80 ]; then
 fi
 ```
 
-### Creating and Managing Backups from Snapshots
+### Snapshot Sizing Guidelines
+- Size based on expected changes during snapshot lifetime
+- Too small = snapshot fails if it fills up
+- Typical sizes: 10-20% of original LV
+- Monitor usage with lvs command
+
+### Snapshot Performance Impact
+- Reads are fast, writes are slower
+- Performance impact increases as snapshot fills up
+- Monitor with iostat or vmstat commands
+
+### Creating Backups from Snapshots and Restoring
 ```bash
-# Backup data fom snapshot
-mkdir /mnt/snapshot
-mount -o ro /dev/vg_system/snap_root /mnt/snapshot
-tar czf /backup/data.tar.gz /mnt/backup/
-umount /mnt/backup
-rmdir /mnt/backup
+# Create backup from snapshot
+mkdir /mnt/snapshot  # Create mount point for snapshot
+mount -o ro /dev/vg_system/snap_root /mnt/snapshot  # Mount snapshot read-only
+tar czf /backup/data.tar.gz /mnt/backup/  # Create backup tarball
+umount /mnt/backup  # Unmount snapshot
+rmdir /mnt/backup  # Remove mount point
 
 # Restore data from backup
-mkdir /mnt/snapshot
-tar xzf /backup/data.tar.gz -C /mnt/snapshot
-rsync -av /mnt/snapshot/ /mnt/original/
-rmdir /mnt/snapshot
+mkdir /mnt/snapshot  # Create mount point for snapshot
+tar xzf /backup/data.tar.gz -C /mnt/snapshot  # Extract backup tarball
+rsync -av /mnt/snapshot/ /mnt/original/  # Restore data to LV
+rmdir /mnt/snapshot  # Remove mount point
 ```
 
-### Best Practices
+### Best Practices for Snapshots and Backups
 - Size snapshots appropriately
 - Keep snapshots temporary (hours/days, not weeks)
 - Monitor snapshot usage
@@ -218,13 +219,3 @@ rmdir /mnt/snapshot
 - Remove snapshots when no longer needed
 - Don't use as backup replacement
 - Consider performance impact
-
-## Additional Tips and Best Practices:
-- Always leave free space in Volume Groups for future expansion or emergencies
-- Always backup data before resizing
-- Monitor free space with `vgs` and `lvs`
-- LV paths are typically in `/dev/vg_name/lv_name`
-- Use `lsblk` to see block device hierarchy
-- Database servers: Separate LV for database files
-- Web servers: Separate LV for web content
-- Backup servers: Large LV for backup storage
