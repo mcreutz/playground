@@ -29,6 +29,14 @@ Remove dependency from active enviroment
 poetry remove <dependency> [--group <name>]
 ```
 
+Lock depencies to a specific version
+```shell
+poetry lock
+```
+Will pin the dependencies to the latests version that matches the constraints in pyproject.toml.
+To only refresh the lock file, use the --no-update option.
+Usually not necessary, as the lockfile is automatically updated when adding or removing dependencies.
+
 Create requirements.txt file
 ```shell
 poetry export --format requirements.txt --output requirements.txt [--with <name>]
