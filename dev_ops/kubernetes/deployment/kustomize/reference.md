@@ -1,10 +1,40 @@
-# Kustomization file syntax
+# Kustomization
+## Directory structure
+```bash
+my_app
+├── base
+│   ├── deployment.yaml
+│   ├── kustomization.yaml
+│   └── service.yaml
+├── overlays
+│   ├── dev
+│   │   ├── kustomization.yaml
+│   │   └── patch.yaml
+│   └── prod
+│       ├── kustomization.yaml
+│       └── patch.yaml
+└── kustomization.yaml
+```
+- Root-level `kustomization.yaml` acts as the entry point and is usually very minimal. Points to which overlay you want to use and does not contain direct resource definitions.
+- `base`-level `kustomization.yaml` lists all base resources and defines common configurations shared across all environments.
+- `overlays`-level `kustomization.yaml` lists the base resources and patches to apply for overlaying.
+
+
+## Overlays
+- Overlays are used to customize the base resources for different environments.
+- Each overlay can have its own set of operations to apply on top of the base resources.
+- Overlays can use of all transformations and generators available in kustomize.
+- The `kustomization.yaml` file in the overlay directory lists the base resources and patches to apply.
+- The `kustomization.yaml` file in the root directory lists the overlays to use.
+
+
+## Kustomization file syntax
 ```yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 ```
 
-## There are 4 basic operations in kustomize. All other operations are just conveniece syntaxes / shorthands for built-in operations of one of these 4 basic operations.
+### There are 4 basic operations in kustomize
 ```yaml
 resources:
 - {pathOrUrl}
@@ -23,18 +53,9 @@ validators:
 - {pathOrUrl}
 - ...
 ```
+All other operations are just conveniece syntaxes / shorthands of one of these 4 basic operations for built-in operations.
 
-### The annotation transformer adds the given annotations to all resources.
-```yaml
-commonAnnotations:
-  myAnnotation: myValue
-```
-
-### The label transformer that adds the given labels to all resources.
-```yaml
-commonLabels:
-  myLabel: myValue
-```
+Some operations can target specific resources using `name`, `kind`, `group`, `version`, `namespace`, `labelSelector`, `annotations`, etc. fields. Others apply to all resources.
 
 ### The config map generator generates a ConfigMap from the given data.
 ```yaml
@@ -61,6 +82,17 @@ configMapGenerator:
     labels:
       app.kubernetes.io/name: "app1"
 ```
+
+### The annotation transformer adds the given annotations to all resources.
+```yaml
+commonAnnotations:
+  myAnnotation: myValue
+```
+
+### The label transformer that adds the given labels to all resources.
+```yaml
+commonLabels:
+  myLabel: myValue
 
 ### The namespace transformer sets the namespace of all resources to the given namespace.
 ```yaml
@@ -122,9 +154,9 @@ patchesStrategicMerge:
           - name: nginx
             image: nignx:latest
 ```
-- Uses Kubernetes Strategic Merge Patch
+- Uses Kubernetes Strategic Merge Patch format
+- Automatically matches resources based on name/kind/group/version
 - Merges entire resource definitions
-- Automatically matches resources based on name/kind
 - Better for larger changes or multiple field updates
 - More Kubernetes-aware (understands arrays and merge directives)
 - Simpler syntax but less precise control
@@ -144,11 +176,9 @@ patches:
     spec:
       replicas: 3
 ```
-- Newer, unified way to apply both types of patches
-- Can use either JSON Patch or Strategic Merge format
-- Combines features of both above methods
+- Newer, unified way to apply JSON Patch or Strategic Merge patches
 - More flexible targeting options
 - Recommended for newer Kustomize versions
 
-## Reference:
+### Reference:
 https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/
