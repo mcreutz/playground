@@ -6,5 +6,5 @@ if [ ! -f render.sh ] || [ ! -f deploy.sh ]; then
     exit 1
 fi
 
-kapp deploy -a ytt -f <(kustomize build platform_repo)
+kapp deploy -a ytt-example -f <(kustomize build platform_repo)
 # "kapp deploy .. <(kustomize build ..)" is basically the same as "kustomize build .. | kapp deploy .. -f-" but kapp prefers it this way. See https://carvel.dev/kapp/docs/v0.45.0/faq/#error-asking-for-confirmation-eof#!/bin/bash
