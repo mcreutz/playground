@@ -10,6 +10,11 @@ ssh-keygen -t ED25519 -C "your_email@example.com" -f ~/.ssh/id_ed25519_something
 - will prompt for a filename if none is provided
 - will prompt for a passphrase
 
+If you copied over a key pair (with a non-default name) that was created on another machine, you need to add it to the ssh-agent:
+```bash
+ssh-add ~/.ssh/id_ed25519_something
+```
+
 ## Copy the public key to the remote server
 ```bash
 ssh-copy-id -i ~/.ssh/id_ed25519_something.pub user@remote_host
