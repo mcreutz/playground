@@ -22,6 +22,9 @@ Volume Group : Logical Volume -> 1 : N
 
 ## Physical Volumes (PV)
 ```bash
+# List all PVs
+pvs
+
 # Create PV from disk or partition
 pvcreate /dev/sdb  # Create PV from disk
 pvcreate /dev/sdc1  # Create PV from partition
@@ -42,6 +45,9 @@ blkid /dev/sdb
 
 ## Volume Groups (VG)
 ```bash
+# List all VGs
+vgs
+
 # Create new VG from PV[s]
 vgcreate vg_name /dev/sdb [/dev/sdc1]
 
@@ -64,6 +70,9 @@ vgrename old_name new_name
 
 ## Logical Volumes (LV) 
 ```bash
+# List all LVs
+lvs
+
 # Create LV with specific size
 lvcreate -L 10G -n lv_name vg_name
 
