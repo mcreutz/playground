@@ -263,6 +263,10 @@ history -c  # clear history
 * tmux  # terminal multiplexer
 * <command> | column -t  # change output to column formatted table
 * stat <file>  # show stats, like size, permissions, access timestamps etc.
+* `sort` - sort lines of text
+* `uniq` - remove or show duplicate lines
+* `cut` - remove sections from each line of files
+
 
 
 # shortcuts
