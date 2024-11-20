@@ -33,7 +33,7 @@ make generator mibs
 
 Backup the existing `generator.yml` file
 ```bash
-mv generator.yml generator.yml.bak
+cp generator.yml generator.yml.backup
 ```
 
 Modify the `generator.yml` file
@@ -47,6 +47,8 @@ Generate the snmp.yml file with the generator
 ```
 
 Add the content of the generated `snmp.yml` file to the `values.yaml` file under the `config: |` key
+
+Add the modules from the `generator.yml` file to the `values.yaml` file under the `params:` key
 
 ## Install the SNMP exporter
 ### Install the Helm chart
