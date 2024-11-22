@@ -1,0 +1,97 @@
+---
+# This is a playbook. It consists of a list of plays, each play is a set of tasks to be executed on a set of hosts.
+- name: Example Ansible Play in a Playbook
+  hosts: web_servers
+  become: true
+  vars:
+    app_port: 8080
+    app_path: /var/www/app
+
+  # Execution order within a play:
+  # 1. pre_tasks
+  # 2. roles
+  # 3. tasks
+  # 4. post_tasks
+
+  pre_tasks:
+    # Execute, even if you use --start-at-task to run your playbook from a specific task
+    # Role Independence
+    - name: Update package cache
+      apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+  # Roles are a way to organize tasks and variables
+  roles:
+    - common
+    - webserver
+
+  # Main tasks
+  tasks:
+    # Basic package installation
+    - name: Install required packages
+      package:
+        name: "{{ item }}" # Content set with 'loop' directive
+        state: present
+      loop:
+        - nginx
+        - python3
+        - git
+
+    # File operations
+    - name: Create directory
+      file:
+        path: "{{ app_path }}" # References 'vars' directive
+        state: directory
+        mode: "0755"
+
+    # Template example
+    - name: Configure nginx
+      template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/sites-available/default
+      notify: Restart nginx
+
+    # Service management
+    - name: Ensure nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    # Conditional execution
+    - name: Install MySQL
+      package:
+        name: mysql-server
+        state: present
+      when: inventory_hostname in groups['db_servers']
+
+    # Register and use command output
+    - name: Check app status
+      command: systemctl status myapp
+      register: app_status
+      ignore_errors: true
+
+    - name: Display status
+      debug:
+        var: app_status.stdout_lines
+
+  # Handlers are tasks that only run when called by a 'notify' directive
+  handlers:
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted
+
+  # Tags allow to run only specific tasks
+  tags:
+    - webserver
+    - configuration
+
+- name: Another Play
+  hosts: db_servers
+  tasks:
+    - name: Install MySQL
+      package:
+        name: mysql-server
+        state: present
