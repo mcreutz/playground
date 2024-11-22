@@ -224,8 +224,9 @@
           [
             {
               "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "editorMode": "code",
               "exemplar": true,
-              "expr": 'diskCapacity{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter"}',
+              "expr": 'last_over_time(diskCapacity{instance="$Device", job="snmp-exporter-prometheus-snmp-exporter"}[7d])',
               "instant": true,
               "interval": "",
               "legendFormat": "Disk {{diskIndex}}",
@@ -389,8 +390,9 @@
           [
             {
               "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "editorMode": "code",
               "exemplar": true,
-              "expr": "\r\nfirmwareUpgradeAvailable{instance=\"$Device\", job=\"snmp-exporter-prometheus-snmp-exporter\"}",
+              "expr": "\r\nlast_over_time(firmwareUpgradeAvailable{instance=\"$Device\", job=\"snmp-exporter-prometheus-snmp-exporter\"}[7d])",
               "instant": true,
               "interval": "",
               "legendFormat": "",
@@ -786,11 +788,13 @@
           [
             {
               "datasource": { "type": "prometheus", "uid": "prometheus" },
+              "editorMode": "code",
               "exemplar": true,
-              "expr": 'systemTotalMem{instance="192.168.0.17", job="snmp-exporter-prometheus-snmp-exporter"} -on() systemAvailableMem{instance="192.168.0.17", job="snmp-exporter-prometheus-snmp-exporter"}',
+              "expr": "last_over_time(systemTotalMem{instance=\"192.168.0.17\", job=\"snmp-exporter-prometheus-snmp-exporter\"}[7d])\n-on(instance, job) \nsystemAvailableMem{instance=\"192.168.0.17\", job=\"snmp-exporter-prometheus-snmp-exporter\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "Used",
+              "range": true,
               "refId": "C",
             },
           ],
@@ -813,7 +817,7 @@
                     "axisPlacement": "auto",
                     "barAlignment": 0,
                     "drawStyle": "line",
-                    "fillOpacity": 10,
+                    "fillOpacity": 0,
                     "gradientMode": "none",
                     "hideFrom":
                       { "legend": false, "tooltip": false, "viz": false },
@@ -988,12 +992,12 @@
           },
         ],
     },
-  "time": { "from": "now-3h", "to": "now" },
+  "time": { "from": "now-24h", "to": "now" },
   "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "",
   "title": "QNAP SNMP Monitor",
   "uid": "pwwviueMz",
-  "version": 17,
+  "version": 19,
   "weekStart": "",
 }

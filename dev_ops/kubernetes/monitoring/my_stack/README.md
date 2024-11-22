@@ -28,7 +28,7 @@ Install Promtail
 helm install promtail grafana/promtail \
     --version 6.16.0 \
     -n monitoring \
-    -f dev_ops/kubernetes_/monitoring/my_stack/promtail_values.yaml
+    -f dev_ops/kubernetes/monitoring/my_stack/promtail_values.yaml
 ```
 
 Install Loki
@@ -36,5 +36,5 @@ Install Loki
 helm install loki grafana/loki \
     --version 6.6.4 \
     -n monitoring \
-    -f dev_ops/kubernetes_/monitoring/my_stack/loki_values_dev.yaml
+    -f dev_ops/kubernetes/monitoring/my_stack/loki_values_dev.yaml
 ```
