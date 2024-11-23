@@ -11,5 +11,5 @@ rm platform_repo/patches_rendered/*
 ytt \
     -f platform_repo/patch_templates \
     -f platform_repo/default_values.yaml \
-    --data-values-file cluster_repo/values.yaml \
+    --data-values-file values_cluster-one.yaml \
     --output-files platform_repo/patches_rendered

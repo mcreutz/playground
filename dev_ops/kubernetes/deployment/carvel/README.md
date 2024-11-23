@@ -10,3 +10,4 @@ deployment sequencing
 diff manifests / diff yaml
 conditional templating
 default values file that explains options and consequences in all cluster repos
+deployment should run 'rendering' internally
