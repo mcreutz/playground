@@ -1,0 +1,6 @@
+appOne:
+  replicas: 2
+
+appTwo:
+  cpu: 250m
+  memory: 256Mi

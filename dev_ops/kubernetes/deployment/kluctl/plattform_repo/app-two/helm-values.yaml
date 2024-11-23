@@ -1,0 +1,10 @@
+resources:
+  limits:
+    cpu: {{args.appTwo.cpu}}
+    memory: {{args.appTwo.memory}}
+  requests:
+    cpu: {{args.appTwo.cpu}}
+    memory: {{args.appTwo.memory}}
+
+service:
+  type: ClusterIP

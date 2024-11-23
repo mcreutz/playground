@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: app-one
 spec:
-  replicas: {{args.replicas}}
+  replicas: {{args.appOne.replicas}}
   selector:
     matchLabels:
       app: app-one
