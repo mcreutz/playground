@@ -1,3 +1,6 @@
 deployments:
   - path: app-one
   - path: app-two
+
+args:
+  - file: values_default.yaml
