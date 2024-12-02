@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: istio-ingressgateway
+  namespace: istio-system
+spec:
+  template:
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      securityContext: {} # Explicitly empty to remove sysctls
+      containers:
+        - name: istio-proxy
+          securityContext:
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
