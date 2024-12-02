@@ -1,4 +1,6 @@
 todo:
+app-based folder structure
+multi-app deployment
 upstream manifest offline and online
 values and schema offline and online
 values versioning
@@ -10,4 +12,4 @@ deployment sequencing
 diff manifests / diff yaml
 conditional templating
 default values file that explains options and consequences in all cluster repos
-deployment should run 'rendering' internally
+deployment should run 'rendering' internally. can it be done without writing to disk?
