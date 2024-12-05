@@ -92,6 +92,14 @@ git fetch
 git remote get-url <remote-name>
 ```
 
+## Committing
+```bash
+# Delete commits (from the end of commit history)
+git reset --hard HEAD~1  # use `HEAD~n` for the last n commits
+git reset --hard <commit-hash>  # remove all commits up to the specified commit
+git push -f  # force push to remote repo
+```
+
 ## Branching
 ```bash
 # List branches
@@ -194,6 +202,31 @@ Import a patch file as a stash
 ```bash
 git apply <file>
 ```
+
+
+## Tagging
+```bash
+# List tags
+git tag
+
+# Create a tag
+git tag <tag-name>
+
+# Create an annotated tag
+git tag -a <tag-name> -m <message>
+
+# Push a tag to a remote repo
+git push <remote-name> <tag-name>
+
+# Push all tags to a remote repo (don't do this unless you know what you're doing)
+git push <remote-name> --tags
+
+# Delete a tag locally
+git tag -d <tag-name>
+
+# Delete a tag on a remote repo
+git push -d <remote-name> <tag-name>
+
 
 ## ToDo
 - fast-forward merge
