@@ -108,10 +108,11 @@ git switch <name> [-c to create and switch]
 git branch -m new-name
 
 # Delete a local branch
-git branch -d <name>
+git branch -d <branch_name>
+git branch -D <branch_name>  # force delete, if branch has unmerged changes
 
 # Delete a remote branch
-git push remote_name -d remote_branch_name
+git push -d <remote_name> <branch_name>
 ```
 
 ## Merging
