@@ -21,7 +21,6 @@ spec:
       volumes:
       - name: node-data
         hostPath:
-          path: /var/openebs/local/  # Path on host node
+          # path: /var/openebs/local/  # Path on host node
+          path: /var/snap/microk8s/common/default-storage
           type: Directory  # Ensures directory exists
-      # Optional: force pod to specific node
-      # nodeName: my-node  # Or use nodeSelector instead
