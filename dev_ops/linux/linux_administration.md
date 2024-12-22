@@ -49,6 +49,9 @@
 - `snap find <package>` Search for Snap packages
 - `sudo snap refresh` Updates all installed Snap packages
 - `snap info <snap_name>` Displays information about a Snap package
+- `snap changes` Shows recent Snap changes
+- `snap list` Lists installed Snap packages
+- `sudo snap set system refresh.hold=<snap_name>` Prevents a Snap package from being updated
 
 ## Cron jobs and scheduling
 - `crontab -e` Edits cron jobs for the current user
@@ -72,6 +75,8 @@
 - `ip addr show` Displays network interfaces and IP addresses
 - `ip -s link` Shows network statistics
 - `ss -l` Shows listening sockets
+- `ip route show` Displays routing table
+
 
 ## Firewall
 - `iptables` IP packet filter administration
@@ -361,7 +366,47 @@
 - `systemctl list-units --type service` List all active services
 - `systemctl list-unit-files --type service` List all services
 
-
-
-
-
+# Todo
+- filesystem links: file, ln, mount, umount
+- systemd
+- cron
+- awk
+- sort
+- locate, find
+- uname, hostname
+- time
+- systemctl
+- watch
+- jobs
+- wget, curl
+- rsync
+- ip, netstat, traceroute, ss, nslookup, dig, whois, ifconfig, ping
+- cd, ls, pwd, mkdir, rmdir, rm, cp, mv, touch, cat, less, more, head, tail, grep, sed, awk, cut, sort, uniq, wc, tee, tr, fmt, pr, fold, join, comm
+- history, !!, !$, !^, !n, !-n, !string, !string:p, !string:s/old/new, !string:gs/old/new
+- alias, unalias, command, which, whereis, whatis, apropos
+- chmod, chown, chgrp, umask
+- grep
+- uniq
+- diff
+- wc
+- ps, top, htop, pstree, pgrep, pmap, lsof, nice, kill, killall, pkill
+- vmstat, iostat, sar, mpstat, pidstat, dstat, free
+- df, du, fdisk, mount, umount, parted, mkfs, fsck, lsblk
+- tar, gzip, gunzip, zip, unzip
+- find, locate
+- date, time, cal
+- apt, dpkg, snap, apt-get, apt-cache, aptitude, pacman, yum, dnf, zypper, flatpak, appimage
+- useradd, usermod, userdel, usermod, passwd, su, sudo, chage, groups, id, who, w, whoami
+- groupadd, groupmod, groupdel
+- shutdown, reboot, halt, poweroff
+- systemctl, journalctl, timedatectl
+- netplan
+- ufw, iptables, nftables
+- lscpu, lsusb, lspci, lsmod, lsblk, lshw
+- demsg, journalctl, syslog
+- service
+- xargs
+- bg
+- tcpdump
+- nc
+- strace
