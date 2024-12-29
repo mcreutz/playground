@@ -36,5 +36,5 @@ Install Loki
 helm install loki grafana/loki \
     --version 6.6.4 \
     -n monitoring \
-    -f dev_ops/kubernetes/monitoring/my_stack/loki_values_dev.yaml
+    -f dev_ops/kubernetes/monitoring/my_stack/loki_values.yaml
 ```
