@@ -26,6 +26,7 @@ singleBinary:
   replicas: 1
   persistence:
     size: 10Gi # 10Gi is default
+    # storageClass: "microk8s-hostpath-retain"
 # Need to configure the SimpleScalable deployment mode, although it is not used
 read:
   replicas: 0
