@@ -25,22 +25,22 @@ Volume Group : Logical Volume -> 1 : N
 # List all PVs
 pvs
 
-# Create PV from disk or partition
-pvcreate /dev/sdb  # Create PV from disk
-pvcreate /dev/sdc1  # Create PV from partition
-
 # Show PV info
 pvs /dev/sdb  # Brief info
 pvdisplay /dev/sdb  # Detailed info
 
-# Remove PV
-pvremove /dev/sdb
+# Create PV from disk or partition
+pvcreate /dev/sdb  # Create PV from disk
+pvcreate /dev/sdc1  # Create PV from partition
 
 # Rename PV
 pvrename /dev/sdb /dev/sdX
 
 # Display PV UUID
 blkid /dev/sdb
+
+# Remove PV
+pvremove /dev/sdb
 ```
 
 ## Volume Groups (VG)
@@ -48,15 +48,15 @@ blkid /dev/sdb
 # List all VGs
 vgs
 
+# Show VG info
+vgs vg_name  # Brief info
+vgdisplay vg_name  # Detailed info
+
 # Create new VG from PV[s]
 vgcreate vg_name /dev/sdb [/dev/sdc1]
 
 # Add PV to existing VG
 vgextend vg_name /dev/sdc1
-
-# Show VG info
-vgs vg_name  # Brief info
-vgdisplay vg_name  # Detailed info
 
 # Remove PV from VG (requires unmounting)
 vgreduce vg_name /dev/sdb
@@ -73,15 +73,15 @@ vgrename old_name new_name
 # List all LVs
 lvs
 
+# Show LV info
+lvs /dev/vg_name/lv_name  # Brief info
+lvdisplay /dev/vg_name/lv_name  # Detailed info
+
 # Create LV with specific size
 lvcreate -L 10G -n lv_name vg_name
 
 # Create LV using all available space
 lvcreate -l 100%FREE -n lv_name vg_name
-
-# Show LV info
-lvs /dev/vg_name/lv_name  # Brief info
-lvdisplay /dev/vg_name/lv_name  # Detailed info
 
 # Resize LV
 lvextend -L +1G /dev/vg_name/lv_name  # Extend by 1GB
