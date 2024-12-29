@@ -2,6 +2,7 @@
 ## System information
 - `uname -a` Displays all system information
 - `hostnamectl` Shows current hostname and related details
+- `hostnamectl set-hostname <new_hostname>` Sets the system hostname
 - `lscpu` Lists CPU architecture information
 - `timedatectl status` Shows system time
 
@@ -64,6 +65,11 @@
 - `sudo systemctl reload <service>` Reloads a service's configuration
 - `journalctl -f` Follows the journal in real time
 - `journalctl -u <unit_name>` Displays logs for a specific systemd unit
+
+## Keyboard Layout
+- `loadkeys de` Load the German keyboard layout
+- `setxkbmap` Set the keyboard layout
+- `localectl` Control the system locale and keyboard layout settings
 
 # Networking
 ## Basics
