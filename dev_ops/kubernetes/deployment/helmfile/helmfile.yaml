@@ -1,0 +1,30 @@
+# example for a helmfile
+
+helmDefaults:
+  timeout: 600
+
+repositories:
+  - name: stable
+    url: https://charts.helm.sh/stable
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+
+releases:
+  - name: myapp
+    namespace: default
+    chart: stable/mychart
+    version: 1.0.0
+    values:
+      - values.yaml
+  - name: backend-service
+    namespace: backend
+    chart: bitnami/postgresql
+    version: 12.5.6
+    values:
+      - backend-values.yaml
+  - name: cache-service
+    namespace: cache
+    chart: bitnami/redis
+    version: 17.11.3
+    values:
+      - cache-values.yaml
