@@ -10,7 +10,7 @@ Prepare nodes for Longhorn installation (needs to be run on one node only)
 ```shell
 # create .kubeconfig file (example for microk8s)
 mkdir -p ~/.kube
-sudo microk8s config > ./.kube/microk8s.kubeconfig
+sudo microk8s config > ~/.kube/microk8s.kubeconfig
 
 # For AMD64 platform
 curl -sSfL -o longhornctl https://github.com/longhorn/cli/releases/download/v1.7.2/longhornctl-linux-amd64
@@ -18,8 +18,8 @@ curl -sSfL -o longhornctl https://github.com/longhorn/cli/releases/download/v1.7
 curl -sSfL -o longhornctl https://github.com/longhorn/cli/releases/download/v1.7.2/longhornctl-linux-arm64
 
 chmod +x longhornctl
-./longhornctl install preflight  --kube-config ./.kube/microk8s.kubeconfig
-./longhornctl check preflight  --kube-config ./.kube/microk8s.kubeconfig
+./longhornctl install preflight  --kube-config ~/.kube/microk8s.kubeconfig
+./longhornctl check preflight  --kube-config ~/.kube/microk8s.kubeconfig
 ```
 
 Add helm repo (on dev machine)
