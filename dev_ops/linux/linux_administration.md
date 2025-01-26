@@ -39,6 +39,14 @@
 ## Memory
 - `free` Show memory usage
 
+### Add a swap file
+```shell
+sudo fallocate -l 32G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+```
+
 ## Package management (APT)
 - `sudo apt install -f --reinstall <package>` Reinstalls a broken package
 - `apt search <package>` Searches for APT packages
