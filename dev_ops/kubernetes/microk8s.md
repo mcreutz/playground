@@ -1,3 +1,5 @@
+# MicroK8s
+## Registry
 Enabling the registry:
 ```bash
 sudo microk8s enable registry
