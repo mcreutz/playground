@@ -10,7 +10,6 @@ prometheus:
     storageSpec:
       volumeClaimTemplate:
         spec:
-          storageClassName: "microk8s-hostpath-retain"
           resources:
             requests:
               storage: 10Gi # 'retentionSize' should be ~1GB below this
