@@ -88,8 +88,11 @@ git pull
 # Fetch new commits from remote repo into local repo, but do not update local workspace
 git fetch
 
-# Get URL of remote
-git remote get-url <remote-name>
+# List remotes
+git remote -v
+
+# Set URL of remote
+git remote set-url <remote-name> <new-url>
 ```
 
 ## Committing
