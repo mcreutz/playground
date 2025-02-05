@@ -124,6 +124,11 @@ git branch -D <branch_name>  # force delete, if branch has unmerged changes
 
 # Delete a remote branch
 git push -d <remote_name> <branch_name>
+
+# Check and delete all local branches that are already merged
+git branch --merged | grep -Ev "(^\*|^\+|master|main|dev)"
+git branch --merged | grep -Ev "(^\*|^\+|master|main|dev)" | xargs --no-run-if-empty git branch -d
+
 ```
 
 ## Merging
