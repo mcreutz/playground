@@ -13,6 +13,19 @@ resources:
 
 rootUser: "root"
 
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt"
+  path: /
+  hosts:
+    - minio-api.server02.creutz.io
+  tls:
+    - hosts:
+        - "*.server02.creutz.io"
+      secretName: tls-server02-creutz-io
+
 consoleIngress:
   enabled: true
   ingressClassName: nginx
