@@ -1,0 +1,29 @@
+# default values at: https://github.com/bitnami/charts/blob/main/bitnami/postgresql/values.yaml
+
+global:
+  postgresql:
+    auth:
+      postgresPassword: # Will be auto-generated if not set
+      username: "finfetcher"
+      password: # Will be auto-generated if not set
+      database: "finfetcher"
+primary:
+  # initdbScripts:
+  #   create_users.sh: |
+  #     #!/bin/bash
+  #     psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" <<-EOSQL
+  #       # CREATE USER datapusher WITH PASSWORD 'pusher';
+  #       CREATE USER datapuller WITH PASSWORD 'puller';
+  #       # CREATE DATABASE findata OWNER user1;
+  #     EOSQL
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 3
+      memory: 8Gi
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
