@@ -7,7 +7,7 @@ kubectl create ns postgres
 Install Helm chart
 ```shell
 helm upgrade --install postgres oci://registry-1.docker.io/bitnamicharts/postgresql \
-    --version 15.5.9 \
+    --version 16.4.9 \
     --values dev_ops/kubernetes/storage/postgres/values.yaml \
     --namespace postgres
 ```
