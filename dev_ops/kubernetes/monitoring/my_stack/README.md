@@ -1,40 +1,35 @@
+Add helm repos
+```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
+```
 
+Create namespace
+```bash
+kubectl create ns monitoring                                         
+```
 
 Install kube-prometheus-stack
 ```bash
-kubectl create ns monitoring                                         
-helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
-    --version 60.4.0 \
+helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
+    --version 69.4.1 \
     -n monitoring \
     -f dev_ops/kubernetes/monitoring/my_stack/prometheus_values.yaml
 ```
 
-Install additional pod- and service-monitors
-```bash
-kubectl apply -f ./additional_objects/pod_monitor.yaml
-kubectl apply -f ./additional_objects/service_monitor.yaml
-```
-
-Install additional Grafana dashboards
-```bash
-kubectl apply -f ./additional_objects/grafana_dashboards.yaml
-```
-
 Install Promtail
 ```bash
-helm install promtail grafana/promtail \
-    --version 6.16.0 \
+helm upgrade --install promtail grafana/promtail \
+    --version 6.16.6 \
     -n monitoring \
     -f dev_ops/kubernetes/monitoring/my_stack/promtail_values.yaml
 ```
 
 Install Loki
 ```bash
-helm install loki grafana/loki \
-    --version 6.6.4 \
+helm upgrade --install loki grafana/loki \
+    --version 6.27.0 \
     -n monitoring \
     -f dev_ops/kubernetes/monitoring/my_stack/loki_values.yaml
 ```

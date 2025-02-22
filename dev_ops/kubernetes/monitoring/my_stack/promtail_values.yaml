@@ -1,7 +1,5 @@
 service:
   enabled: true
-  labels:
-    work: around # https://github.com/grafana/helm-charts/issues/3180
 
 serviceMonitor:
   enabled: true
