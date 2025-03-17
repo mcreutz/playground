@@ -12,7 +12,7 @@ serviceMonitor:
         - qnap
       auth:
         - public_v3
-      interval: 90s
+      interval: 120s
       scrapeTimeout: 30s
     - name: nas02-qnaplong
       target: 192.168.0.17

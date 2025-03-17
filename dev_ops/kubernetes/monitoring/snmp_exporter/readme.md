@@ -61,10 +61,16 @@ helm install snmp-exporter prometheus-community/prometheus-snmp-exporter \
     --values dev_ops/kubernetes/monitoring/snmp_exporter/values.yaml
 ```
 
-### Install the additional ServiceMonitor for self-monitoring
+### Install the additional ServiceMonitor for self-monitoring and the grafana dashboard
 ```bash
-kubectl create -f dev_ops/kubernetes_/monitoring/snmp_exporter/servicemonitor-self-monitoring.yaml -n monitoring                 
+kubectl create \
+    -f dev_ops/kubernetes/monitoring/snmp_exporter/servicemonitor-self-monitoring.yaml \
+    -n monitoring
+kubectl create \
+    -f dev_ops/kubernetes/monitoring/snmp_exporter/qnap-dashboard-cm.yaml \
+    -n monitoring
 ```
+
 
 ## Helpful links
 - https://grafana.com/blog/2022/02/01/an-advanced-guide-to-network-monitoring-with-grafana-and-prometheus/
