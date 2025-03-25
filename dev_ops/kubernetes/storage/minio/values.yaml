@@ -18,6 +18,7 @@ ingress:
   ingressClassName: nginx
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt"
+    nginx.ingress.kubernetes.io/proxy-body-size: "1000m" # for large file uploads
   path: /
   hosts:
     - minio-api.server02.creutz.io
