@@ -12,10 +12,10 @@ Prepare nodes for Longhorn installation (needs to be run on one node only)
 mkdir -p ~/.kube
 sudo microk8s config > ~/.kube/microk8s.kubeconfig
 
-# For AMD64 platform
-curl -sSfL -o longhornctl https://github.com/longhorn/cli/releases/download/v1.7.2/longhornctl-linux-amd64
-# For ARM platform
-curl -sSfL -o longhornctl https://github.com/longhorn/cli/releases/download/v1.7.2/longhornctl-linux-arm64
+# Install lonhorn cli: for AMD64 platform
+curl -sSfL -o longhornctl https://github.com/longhorn/cli/releases/download/v1.8.1/longhornctl-linux-amd64
+# Install lonhorn cli: for ARM platform
+curl -sSfL -o longhornctl https://github.com/longhorn/cli/releases/download/v1.8.1/longhornctl-linux-arm64
 
 chmod +x longhornctl
 ./longhornctl install preflight  --kube-config ~/.kube/microk8s.kubeconfig
@@ -30,10 +30,10 @@ helm repo update
 
 Install Longhorn
 ```shell
-kubectl create namespace longhorn-system
-helm install longhorn longhorn/longhorn \
+kubectl create namespace longhorn-system  # must be this name
+helm upgrade --install longhorn longhorn/longhorn \
     --namespace longhorn-system \
-    --version 1.7.2 \
+    --version 1.8.1 \
     --values dev_ops/kubernetes/storage/longhorn/values.yaml
 ```
 
@@ -62,3 +62,9 @@ The most common problems reported for the Kubernetes storage provider Longhorn a
 - Failure to mount: Volumes sometimes fail to mount properly6
 - Node recovery problems: There have been reports of unrecoverable nodes upon reboot6
 - Size limitations: Hardcoded rebuild limits and practical size constraints can cause issues1
+
+
+
+ToDo:
+- Automatic file system trimming, recurring job?
+- ReadWriteOnce vs. ReadWriteMany Volumes

@@ -12,7 +12,7 @@ releases:
   - name: longhorn
     namespace: longhorn-system
     chart: longhorn/longhorn
-    version: 1.7.2
+    version: 1.8.1
     values:
       - longhorn_values.yaml
     wait: true

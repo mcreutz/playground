@@ -10,3 +10,6 @@ ingress:
 metrics:
   serviceMonitor:
     enabled: false
+
+longhornUI:
+  replicas: 1
