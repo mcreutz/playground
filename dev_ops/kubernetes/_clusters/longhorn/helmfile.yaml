@@ -7,16 +7,24 @@
 #     url: https://charts.longhorn.io
 #   - name: bitnami
 #     url: https://charts.bitnami.com/bitnami
+#   - name: langflow
+#     url: https://langflow-ai.github.io/langflow-helm-charts
 
 releases:
   - name: longhorn
-    namespace: longhorn-system
     chart: longhorn/longhorn
+    namespace: longhorn-system
     version: 1.8.1
     values:
       - longhorn_values.yaml
     wait: true
     hooks:
+      - events: ["postsync"]
+        command: "kubectl"
+        args: ["apply", "-f", "./longhorn-single-replica-sc.yaml", "--namespace", "{{ .Namespace }}"]
+      - events: ["preuninstall", "presync"]
+        command: "kubectl"
+        args: ["delete", "storageclass", "longhorn-single-replica", "--ignore-not-found=true"]
       - events: ["postsync"]
         showlogs: true
         command: "/bin/sh"
@@ -41,8 +49,8 @@ releases:
 
   - name: prom-stack
     # https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
-    namespace: monitoring
     chart: prometheus-community/kube-prometheus-stack
+    namespace: monitoring
     version: 67.5.0
     values:
       - prometheus_values.yaml
@@ -51,8 +59,8 @@ releases:
 
   - name: loki
     # https://github.com/grafana/loki/tree/main/production/helm/loki
-    namespace: monitoring
     chart: grafana/loki
+    namespace: monitoring
     version: 6.24.0
     values:
       - loki_values.yaml
@@ -62,8 +70,8 @@ releases:
 
   - name: promtail
     # https://github.com/grafana/helm-charts/tree/main/charts/promtail
-    namespace: monitoring
     chart: grafana/promtail
+    namespace: monitoring
     version: 6.16.6
     values:
       - promtail_values.yaml
@@ -71,10 +79,44 @@ releases:
       - longhorn-system/longhorn
 
   - name: postgres
-    namespace: postgres
     chart: bitnami/postgresql
+    namespace: postgres
     version: 16.3.4
     values:
       - postgres_values.yaml
     needs:
       - longhorn-system/longhorn
+
+  - name: kagent
+    chart: oci://ghcr.io/kagent-dev/kagent/helm/kagent
+    namespace: kagent
+    version: 0.1.15
+    values:
+      - kagent_values.yaml
+    needs:
+      - longhorn-system/longhorn
+      - monitoring/promtail
+      - monitoring/prom-stack
+
+  - name: langflow-ide
+    chart: langflow/langflow-ide
+    namespace: langflow
+    version: 0.1.1
+    values:
+      - langflow-ide_values.yaml
+    needs:
+      - longhorn-system/longhorn
+      - monitoring/promtail
+      - monitoring/prom-stack
+
+  - name: langflow-runtime
+    chart: langflow/langflow-runtime
+    namespace: langflow
+    version: 0.1.1
+    values:
+      - langflow-runtime_values.yaml
+    needs:
+      - longhorn-system/longhorn
+      - monitoring/promtail
+      - monitoring/prom-stack
+      - langflow-ide
