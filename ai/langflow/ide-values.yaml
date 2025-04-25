@@ -1,0 +1,5 @@
+langflow:
+  backend:
+    probe:
+      timeoutSeconds: 30
+      initialDelaySeconds: 60
