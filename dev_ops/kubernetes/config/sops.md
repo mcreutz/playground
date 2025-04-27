@@ -1,9 +1,8 @@
 # Use Sops with Helmfile
 ## Install
 ```bash
-install gpg
-install sops
-install helm-secrets plugin
+brew install gnupg sops
+helm plugin install https://github.com/jkroepke/helm-secrets --version v4.6.3
 ```
 
 ## List existing GPG keys
