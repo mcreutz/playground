@@ -33,7 +33,7 @@ rm -rf .venv
 ```
 
 ## Managing dependencies
-### Of the project
+### ... of the project
 ```sh
 # List all dependencies of the project
 uv tree
@@ -54,11 +54,8 @@ uv export > requirements.txt
 uv remove requests
 ```
 
-### Of the virtual environment
+### ... of the virtual environment
 ```sh
 # Install all dependencies from the lockfile to the environment
 uv sync
 ```
-
-
-
