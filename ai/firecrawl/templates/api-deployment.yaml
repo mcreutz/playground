@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-api
+  labels:
+    app: {{ .Release.Name }}-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-api
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-api
+    spec:
+      containers:
+      - name: api
+        image: "ghcr.io/mendableai/firecrawl:latest"
+        imagePullPolicy: IfNotPresent
+        command: ["pnpm", "run", "start:production"]
+        env:
+        - name: HOST
+          value: "0.0.0.0"
+        - name: PORT
+          value: "3002"
+        - name: FLY_PROCESS_GROUP
+          value: "app"
+        - name: REDIS_URL
+          value: "redis://{{ .Release.Name }}-redis:6379"
+        - name: REDIS_RATE_LIMIT_URL
+          value: "redis://{{ .Release.Name }}-redis:6379"
+        - name: PLAYWRIGHT_MICROSERVICE_URL
+          value: "http://{{ .Release.Name }}-playwright-service:3000/scrape"
+        - name: USE_DB_AUTHENTICATION
+          value: ""
+        - name: OPENAI_API_KEY
+          value: ""
+        - name: OPENAI_BASE_URL
+          value: ""
+        - name: MODEL_NAME
+          value: ""
+        - name: MODEL_EMBEDDING_NAME
+          value: ""
+        - name: OLLAMA_BASE_URL
+          value: ""
+        - name: SLACK_WEBHOOK_URL
+          value: ""
+        - name: BULL_AUTH_KEY
+          value: ""
+        - name: TEST_API_KEY
+          value: ""
+        - name: POSTHOG_API_KEY
+          value: ""
+        - name: POSTHOG_HOST
+          value: ""
+        - name: SUPABASE_ANON_TOKEN
+          value: ""
+        - name: SUPABASE_URL
+          value: ""
+        - name: SUPABASE_SERVICE_TOKEN
+          value: ""
+        - name: SELF_HOSTED_WEBHOOK_URL
+          value: ""
+        - name: SERPER_API_KEY
+          value: ""
+        - name: SEARCHAPI_API_KEY
+          value: ""
+        - name: LOGGING_LEVEL
+          value: ""
+        - name: PROXY_SERVER
+          value: ""
+        - name: PROXY_USERNAME
+          value: ""
+        - name: PROXY_PASSWORD
+          value: ""
+        - name: SEARXNG_ENDPOINT
+          value: ""
+        - name: SEARXNG_ENGINES
+          value: ""
+        - name: SEARXNG_CATEGORIES
+          value: ""
+        ports:
+        - containerPort: 3002

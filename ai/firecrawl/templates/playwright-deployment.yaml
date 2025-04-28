@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-playwright-service
+  labels:
+    app: {{ .Release.Name }}-playwright-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-playwright-service
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-playwright-service
+    spec:
+      containers:
+      - name: playwright-service
+        image: "ghcr.io/mendableai/firecrawl:latest"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PORT
+          value: "3000"
+        - name: PROXY_SERVER
+          value: ""
+        - name: PROXY_USERNAME
+          value: ""
+        - name: PROXY_PASSWORD
+          value: ""
+        - name: BLOCK_MEDIA
+          value: ""
+        ports:
+        - containerPort: 3000
