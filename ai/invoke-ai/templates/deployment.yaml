@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: invokeai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: invokeai
+  template:
+    metadata:
+      labels:
+        app: invokeai
+    spec:
+      containers:
+        - name: invokeai
+          image: ghcr.io/invoke-ai/invokeai:latest
+          ports:
+            - containerPort: 9090
+          env:
+            - name: INVOKEAI_DISABLE_XFORMERS
+              value: "1"
+            - name: INVOKEAI_DISABLE_CUDA
+              value: "1"
+            - name: INVOKEAI_PORT
+              value: "9090"
+            - name: INVOKEAI_HOST
+              value: "0.0.0.0"
