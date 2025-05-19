@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: grafana-vs
+  namespace: monitoring # Assuming grafana is in the monitoring namespace
+spec:
+  hosts:
+  - "grafana.local.dev" # Replace with your desired hostname
+  gateways:
+  - istio-system/istio-ingressgateway # Assuming default ingress gateway name and namespace
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: prom-stack-grafana # Default service name for grafana in kube-prometheus-stack
+        port:
+          number: 80 # Default service port for grafana in kube-prometheus-stack

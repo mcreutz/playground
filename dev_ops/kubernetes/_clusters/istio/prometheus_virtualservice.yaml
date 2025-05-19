@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: prometheus-vs
+  namespace: monitoring # Assuming prometheus is in the monitoring namespace
+spec:
+  hosts:
+  - "prometheus.local.dev" # Replace with your desired hostname
+  gateways:
+  - istio-system/istio-ingressgateway # Assuming default ingress gateway name and namespace
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: prom-stack-kube-prometheus-prometheus # Default service name for prometheus in kube-prometheus-stack
+        port:
+          number: 9090 # Default service port for prometheus

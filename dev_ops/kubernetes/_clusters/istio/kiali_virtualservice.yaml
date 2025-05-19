@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: kiali
+  namespace: istio-system
+spec:
+  hosts:
+  - "kiali.example.com"  # Replace with your domain
+  gateways:
+  - istio-system/istio-ingressgateway  # Assumes you have this gateway configured
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: kiali
+        port:
+          number: 20001  # Default Kiali service port

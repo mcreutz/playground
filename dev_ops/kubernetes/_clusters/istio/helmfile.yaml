@@ -1,0 +1,122 @@
+repositories:
+  - name: istio 
+    url: https://istio-release.storage.googleapis.com/charts
+  - name: kiali
+    url: https://kiali.org/helm-charts
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+
+releases:
+  # --- istio ---
+  - name: istio-base
+    chart: istio/base
+    namespace: istio-system
+    version: 1.25.2
+    values:
+      - istio-base_values.yaml
+  - name: istiod
+    chart: istio/istiod
+    namespace: istio-system
+    version: 1.25.2
+    values:
+      - istiod_values.yaml
+    needs:
+      - istio-system/istio-base
+    hooks:
+      - events: ["postsync"]
+        command: "kubectl"
+        args: ["wait", "deployment/istiod", "-n", "istio-system", "--for=condition=Available", "--timeout=300s"]
+  - name: ztunnel
+    chart: istio/ztunnel
+    namespace: istio-system
+    version: 1.25.2
+    values:
+      - ztunnel_values.yaml
+    needs:
+      - istio-system/istiod
+    hooks:
+      - events: ["postsync"]
+        command: "kubectl"
+        args: ["wait", "daemonset/ztunnel", "-n", "istio-system", "--for=condition=Available", "--timeout=300s"]
+
+  - name: istio-ingress
+    chart: istio/gateway
+    namespace: istio-system
+    version: 1.25.2
+    values:
+      - istio-ingress_values.yaml
+    needs:
+      - istio-system/istiod
+  - name: kiali
+    chart: kiali/kiali-server
+    namespace: istio-system
+    version: 2.9.0
+    values:
+      - kiali_values.yaml
+    needs:
+      - istio-system/istiod
+    hooks:
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args: ["apply", "-f", "dev_ops/kubernetes/_clusters/istio/kiali_virtualservice.yaml"]
+
+  # --- monitoring ---
+  - name: loki
+    # https://github.com/grafana/loki/tree/main/production/helm/loki
+    chart: grafana/loki
+    namespace: monitoring
+    version: 6.24.0
+    values:
+      - loki_values.yaml
+  - name: prom-stack
+    # https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
+    chart: prometheus-community/kube-prometheus-stack
+    namespace: monitoring
+    version: 67.5.0
+    values:
+      - prometheus_values.yaml
+    needs:
+      - monitoring/loki
+    hooks:
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args: ["apply", "-f", "dev_ops/kubernetes/_clusters/istio/prometheus_virtualservice.yaml"]
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args: ["apply", "-f", "dev_ops/kubernetes/_clusters/istio/grafana_virtualservice.yaml"]
+  - name: promtail
+    # https://github.com/grafana/helm-charts/tree/main/charts/promtail
+    chart: grafana/promtail
+    namespace: monitoring
+    version: 6.16.6
+    values:
+      - promtail_values.yaml
+    needs:
+      - monitoring/loki
+
+    # --- apps ---
+  - name: postgres
+    chart: bitnami/postgresql
+    namespace: postgres
+    version: 16.3.4
+    values:
+      - postgres_values.yaml
+    needs:
+      # Ensure istio ingress gateway is ready if the gateway uses it
+      - istio-system/istio-ingress
+    hooks:
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args: ["apply", "-f", "dev_ops/kubernetes/_clusters/istio/postgres_gateway.yaml"]
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args: ["apply", "-f", "dev_ops/kubernetes/_clusters/istio/postgres_virtualservice.yaml"]
