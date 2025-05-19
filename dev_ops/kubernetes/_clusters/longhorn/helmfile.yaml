@@ -87,16 +87,16 @@ releases:
     needs:
       - longhorn-system/longhorn
 
-  - name: kagent
-    chart: oci://ghcr.io/kagent-dev/kagent/helm/kagent
-    namespace: kagent
-    version: 0.1.15
-    values:
-      - kagent_values.yaml
-    needs:
-      - longhorn-system/longhorn
-      - monitoring/promtail
-      - monitoring/prom-stack
+  # - name: kagent
+  #   chart: oci://ghcr.io/kagent-dev/kagent/helm/kagent
+  #   namespace: kagent
+  #   version: 0.1.15
+  #   values:
+  #     - kagent_values.yaml
+  #   needs:
+  #     - longhorn-system/longhorn
+  #     - monitoring/promtail
+  #     - monitoring/prom-stack
 
   - name: langflow-ide
     chart: langflow/langflow-ide
@@ -109,14 +109,14 @@ releases:
       - monitoring/promtail
       - monitoring/prom-stack
 
-  - name: langflow-runtime
-    chart: langflow/langflow-runtime
-    namespace: langflow
-    version: 0.1.1
-    values:
-      - langflow-runtime_values.yaml
-    needs:
-      - longhorn-system/longhorn
-      - monitoring/promtail
-      - monitoring/prom-stack
-      - langflow-ide
+  # - name: langflow-runtime
+  #   chart: langflow/langflow-runtime
+  #   namespace: langflow
+  #   version: 0.1.1
+  #   values:
+  #     - langflow-runtime_values.yaml
+  #   needs:
+  #     - longhorn-system/longhorn
+  #     - monitoring/promtail
+  #     - monitoring/prom-stack
+  #     - langflow-ide

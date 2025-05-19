@@ -16,7 +16,7 @@ primary:
           topologyKey: kubernetes.io/hostname
 
 readReplicas:
-  replicaCount: 2
+  replicaCount: 1
   persistence:
     size: 2Gi
   affinity:
