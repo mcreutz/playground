@@ -1,0 +1,21 @@
+langflow:
+  backend:
+    image:
+      tag: 1.4.1
+  frontend:
+    image:
+      tag: 1.4.1
+ingress:
+  enabled: true
+  className: nginx
+  annotations: 
+    cert-manager.io/cluster-issuer: "letsencrypt"
+  hosts:
+    - host: langflow-ide.server02.creutz.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: 
+    - secretName: tls-server02-creutz-io
+      hosts:
+        - "*.server02.creutz.io"
