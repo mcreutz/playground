@@ -17,10 +17,10 @@ uv init --no-workspace --python 3.10
 ## Managing virtual environments
 ```sh
 # Create a new virtual environment
-uv venv create .venv
+uv venv .venv
 
 # Create a new virtual environment with a specific Python version
-uv venv create .venv --python 3.10
+uv venv .venv --python 3.10
 
 # Activate the virtual environment
 source .venv/bin/activate
