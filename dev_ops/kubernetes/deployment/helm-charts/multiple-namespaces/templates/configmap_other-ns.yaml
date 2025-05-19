@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: example-configmap-other-ns
+    namespace: other-ns
+data:
+    message: "Hello, World!"
+    config.properties: |
+        app.name=HelloApp
+        app.version=1.0

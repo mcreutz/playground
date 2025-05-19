@@ -1,0 +1,14 @@
+apiVersion: v2
+name: multiple-namespaces
+description: A Helm chart for deploying resources across multiple namespaces
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+home: https://github.com/yourusername/multiple-namespaces
+maintainers:
+  - name: Your Name
+    email: your.email@example.com
+keywords:
+  - kubernetes
+  - namespaces
+  - multi-namespace
