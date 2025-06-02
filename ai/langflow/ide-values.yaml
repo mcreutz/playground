@@ -1,5 +1,10 @@
 langflow:
   backend:
+    image:
+      tag: 1.4.1
     probe:
       timeoutSeconds: 30
       initialDelaySeconds: 60
+  frontend:
+    image:
+      tag: 1.4.1
