@@ -25,7 +25,8 @@ ingress:
   tls:
     - hosts:
         - "*.server02.creutz.io"
-      secretName: tls-server02-creutz-io
+      # secretName: tls-server02-creutz-io
+      secretName: tls-minio-api-server02-creutz-io
 
 consoleIngress:
   enabled: true
@@ -38,7 +39,8 @@ consoleIngress:
   tls:
     - hosts:
         - "*.server02.creutz.io"
-      secretName: tls-server02-creutz-io
+      # secretName: tls-server02-creutz-io
+      secretName: tls-minio-console-server02-creutz-io
 
 metrics:
   serviceMonitor:
