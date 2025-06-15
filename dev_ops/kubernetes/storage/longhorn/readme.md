@@ -6,6 +6,13 @@ sudo systemctl disable multipathd
 sudo reboot
 ```
 
+Setup Kubernetes on the nodes and join the cluster
+```shell
+sudo snap install microk8s --classic
+sudo microk8s add-node  # on the first node
+sudo microk8s join ... # on the other nodes
+```
+
 Prepare nodes for Longhorn installation (needs to be run on one node only)
 ```shell
 # create .kubeconfig file (example for microk8s)
@@ -30,9 +37,9 @@ helm repo update
 
 Install Longhorn
 ```shell
-kubectl create namespace longhorn-system  # must be this name
 helm upgrade --install longhorn longhorn/longhorn \
-    --namespace longhorn-system \
+    --namespace longhorn-system \  # must be this namespace
+    --create-namespace \
     --version 1.8.1 \
     --values dev_ops/kubernetes/storage/longhorn/values.yaml
 ```
@@ -47,24 +54,8 @@ kubectl delete namespace longhorn-system
 
 
 
-
-what are the most common problems reported for the k8s storage provider longhorn?
-
-Answer:
-The most common problems reported for the Kubernetes storage provider Longhorn are:
-- Attachment issues: Volumes may get stuck during attaching and detaching processes1
-- Data loss: If a pod or VM is down for some time and the PVC is detached, data can be lost due to lack of replication for detached PVCs9
-- Performance issues: Disk latency can cause timeouts and performance problems1
-- Storage inefficiency: Nested storage virtualization can lead to storage overhead1
-- Mounting delays: Volumes with many files/directories can take a long time to finish mounting, especially when using fsGroup in the pod's security context2
-- Snapshot and backup complications: Users report difficulties in using snapshots and working with backups effectively9
-- Drive corruption: Some users have experienced drive corruption issues6
-- Failure to mount: Volumes sometimes fail to mount properly6
-- Node recovery problems: There have been reports of unrecoverable nodes upon reboot6
-- Size limitations: Hardcoded rebuild limits and practical size constraints can cause issues1
-
-
-
 ToDo:
-- Automatic file system trimming, recurring job?
-- ReadWriteOnce vs. ReadWriteMany Volumes
+- Automatic file system trimming, recurring job? -> kubelet metrics show correct volume size
+- Test RWX volumes
+- Volume resizing
+- Backups
