@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ray-workers.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "ray-workers.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "ray-workers.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "ray-workers.labels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: ray-worker
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["ray", "start"]
+        args: 
+          - "--address={{ .Values.rayHead.address }}"
+          - "--block"
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        env:
+        - name: RAY_DISABLE_IMPORT_WARNING
+          value: "1"
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }} 

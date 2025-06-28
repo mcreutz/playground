@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: rayproject/ray
+  tag: "2.47.1"
+  pullPolicy: IfNotPresent
+
+rayHead:
+  address: "HOST_MACHINE_IP:10001"  # Replace with your machine's IP
+
+resources:
+  limits:
+    cpu: "11"
+    memory: "22Gi"
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+namespace: ray-system 

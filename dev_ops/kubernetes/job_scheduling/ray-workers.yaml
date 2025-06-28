@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ray-workers
+  namespace: ray-system
+  labels:
+    app: ray-workers
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ray-workers
+  template:
+    metadata:
+      labels:
+        app: ray-workers
+    spec:
+      containers:
+      - name: ray-worker
+        image: rayproject/ray:2.47.1
+        command: ["ray", "start"]
+        args: 
+          - "--address=HOST_MACHINE_IP:10001"  # Replace with your machine's IP
+          - "--block"
+        resources:
+          requests:
+            cpu: "1"
+            memory: "2Gi"
+          limits:
+            cpu: "2" 
+            memory: "4Gi"
+        env:
+        - name: RAY_DISABLE_IMPORT_WARNING
+          value: "1"
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ray-system 

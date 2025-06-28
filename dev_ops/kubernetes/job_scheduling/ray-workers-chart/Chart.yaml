@@ -1,0 +1,10 @@
+apiVersion: v2
+name: ray-workers
+description: Ray worker nodes that connect to external head node
+type: application
+version: 0.1.0
+appVersion: "2.47.1"
+keywords:
+  - ray
+  - distributed-computing
+  - machine-learning 
