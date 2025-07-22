@@ -1,0 +1,21 @@
+[project]
+name = "vectorbt-play"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.9,<3.10"
+dependencies = [
+    "jupyter>=1.1.1",
+    "matplotlib>=3.9.4",
+    "numpy>=1.23.5",
+    "pandas>=2.3.1",
+    "plotly>=5.24.1",
+    "python-dotenv>=1.1.1",
+    "quantstats>=0.0.64",
+    "requests>=2.32.4",
+    "scikit-learn>=1.6.1",
+    "scipy>=1.13.1",
+    "seaborn>=0.13.2",
+    "tqdm>=4.67.1",
+    "vectorbt[full]>=0.28.0",
+]
