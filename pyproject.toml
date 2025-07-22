@@ -43,6 +43,12 @@ dependencies = [
     "tqdm>=4.64.0",
     "wandb>=0.17.8",
     "ray[default]",
+    "dagster",
+    "dagster-webserver",
+    "flytekit>=1.16.1",
+    "prefect[ray]>=3.4.8",
+    "zipline-reloaded>=3.1.1",
+    "yfinance>=0.2.65",
 ]
 
 [dependency-groups]
@@ -53,7 +59,3 @@ dev = [
     "rope>=1.7.0",
     "pydantic>=1.10.5",
 ]
-
-[build-system]
-requires = ["setuptools>=61.0", "wheel"]
-build-backend = "setuptools.build_meta"
