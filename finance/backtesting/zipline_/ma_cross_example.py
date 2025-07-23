@@ -1,7 +1,11 @@
 import os
+import warnings
 
 import yfinance as yf
 import pandas as pd
+
+# Suppress warnings for cleaner output
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 from zipline import run_algorithm
 from zipline.api import (
@@ -16,40 +20,45 @@ from zipline.data.bundles.csvdir import csvdir_equities
 
 
 STOCKS = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "META", "NVDA", "JPM", "JNJ", "V"]
-
-# Download data and save as CSV files
-print("Downloading data...")
-data = yf.download(STOCKS, start="2021-12-01", end="2024-12-31", progress=False)
-os.makedirs("yfinance_data", exist_ok=True)
-
-for stock in STOCKS:
-    df = pd.DataFrame(
-        {
-            "open": data[("Open", stock)],
-            "high": data[("High", stock)],
-            "low": data[("Low", stock)],
-            "close": data[("Close", stock)],
-            "volume": data[("Volume", stock)],
-        }
-    ).dropna()
-    df.index.name = "date"
-    df.to_csv(f"yfinance_data/{stock}.csv")
-
-# Register the yfinance bundle
-os.environ["CSVDIR"] = os.path.abspath("yfinance_data")
-register(
-    "yfinance",
-    csvdir_equities([os.path.abspath("yfinance_data")]),
-    calendar_name="NYSE",
-)
+START_DATE = "2015-01-01"
+END_DATE = "2024-12-31"
 
 
-def initialize(context):
-    context.stocks = [symbol(stock) for stock in STOCKS]
-    schedule_function(rebalance, date_rules.week_start(), time_rules.market_open())
+def download_data():
+    """Download yfinance data and save as CSV files"""
+    print("Downloading data...")
+    data = yf.download(
+        STOCKS, start=START_DATE, end=END_DATE, progress=False, auto_adjust=True
+    )
+    os.makedirs("yfinance_data", exist_ok=True)
+
+    for stock in STOCKS:
+        df = pd.DataFrame(
+            {
+                "open": data[("Open", stock)],
+                "high": data[("High", stock)],
+                "low": data[("Low", stock)],
+                "close": data[("Close", stock)],
+                "volume": data[("Volume", stock)],
+            }
+        ).dropna()
+        df.index.name = "date"
+        df.to_csv(f"yfinance_data/{stock}.csv")
+
+
+def setup_bundle():
+    """Register and ingest the yfinance bundle"""
+    os.environ["CSVDIR"] = os.path.abspath("yfinance_data")
+    register(
+        "yfinance",
+        csvdir_equities([os.path.abspath("yfinance_data")]),
+        calendar_name="NYSE",
+    )
+    ingest("yfinance")
 
 
 def rebalance(context, data):
+    """Weekly rebalancing function"""
     ma_diffs = {}
     for stock in context.stocks:
         try:
@@ -70,22 +79,50 @@ def rebalance(context, data):
             order_target_percent(stock, weight)
 
 
+def initialize(context):
+    """Initialize the zipline algorithm"""
+    context.stocks = [symbol(stock) for stock in STOCKS]
+    schedule_function(rebalance, date_rules.week_start(), time_rules.market_open())
+
+
 def analyze(context, perf):
-    total_return = (
-        perf["portfolio_value"].iloc[-1] / perf["portfolio_value"].iloc[0] - 1
-    ) * 100
+    """Analyze performance results"""
+    initial_value = perf["portfolio_value"].iloc[0]
+    final_value = perf["portfolio_value"].iloc[-1]
+
+    # Calculate total return
+    total_return = ((final_value / initial_value) - 1) * 100
+
+    # Calculate annualized return
+    start_date = pd.to_datetime(START_DATE)
+    end_date = pd.to_datetime(END_DATE)
+    years = (end_date - start_date).days / 365.25
+    annualized_return = ((final_value / initial_value) ** (1 / years) - 1) * 100
+
     print(f"Total Return: {total_return:.1f}%")
+    print(f"Annualized Return: {annualized_return:.1f}%")
+    print(f"Years: {years:.1f}")
 
 
-# Ingest the yfinance bundle and run
-ingest("yfinance")
-print("Running backtest...")
-result = run_algorithm(
-    start=pd.Timestamp("2022-01-01"),
-    end=pd.Timestamp("2024-12-31"),
-    initialize=initialize,
-    analyze=analyze,
-    capital_base=100000,
-    data_frequency="daily",
-    bundle="yfinance",
-)
+def run_backtest():
+    print("Running backtest...")
+    run_algorithm(
+        start=pd.Timestamp(START_DATE),
+        end=pd.Timestamp(END_DATE),
+        initialize=initialize,
+        analyze=analyze,
+        capital_base=100000,
+        data_frequency="daily",
+        bundle="yfinance",
+    )
+
+
+def main():
+    """Run the complete backtest"""
+    download_data()
+    setup_bundle()
+    run_backtest()
+
+
+if __name__ == "__main__":
+    main()
