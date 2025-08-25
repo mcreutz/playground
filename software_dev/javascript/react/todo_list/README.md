@@ -1,73 +1,55 @@
-![screenshot](screenshot.png)
-<br>
+# React Todo List - Vue vs React Comparison
 
-# Getting Started with Create React App
+This is an exact functional copy of the Vue.js todo app, but built with React. It demonstrates the differences between Vue.js and React frameworks while maintaining identical functionality.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Key Differences from Vue Version
 
-## Available Scripts
+### State Management
+- **Vue**: Uses `ref()` and `computed()` for reactive state
+- **React**: Uses `useState()` and `useMemo()` for state management
 
-In the project directory, you can run:
+### Dependency Injection
+- **Vue**: Uses `provide()` and `inject()` for sharing state
+- **React**: Uses React Context API with `createContext()` and `useContext()`
 
-### `npm start`
+### Component Definition
+- **Vue**: Single File Components (`.vue`) with `<template>`, `<script setup>`, and `<style scoped>`
+- **React**: TypeScript files (`.tsx`) with JSX returned from functions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Routing
+- **Vue**: Vue Router with `useRouter()` and `<router-view>`
+- **React**: React Router with `useNavigate()` and `<Outlet>`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Event Handling
+- **Vue**: `@click="handler"` and `@submit.prevent="handler"`
+- **React**: `onClick={handler}` and `onSubmit={handler}` with `e.preventDefault()`
 
-### `npm test`
+### Two-way Binding
+- **Vue**: `v-model="value"` for automatic two-way binding
+- **React**: `value={state}` + `onChange={setter}` for controlled components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Conditional Rendering
+- **Vue**: `v-if="condition"` and `v-else`
+- **React**: `{condition ? <Component /> : <OtherComponent />}`
 
-### `npm run build`
+### List Rendering
+- **Vue**: `v-for="item in items" :key="item.id"`
+- **React**: `{items.map(item => <Component key={item.id} />)}`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Lifecycle
+- **Vue**: `onMounted()` composable
+- **React**: `useEffect()` hook
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### CSS Styling
+- **Vue**: Scoped styles within `.vue` files
+- **React**: Separate `.css` files imported into components
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Installation & Setup
 
-### `npm run eject`
+```bash
+cd /path/to/react/todo_list
+npm install
+npm run dev
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
