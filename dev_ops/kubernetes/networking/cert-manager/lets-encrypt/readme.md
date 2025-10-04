@@ -17,8 +17,8 @@ kubectl create secret generic cloudflare-api-token-secret \
 
 Create a cluster issuer and a certificate. As Let's Encrypt has tight rate limits, it is recommended to use a staging issuer for testing purposes. 
 ```shell
-kubectl create -f dev_ops/kubernetes/networking/ssl_certs/cluster_issuer_staging.yaml
-kubectl create -f certificate_staging.yaml -n cert-manager
+kubectl create -f dev_ops/kubernetes/networking/cert-manager/lets-encrypt/cluster_issuer_staging.yaml
+kubectl create -f dev_ops/kubernetes/networking/cert-manager/lets-encrypt/certificate_staging.yaml -n cert-manager
 ```
 
 Check the status of the certificate
