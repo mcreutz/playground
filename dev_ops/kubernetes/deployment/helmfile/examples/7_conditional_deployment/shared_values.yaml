@@ -1,0 +1,4 @@
+install:
+  loki: true
+  prometheus: false
+  promtail: true

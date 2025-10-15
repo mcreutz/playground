@@ -1,0 +1,20 @@
+repositories:
+
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+
+
+releases:
+
+  - name: kube-prometheus-stack
+    chart: prometheus-community/kube-prometheus-stack
+    version: 69.4.1
+    namespace: monitoring
+    values:
+      - prometheus_values.yaml
+
+  - name: my-kustomize-app
+    chart: ./my-kustomize-app
+    namespace: my-kustomize-app
+    needs:
+      - monitoring/kube-prometheus-stack

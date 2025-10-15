@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: {{ .Values.imagePullPolicy }}
+  tag: "1.27"
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  limits:
+    cpu: {{ .Values.resources.cpu }}
+    memory: {{ .Values.resources.memory }}
+  requests:
+    cpu: {{ .Values.resources.cpu }}
+    memory: {{ .Values.resources.memory }}

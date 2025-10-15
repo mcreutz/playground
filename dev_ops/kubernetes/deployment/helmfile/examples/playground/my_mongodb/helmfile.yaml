@@ -1,0 +1,29 @@
+repositories:
+  - name: mongodb
+    url: https://mongodb.github.io/helm-charts
+
+releases:
+  - name: mongodb
+    namespace: database
+    chart: mongodb/community-operator
+    version: 0.10.0
+    values:
+      - mongodb/values.yaml.gotmpl
+    wait: true
+    hooks:
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "wait"
+          - "--for=condition=Established"
+          - "crd/mongodbcommunity.mongodbcommunity.mongodb.com"
+          - "--timeout=60s"
+
+  - name: additional-manifests
+    namespace: database
+    chart: ./add_manifests
+    values:
+      - add_manifests/values.yaml.gotmpl
+    needs:
+      - database/mongodb

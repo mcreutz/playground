@@ -1,0 +1,45 @@
+hooks:
+  - events: ["prepare"]
+    showlogs: true
+    command: "bash"
+    args:
+    - "-c"
+    - |
+      EXPECTED="468b282a-f0ef-49dd-8c31-5ca33fb8d882"
+      CURRENT=$(kubectl get namespace kube-system -o jsonpath='{.metadata.uid}' 2>/dev/null || echo "")
+      
+      if [ -z "$CURRENT" ]; then
+        echo "ERROR: Cannot get kube-system namespace UID"
+        exit 1
+      fi
+      
+      if [ "$CURRENT" != "$EXPECTED" ]; then
+        echo "❌ ERROR: Cluster UID mismatch!"
+        exit 1
+      fi
+
+
+repositories:
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
+
+
+releases:
+
+  - name: kube-prometheus-stack
+    chart: prometheus-community/kube-prometheus-stack
+    version: 69.4.1
+    namespace: monitoring
+    values:
+      - prometheus_values.yaml
+
+  - name: promtail
+    chart: grafana/promtail
+    version: 6.16.6
+    namespace: monitoring
+    values:
+      - promtail_values.yaml
+    needs:
+      - monitoring/kube-prometheus-stack

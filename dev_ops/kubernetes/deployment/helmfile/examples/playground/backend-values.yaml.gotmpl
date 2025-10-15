@@ -1,0 +1,23 @@
+# Helmfile-rendered values for CloudNativePG operator
+# Uses shared values from shared-values.yaml
+
+community-operator:
+  operator:
+    watchNamespace: "backend"
+  
+  resource:
+    limits:
+      cpu: {{ .Values.resources.cpu }}
+      memory: {{ .Values.resources.memory }}
+    requests:
+      cpu: {{ .Values.resources.cpu }}
+      memory: {{ .Values.resources.memory }}
+
+monitoring:
+  enabled: {{ .Values.monitoring.enabled }}
+  scrapeInterval: {{ .Values.monitoring.scrapeInterval }}
+
+# Additional labels
+labels:
+  environment: {{ .Values.environment }}
+  region: {{ .Values.region }}

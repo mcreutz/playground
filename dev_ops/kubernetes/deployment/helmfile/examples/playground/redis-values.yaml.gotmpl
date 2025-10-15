@@ -1,0 +1,36 @@
+# Helmfile-rendered values for Redis chart
+# Uses shared values from shared-values.yaml
+
+global:
+  redis:
+    password: "changeme"
+
+master:
+  resources:
+    limits:
+      cpu: {{ .Values.resources.cpu }}
+      memory: {{ .Values.resources.memory }}
+    requests:
+      cpu: {{ .Values.resources.cpu }}
+      memory: {{ .Values.resources.memory }}
+
+replica:
+  replicaCount: 2
+  resources:
+    limits:
+      cpu: {{ .Values.resources.cpu }}
+      memory: {{ .Values.resources.memory }}
+    requests:
+      cpu: {{ .Values.resources.cpu }}
+      memory: {{ .Values.resources.memory }}
+
+metrics:
+  enabled: {{ .Values.monitoring.enabled }}
+  
+commonLabels:
+  environment: {{ .Values.environment }}
+  region: {{ .Values.region }}
+
+# Image pull policy
+image:
+  pullPolicy: {{ .Values.imagePullPolicy }}

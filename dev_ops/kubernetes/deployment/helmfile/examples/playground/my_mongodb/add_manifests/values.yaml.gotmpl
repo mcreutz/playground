@@ -1,0 +1,11 @@
+mongodb:
+  name: my-mongodb
+  members: 3
+  version: "7.0.0"
+
+database:
+  name: myapp
+  
+user:
+  name: appuser
+  passwordSecretRef: mongodb-user-password

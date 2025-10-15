@@ -1,0 +1,14 @@
+# First the nested Helmfiles are deployed in their given sequence.
+helmfiles:
+
+  - path: logs/helmfile.yaml
+  - path: metrics/helmfile.yaml
+
+
+# Second, releases are deployed in parallel, unless dependencies are specified.
+# Parallelization is fast but jumbles up the output.
+releases:
+
+  - name: my-kustomize-app
+    chart: ./my-kustomize-app
+    namespace: my-kustomize-app

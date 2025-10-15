@@ -1,0 +1,15 @@
+# Shared values used across multiple charts
+
+environment: production
+region: us-east-1
+logLevel: info
+
+imagePullPolicy: IfNotPresent
+
+resources:
+  cpu: 200m
+  memory: 256Mi
+
+monitoring:
+  enabled: true
+  scrapeInterval: 30s

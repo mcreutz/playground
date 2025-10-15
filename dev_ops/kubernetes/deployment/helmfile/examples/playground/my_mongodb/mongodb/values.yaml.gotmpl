@@ -1,0 +1,15 @@
+community-operator:
+  operator:
+    watchNamespace: "database"
+  
+  resource:
+    limits:
+      cpu: {{ .Values.resources.cpu }}
+      memory: {{ .Values.resources.memory }}
+    requests:
+      cpu: {{ .Values.resources.cpu }}
+      memory: {{ .Values.resources.memory }}
+
+monitoring:
+  enabled: {{ .Values.monitoring.enabled }}
+  scrapeInterval: {{ .Values.monitoring.scrapeInterval }}

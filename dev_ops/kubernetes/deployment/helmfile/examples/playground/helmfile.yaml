@@ -1,0 +1,72 @@
+environments:
+  production:
+    values:
+    - expectedClusterUID: "your-production-cluster-uid-here"
+  staging:
+    values:
+    - expectedClusterUID: "your-staging-cluster-uid-here"
+
+helmDefaults:
+  timeout: 600
+
+hooks:
+  - events: ["prepare"]
+    showlogs: true
+    command: "bash"
+    args:
+    - "-c"
+    - |
+      EXPECTED="{{ .Values.expectedClusterUID }}"
+      CURRENT=$(kubectl get namespace kube-system -o jsonpath='{.metadata.uid}' 2>/dev/null || echo "")
+      
+      if [ -z "$CURRENT" ]; then
+        echo "ERROR: Cannot get kube-system namespace UID"
+        exit 1
+      fi
+      
+      if [ "$CURRENT" != "$EXPECTED" ]; then
+        echo "❌ ERROR: Cluster UID mismatch!"
+        exit 1
+      fi
+
+
+helmfiles:
+  - path: ./my_mongodb/helmfile.yaml
+    values:
+      - shared-values.yaml
+    needs:
+      - cache/cache-service
+
+
+repositories:
+  - name: cnpg
+    url: https://cloudnative-pg.github.io/charts
+  - name: redis
+    url: https://charts.redis.io
+
+
+releases:
+  - name: myapp
+    namespace: default
+    chart: ./my_helmchart
+    values:
+      - shared-values.yaml
+      - my_helmchart/values.yaml.gotmpl
+
+  - name: backend-service
+    namespace: backend
+    chart: cnpg/cloudnative-pg
+    version: 0.23.0
+    values:
+      - backend-values.yaml.gotmpl
+
+  - name: cache-service
+    namespace: cache
+    chart: redis/redis
+    version: 20.5.2
+    values:
+      - redis-values.yaml.gotmpl
+
+  - name: kustomize-app
+    namespace: default
+    chart: ./my_kustomization

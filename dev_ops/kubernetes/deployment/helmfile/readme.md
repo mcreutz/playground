@@ -4,9 +4,8 @@
 
 ```bash
 # Apply all releases from helmfile
-helmfile sync          # Install or upgrade all releases
-helmfile apply         # Like sync but with no confirmation, use with caution
-
+helmfile sync          # Install or upgrade all releases. Will increment all relese versions and re-deploy resources with randomly generated content (e.g. Secrets)
+helmfile apply         # Sync only if helmfile diff finds changes
 # Delete all releases
 helmfile destroy
 
@@ -18,32 +17,21 @@ helmfile template
 
 # Show changes before applying
 helmfile diff          # Compare differences between current and desired state
+helmfile diff --context 0  # Show minimal context in diff output
+helmfile diff --concurrency 1  # No concurrent helm executions, would jumble output otherwise
 ```
 
 ## Common Flags
 
 ```bash
 # Specify environment
-helmfile -e production sync
+helmfile --environment/-e staging,production sync
 
-# Specify helmfile
-helmfile -f custom-helmfile.yaml sync
+# Specify helmfile, defaulting to ./helmfile.yaml
+helmfile --file/-f custom-helmfile.yaml sync
 
 # Select specific releases from the helmfile
-helmfile --selector name=myapp sync
-
-# Show diff before applying
-helmfile diff
-```
-
-## Environment Management
-
-```bash
-# Apply with specific values file
-helmfile -e staging sync
-
-# Apply with multiple environments
-helmfile -e staging,production sync
+helmfile --selector/-l name=myapp sync
 ```
 
 ## Tips
