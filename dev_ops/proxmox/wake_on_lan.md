@@ -1,18 +1,24 @@
-Setup BIOS for Wake-on-LAN
+# Setup WakeOnLan for a Proxmox server
 
-Install ethtool on Proxmox host
+## Setup BIOS for Wake-on-LAN support
+todo
+
+## Enable Wake-on-LAN on network interface
+Find network interface name with `ip a` command
 ```sh
-apt install ethtool
+ip a
 ```
 
-Enable Wake-on-LAN on network interface
-
-Find network interface name with `ip a` command
-
+Install ethtool and enable Wake-on-LAN
+```sh
+apt install ethtool
 ethtool -s <interface> wol g
+```
 
-Make Wake-on-LAN setting persistent
+## Make Wake-on-LAN setting persistent
+```sh
 nano /etc/systemd/system/wol.service
+```
 
 Add the following content to the file, replace <interface> with your network interface name
 ```ini
@@ -27,7 +33,7 @@ ExecStart=/sbin/ethtool -s <interface> wol g
 WantedBy=multi-user.target
 ```
 
-Enable and start the service
+## Enable and start the service
 ```sh
 systemctl enable wol.service
 systemctl start wol.service

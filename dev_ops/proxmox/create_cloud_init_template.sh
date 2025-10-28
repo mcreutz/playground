@@ -1,57 +1,88 @@
-# Download Ubuntu 24.04 cloud image
-wget https://cloud-images.ubuntu.com/releases/24.04/release/ubuntu-24.04-server-cloudimg-amd64.img
+#!/bin/bash
 
-# Create VM with ID 900
-qm create 900 --memory 2048 --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-pci --name "ubuntu-24.04-template"
+set -e
+
+#------------------------------------------------------------------------------
+# CONFIGURATION
+#------------------------------------------------------------------------------
+
+UBUNTU_VERSION="24.04"
+CI_USER="ubuntu"
+CI_PASSWORD="ChangeMe!"
+SSH_KEY_PATH="~/.ssh/id_ed25519_martin.pub"
+
+#------------------------------------------------------------------------------
+# Script Logic
+#------------------------------------------------------------------------------
+
+# Download Ubuntu cloud image
+IMAGE_URL="https://cloud-images.ubuntu.com/releases/${UBUNTU_VERSION}/release/ubuntu-${UBUNTU_VERSION}-server-cloudimg-amd64.img"
+IMAGE_FILE="ubuntu-${UBUNTU_VERSION}-server-cloudimg-amd64.img"
+wget "${IMAGE_URL}"
+
+# Create VM
+VM_ID="900"
+VM_NAME="ubuntu-${UBUNTU_VERSION}-template"
+VM_MEMORY="2048"
+NETWORK_BRIDGE="vmbr0"
+qm create ${VM_ID} --memory ${VM_MEMORY} --net0 virtio,bridge=${NETWORK_BRIDGE} --scsihw virtio-scsi-pci --name "${VM_NAME}"
 
 # Import disk to storage
-qm importdisk 900 ubuntu-24.04-server-cloudimg-amd64.img local-lvm
+STORAGE="local-lvm"
+qm importdisk ${VM_ID} ${IMAGE_FILE} ${STORAGE}
 
 # Attach disk to VM
-qm set 900 --scsi0 local-lvm:vm-900-disk-0
+qm set ${VM_ID} --scsi0 ${STORAGE}:vm-${VM_ID}-disk-0
 
 # Add cloud-init drive
-qm set 900 --ide2 local-lvm:cloudinit
+qm set ${VM_ID} --ide2 ${STORAGE}:cloudinit
 
 # Set boot order
-qm set 900 --boot c --bootdisk scsi0
+qm set ${VM_ID} --boot c --bootdisk scsi0
 
 # Enable QEMU guest agent
-qm set 900 --agent enabled=1
+qm set ${VM_ID} --agent enabled=1
 
-# Setup Mac German keyboard
-mkdir -p /var/lib/vz/snippets
-cat << EOF > /var/lib/vz/snippets/mac-german-keyboard.yaml
+# Setup keyboard configuration
+SNIPPETS_DIR="/var/lib/vz/snippets"
+KEYBOARD_SNIPPET="mac-german-keyboard.yaml"
+KEYBOARD_LAYOUT="de"
+KEYBOARD_VARIANT="mac"
+KEYBOARD_MODEL="macintosh"
+LOCALE="de_DE.UTF-8"
+mkdir -p ${SNIPPETS_DIR}
+cat << EOF > ${SNIPPETS_DIR}/${KEYBOARD_SNIPPET}
 #cloud-config
 keyboard:
-  layout: de
-  variant: mac
-  model: macintosh
-locale: de_DE.UTF-8
+  layout: ${KEYBOARD_LAYOUT}
+  variant: ${KEYBOARD_VARIANT}
+  model: ${KEYBOARD_MODEL}
+locale: ${LOCALE}
 runcmd:
-  - localectl set-keymap de-mac
+  - localectl set-keymap ${KEYBOARD_LAYOUT}-${KEYBOARD_VARIANT}
   - dpkg-reconfigure -f noninteractive keyboard-configuration
   - apt update
   - apt install -y qemu-guest-agent
   - systemctl start qemu-guest-agent
 EOF
-qm set 900 --cicustom "vendor=local:snippets/mac-german-keyboard.yaml"
+qm set ${VM_ID} --cicustom "vendor=local:snippets/${KEYBOARD_SNIPPET}"
 
 # Set user and password
-qm set 900 --ciuser ubuntu --cipassword 'ChangeMe!'
+qm set ${VM_ID} --ciuser ${CI_USER} --cipassword "${CI_PASSWORD}"
 
 # Setup IP address
-qm set 900 --ipconfig0 ip=dhcp
+IP_CONFIG="ip=dhcp"
+qm set ${VM_ID} --ipconfig0 ${IP_CONFIG}
 
 # Copy SSH key
-if [ ! -f ~/.ssh/id_ed25519_martin.pub ]; then
-    echo "Error: SSH key ~/.ssh/id_ed25519_martin.pub not found"
+if [ ! -f ${SSH_KEY_PATH} ]; then
+    echo "Error: SSH key ${SSH_KEY_PATH} not found"
     exit 1
 fi
-qm set 900 --sshkeys ~/.ssh/id_ed25519_martin.pub
+qm set ${VM_ID} --sshkeys ${SSH_KEY_PATH}
 
 # Convert to template
-qm template 900
+qm template ${VM_ID}
 
 # Clean up
-rm ubuntu-24.04-server-cloudimg-amd64.img
+rm ${IMAGE_FILE}
