@@ -1,0 +1,155 @@
+---
+################################################################################
+# Proxmox VM New Disk Setup Ansible Playbook
+#
+# This playbook partitions, formats, and mounts a new disk in a Proxmox VM.
+# It creates a single partition using the entire disk, formats it with ext4,
+# mounts it, and adds an entry to /etc/fstab for automatic mounting on boot.
+#
+# Usage: ansible-playbook setup_new_disk.yml -e @disk_config.yml
+#        Or: ansible-playbook setup_new_disk.yml --extra-vars "disk_device=/dev/sdb mount_point=/mnt/data"
+################################################################################
+
+- name: Setup and Mount New Disk
+  hosts: all
+  become: true
+
+  # All configuration variables are set in inventory.ini
+  # Required vars: disk_device, mount_point
+  # Optional vars: filesystem, fs_label, fstab_options, fstab_dump, fstab_passno
+
+  tasks:
+    - name: Verify disk device exists
+      stat:
+        path: "{{ disk_device }}"
+      register: disk_stat
+      failed_when: not disk_stat.stat.exists or not disk_stat.stat.isblk
+
+    - name: Check if disk or its partitions are currently mounted
+      shell: "mount | grep -q '^{{ disk_device }}'"
+      register: mount_check
+      failed_when: mount_check.rc == 0
+      changed_when: false
+      ignore_errors: true
+
+    - name: Fail if disk is mounted
+      fail:
+        msg: "ERROR: Disk {{ disk_device }} or its partitions are currently mounted!"
+      when: mount_check.rc == 0
+
+    - name: Check for existing partitions
+      command: "lsblk -ln -o NAME {{ disk_device }}"
+      register: lsblk_output
+      changed_when: false
+
+    - name: Parse partition information
+      set_fact:
+        existing_partitions: "{{ lsblk_output.stdout_lines[1:] | default([]) }}"
+
+    - name: Fail if disk has existing partitions
+      fail:
+        msg: |
+          ERROR: Disk {{ disk_device }} already has partitions!
+          This playbook only works with unpartitioned disks.
+          To wipe this disk, run: wipefs -a {{ disk_device }}
+      when: existing_partitions | length > 0
+
+    - name: Install required packages
+      package:
+        name:
+          - parted
+          - e2fsprogs
+        state: present
+
+    - name: Create GPT partition table
+      command: "parted -s {{ disk_device }} mklabel gpt"
+      args:
+        creates: "{{ disk_device }}1"
+
+    - name: Create primary partition
+      parted:
+        device: "{{ disk_device }}"
+        number: 1
+        state: present
+        part_start: "0%"
+        part_end: "100%"
+        label: gpt
+
+    - name: Wait for partition to be recognized
+      pause:
+        seconds: 2
+
+    - name: Update kernel partition table
+      command: "partprobe {{ disk_device }}"
+      changed_when: false
+
+    - name: Wait after partprobe
+      pause:
+        seconds: 2
+
+    - name: Discover actual partition device using lsblk
+      shell: "lsblk -ln -o NAME {{ disk_device }} | tail -n 1 | awk '{print \"/dev/\" $1}'"
+      register: discovered_partition
+      changed_when: false
+
+    - name: Set partition device from discovery
+      set_fact:
+        partition_device: "{{ discovered_partition.stdout }}"
+
+    - name: Debug partition device information
+      debug:
+        msg: "Expected partition device: {{ partition_device }} for disk {{ disk_device }}"
+
+    - name: Verify partition was created
+      stat:
+        path: "{{ partition_device }}"
+      register: partition_stat
+      until: partition_stat.stat.exists and partition_stat.stat.isblk
+      retries: 5
+      delay: 2
+      failed_when: not partition_stat.stat.exists or not partition_stat.stat.isblk
+
+    - name: Format partition with filesystem
+      filesystem:
+        fstype: "{{ filesystem }}"
+        dev: "{{ partition_device }}"
+        opts: "{{ '-L ' + fs_label if fs_label else '' }}"
+        force: no
+
+    - name: Get UUID of the partition
+      command: "blkid -s UUID -o value {{ partition_device }}"
+      register: partition_uuid
+      changed_when: false
+
+    - name: Create mount point directory
+      file:
+        path: "{{ mount_point }}"
+        state: directory
+        mode: '0755'
+
+    - name: Backup /etc/fstab before modification
+      copy:
+        src: /etc/fstab
+        dest: "/etc/fstab.backup.{{ ansible_date_time.iso8601_basic_short }}"
+        remote_src: yes
+        mode: '0644'
+
+    - name: Add fstab entry for automatic mounting
+      mount:
+        path: "{{ mount_point }}"
+        src: "UUID={{ partition_uuid.stdout }}"
+        fstype: "{{ filesystem }}"
+        opts: "{{ fstab_options }}"
+        dump: "{{ fstab_dump }}"
+        passno: "{{ fstab_passno }}"
+        state: mounted
+
+    - name: Verify mount is active
+      shell: "mount | grep {{ mount_point }}"
+      register: final_mount_check
+      changed_when: false
+      failed_when: final_mount_check.rc != 0
+
+    - name: Display success message
+      debug:
+        msg: "Successfully setup and mounted disk {{ disk_device }} at {{ mount_point }}"
