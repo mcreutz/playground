@@ -1,5 +1,69 @@
-# Ansible Command Cheat Sheet
+# Ansible
 
+## Architecture
+### Modules
+Modules are reusable units of code that Ansible executes on managed hosts. They are the building blocks for tasks.
+
+Common modules:
+- `apt/yum`: Package management
+- `copy`: Copy files
+- `file`: File operations
+- `service`: Manage services
+- `template`: Template processing
+
+
+### Tasks
+Tasks are individual actions that Ansible performs using modules. Each task typically calls a single module with specific parameters.
+
+Tasks can be executed in playbooks or as ad-hoc commands.
+
+Example tasks (in a playbook file):
+
+```yaml
+# File operations
+- name: Create directory
+  file:
+    path: /app/data
+    state: directory
+    mode: '0755'
+
+# Service management
+- name: Start service
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+```
+
+
+## Playbooks
+Playbooks are YAML files that define automation tasks in Ansible. They contain a list of plays, each defining a set of tasks to execute on specific hosts.
+
+Example playbook:
+```yaml
+# example-playbook.yml
+- hosts: webservers
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+```
+
+Running playbooks:
+```bash
+# Run playbook
+ansible-playbook playbook.yml
+
+# Run playbook with inventory file
+ansible-playbook -i inventory.yml playbook.yml
+
+# Check syntax
+ansible-playbook --syntax-check playbook.yml
+
+# Dry run (simulation)
+ansible-playbook --check playbook.yml
+```
 ## Basic Commands
 ### Ad-hoc Commands
 ```bash
@@ -104,62 +168,6 @@ ansible web1.example.com -a "uptime"
 ```
 
 
-## Modules
-Modules are reusable units of code that Ansible executes on managed hosts. They are the building blocks for tasks.
-
-Common modules:
-- `apt/yum`: Package management
-- `copy`: Copy files
-- `file`: File operations
-- `service`: Manage services
-- `template`: Template processing
-
-Using modules:
-```yaml
-# File operations
-- name: Create directory
-  file:
-    path: /app/data
-    state: directory
-    mode: '0755'
-
-# Service management
-- name: Start service
-  service:
-    name: nginx
-    state: started
-    enabled: yes
-```
-
-
-## Playbooks
-Playbooks are YAML files that define automation tasks in Ansible. They contain a list of plays, each defining a set of tasks to execute on specific hosts.
-
-Example playbook:
-```yaml
-# example-playbook.yml
-- hosts: webservers
-  tasks:
-    - name: Install nginx
-      apt:
-        name: nginx
-        state: present
-```
-
-Running playbooks:
-```bash
-# Run playbook
-ansible-playbook playbook.yml
-
-# Run playbook with inventory file
-ansible-playbook -i inventory.yml playbook.yml
-
-# Check syntax
-ansible-playbook --syntax-check playbook.yml
-
-# Dry run (simulation)
-ansible-playbook --check playbook.yml
-```
 
 
 ## Best Practices
