@@ -1,0 +1,26 @@
+authentik:
+  secret_key: "PleaseGenerateASecureKey"
+  postgresql:
+    password: "ThisIsNotASecurePassword"
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+    hosts:
+      - authentik.server03.creutz.io
+    tls:
+      - secretName: tls-authentik-server03-creutz-io
+        hosts:
+          - "authentik.server03.creutz.io"
+
+postgresql:
+  enabled: true
+  auth:
+    password: "ThisIsNotASecurePassword"
+
+blueprints:
+  configMaps:
+    - grafana-setup-blueprint

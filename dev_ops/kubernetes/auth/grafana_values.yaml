@@ -1,0 +1,33 @@
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt"
+  hosts:
+    - grafana2.server03.creutz.io
+  tls:
+    - secretName: tls-grafana2-server03-creutz-io
+      hosts:
+        - "grafana2.server03.creutz.io"
+
+assertNoLeakedSecrets: false
+
+grafana.ini:
+  server:
+    root_url: https://grafana2.server03.creutz.io
+    enable_gzip: true
+  auth.generic_oauth:
+    enabled: true
+    name: Authentik
+    allow_sign_up: true
+    client_id: grafana
+    client_secret: my-reproducible-secret-12345
+    scopes: openid profile email groups
+    auth_url: https://authentik.server03.creutz.io/application/o/authorize/
+    token_url: https://authentik.server03.creutz.io/application/o/token/
+    api_url: https://authentik.server03.creutz.io/application/o/userinfo/
+    role_attribute_path: contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'
+  auth:
+    disable_login_form: true
+    oauth_auto_login: true
+    signout_redirect_url: https://authentik.server03.creutz.io/application/o/grafana/end-session/
