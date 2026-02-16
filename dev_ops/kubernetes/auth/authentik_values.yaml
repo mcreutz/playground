@@ -23,4 +23,5 @@ postgresql:
 
 blueprints:
   configMaps:
+    - groups-blueprint
     - grafana-setup-blueprint

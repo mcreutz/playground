@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: groups-blueprint
+  namespace: authentik
+data:
+  blueprint.yaml: |
+    version: 1
+    entries:
+      - model: authentik_core.group
+        identifiers:
+          name: pk_admins
+
+      - model: authentik_core.group
+        identifiers:
+          name: pk_users

@@ -18,17 +18,6 @@ data:
           expression: |
             return {"groups": [group.name for group in request.user.ak_groups.all()]}
 
-      # Authentik groups that map to Grafana roles
-      - model: authentik_core.group
-        id: grafana-admins
-        identifiers:
-          name: Grafana Admins
-
-      - model: authentik_core.group
-        id: grafana-editors
-        identifiers:
-          name: Grafana Editors
-
       # OAuth2 provider
       - model: authentik_providers_oauth2.oauth2provider
         id: grafana-provider

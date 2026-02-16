@@ -21,10 +21,10 @@ helm repo update
 
 helm upgrade --install authentik authentik/authentik -n authentik -f authentik_values.yaml --create-namespace
 
+k apply -f groups_blueprint.yaml -n authentik
+k apply -f grafana_blueprint.yaml -n authentik
 
 helm repo add grafana-community https://grafana-community.github.io/helm-charts
 helm repo update
 
 helm upgrade --install grafana grafana-community/grafana -n grafana -f grafana_values.yaml --create-namespace
-
-k apply -f grafana_blueprint.yaml -n authentik    
