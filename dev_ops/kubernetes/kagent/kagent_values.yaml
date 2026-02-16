@@ -1,0 +1,23 @@
+# https://github.com/kagent-dev/kagent/blob/main/helm/kagent/values.yamlproviders:
+  
+  default: openAI
+  openAI:
+    provider: OpenAI
+    model: "gpt-4.1-mini"
+    apiKeySecretRef: kagent-openai
+    apiKeySecretKey: OPENAI_API_KEY
+    # apiKey: ""
+  ollama:
+    provider: Ollama
+    model: "llama3.2"
+    config:
+      host: host.docker.internal:11434
+      options:
+        num_ctx: "64000"
+
+  anthropic:
+    provider: Anthropic
+    model: "claude-3-5-haiku-20241022"
+    apiKeySecretRef: kagent-anthropic
+    apiKeySecretKey: ANTHROPIC_API_KEY
+    # apiKey: ""
