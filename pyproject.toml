@@ -53,6 +53,7 @@ dependencies = [
     "yfinance>=0.2.65",
     "zipline-reloaded>=3.1.1",
     "virtualenv>=20.31.2",
+    "temporalio>=1.23.0",
 ]
 
 [dependency-groups]
