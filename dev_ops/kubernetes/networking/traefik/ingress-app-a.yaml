@@ -1,0 +1,29 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-a
+  namespace: app-a
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: app-a.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app-a
+                port:
+                  number: 80
+  # The wildcard certificate is issued and stored by Traefik itself.
+  # No secretName is required here because Traefik serves the certificate
+  # directly from acme.json.
+  tls:
+    - hosts:
+        - app-a.example.com

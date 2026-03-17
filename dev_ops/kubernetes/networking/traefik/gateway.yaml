@@ -1,0 +1,37 @@
+# Applied automatically via the Helmfile postsync hook on the traefik release.
+# Required for Gateway API resources (HTTPRoute, TLSRoute) e.g. SNI-based TCP routing to PostgreSQL.
+# Standard Ingress resources work without this.
+#
+# The GatewayClass "traefik" is created automatically by the Helm chart.
+# TLS cert resolution comes from the entrypoint config in traefik_values.yaml — no annotation needed here.
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  gatewayClassName: traefik
+  listeners:
+    # HTTPS listener – maps to the websecure entrypoint (internal port 8443).
+    # HTTPRoutes in any namespace can attach to this listener.
+    - name: websecure
+      protocol: HTTPS
+      port: 8443
+      tls:
+        mode: Terminate
+      allowedRoutes:
+        namespaces:
+          from: All
+
+    # TLS listener for postgres – Traefik terminates TLS using the wildcard cert
+    # from acme.json and forwards plaintext TCP to the backend. SNI is used for
+    # routing, so multiple services can share this port via different hostnames.
+    # Requires experimentalChannel: true in providers.kubernetesGateway.
+    - name: postgres
+      protocol: TLS
+      port: 5432
+      tls:
+        mode: Terminate
+      allowedRoutes:
+        namespaces:
+          from: All

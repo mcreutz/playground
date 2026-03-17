@@ -1,0 +1,146 @@
+deployment:
+  # Single replica is required when using file-based ACME persistence
+  # (acme.json cannot be shared across replicas without a distributed store).
+  replicas: 1
+
+  # Recreate is required because hostNetwork: true means two pods cannot bind
+  # the same host ports on the same node simultaneously. RollingUpdate (default)
+  # would deadlock: new pod can't start until old pod releases the ports.
+  strategy:
+    type: Recreate
+
+  dnsPolicy: ClusterFirstWithHostNet
+
+  # Init container to fix acme.json permissions (must be 600).
+  # Runs as root to create the file, then the main container takes over as non-root.
+  initContainers:
+    - name: volume-permissions
+      image: busybox:1.37.0
+      command: ["sh", "-c", "touch /data/acme.json; chmod -v 600 /data/acme.json; chown 65532:65532 /data/acme.json"]
+      securityContext:
+        runAsUser: 0
+        runAsNonRoot: false
+        allowPrivilegeEscalation: true
+      volumeMounts:
+        - name: data
+          mountPath: /data
+
+# Cloudflare API Token from the pre-created Secret
+env:
+  - name: CF_DNS_API_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: <cloudflare-api-token>
+        key: api-token
+
+providers:
+  kubernetesCRD:
+    enabled: true
+
+  kubernetesIngress:
+    enabled: true
+
+  kubernetesGateway:
+    enabled: true
+    # Required for TCPRoute and TLSRoute (Gateway API experimental channel)
+    experimentalChannel: true
+
+# Disable the Helm-auto-created Gateway; we manage it explicitly in gateway.yaml
+gateway:
+  enabled: false
+
+ports:
+  web:
+    port: 8000
+    expose:
+      default: true
+    exposedPort: 80
+    protocol: TCP
+    http:
+      # Redirect all HTTP traffic to HTTPS
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          priority: 10
+
+  websecure:
+    port: 8443
+    expose:
+      default: true
+    exposedPort: 443
+    protocol: TCP
+    http:
+      tls:
+        enabled: true
+        # Use the ACME resolver defined below for every request on this entrypoint
+        certResolver: letsencrypt
+        domains:
+          - main: <example.com>
+            sans:
+              - "*.<example.com>"
+
+  # Internal dashboard/ping entrypoint – moved off 8080 (used by rke2-server)
+  traefik:
+    port: 9000
+    expose:
+      default: false
+    exposedPort: 9000
+    protocol: TCP
+
+  # Prometheus metrics – moved off 9100 (used by rke2 node-exporter)
+  metrics:
+    port: 9101
+    expose:
+      default: false
+    exposedPort: 9101
+    protocol: TCP
+
+  # TCP entrypoint for raw TCP traffic (e.g. PostgreSQL via Gateway API TCPRoute)
+  postgres:
+    port: 5432
+    expose:
+      default: true
+    exposedPort: 5432
+    protocol: TCP
+
+# ACME Certificate Resolver – Let's Encrypt via DNS-01 (Cloudflare)
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: <example@example.com>
+      # Use the staging CA while testing to avoid rate limits:
+      # caServer: https://acme-staging-v02.api.letsencrypt.org/directory
+      storage: /data/acme.json
+      dnsChallenge:
+        provider: cloudflare
+        # Let DNS changes propagate before ACME verification
+        propagation:
+          delayBeforeChecks: 10
+        resolvers:
+          - "1.1.1.1:53"
+          - "1.0.0.1:53"
+
+persistence:
+  enabled: true
+  # storageClass: ""       # uncomment and set if your cluster has no default SC
+  accessMode: ReadWriteOnce
+  size: 128Mi
+  path: /data
+
+hostNetwork: true
+
+# Pin Traefik to the dedicated ingress node.
+nodeSelector:
+  ingress-node: "true"
+
+service:
+  type: ClusterIP
+  externalIPs:
+    - <your-external-ip>
+
+logs:
+  general:
+    level: INFO
+  access:
+    enabled: true
