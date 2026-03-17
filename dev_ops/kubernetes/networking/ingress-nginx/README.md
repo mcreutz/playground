@@ -4,18 +4,12 @@
 sudo microk8s enable ingress
 ```
 
-## As a general way, install the Nginx Ingress Controller using Helm:
+## For all other K8s distros, install the Nginx Ingress Controller using Helm:
 ```bash
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx \
   -n ingress-nginx \
-  -f dev_ops/kubernetes_/ingress/nginx_ingress_controller/nginx_values_baremetal.yaml
-  --version 4.11.2
+  -f dev_ops/kubernetes_/ingress/nginx_ingress_controller/nginx_values_baremetal.yaml \
+  --version 4.15.0
 ```
-
-## Todo
-- SSL termination
-- TCP ingress
-- basic auth
-

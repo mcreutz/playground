@@ -1,0 +1,19 @@
+controller:
+  hostNetwork: true
+  hostPort:
+    enabled: true
+  dnsPolicy: ClusterFirstWithHostNet
+  service:
+    enabled: false
+  nodeSelector:
+    # bind to a specific node if no load balancer is used
+    ingress-node: "true"
+  extraArgs:
+    # use an existing wildcard TLS certificate as default for ingresses
+    default-ssl-certificate: cert-manager/my-tls-secret
+  updateStrategy:
+    # when bound to one node wtih affinity
+    type: Recreate
+    
+tcp:
+  "5432": "postgres/postgres-postgresql-hl:5432"
