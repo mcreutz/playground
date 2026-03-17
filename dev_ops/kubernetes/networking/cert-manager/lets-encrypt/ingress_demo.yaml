@@ -8,10 +8,6 @@ metadata:
   #   cert-manager.io/cluster-issuer: <cluster-issuer-name>
 spec:
   ingressClassName: <ingress-class-name>
-  tls:
-    - hosts:
-        - "<host-name>" # e.g. app.mysite.com
-      secretName: tls-app-mysite-com
   rules:
     - host: "<host-name>" # e.g. app.mysite.com
       http:
