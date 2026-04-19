@@ -1,9 +1,14 @@
 # RKE2
 
 RKE2 uses **server** (control plane) and **agent** (worker) terminology.
+
 Must have an odd number of server nodes for etcd quorum (3 recommended).
+
 Critical config values (e.g. `cluster-cidr`) must match across all server nodes.
+
 A full uninstall is needed before rejoining as a different role (worker ↔ master).
+
+This installation assumes a LVM partition is used for the RKE2 data directory (`/mnt/rke2_data` in this example) to allow for easier management of disk space and snapshots. Adjust `data-dir` in the config if using a different setup.
 
 ## Install
 Install RKE2 
@@ -20,10 +25,21 @@ Configure
 sudo mkdir -p /etc/rancher/rke2
 sudo tee -a /etc/rancher/rke2/config.yaml > /dev/null <<EOF
 ingress-controller: none
+
 disable:
   - rke2-snapshot-controller
   - rke2-snapshot-controller-crd
   - rke2-snapshot-validation-webhook
+
+data-dir: /mnt/rke2_data
+
+kubelet-arg:
+  # Reserve resources for Kubernetes components (kubelet, containerd, etc.)
+  - "kube-reserved=cpu=500m,memory=1Gi,ephemeral-storage=5Gi"  
+  # Reserve resources for OS system daemons (sshd, journald, etc.)
+  - "system-reserved=cpu=500m,memory=1Gi,ephemeral-storage=10Gi"
+  # (Optional but recommended) Explicitly tell the Kubelet what to enforce
+  - "enforce-node-allocatable=pods"
 EOF
 ```
 
