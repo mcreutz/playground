@@ -21,6 +21,11 @@ ssh-copy-id -i ~/.ssh/id_ed25519_something.pub user@remote_host
 ```
 This will copy (append) the content of the public key file to the file ~/.ssh/authorized_keys on the remote host
 
+## Remove deprecated entries for a host from the ~/.ssh/known_hostst file
+```shell
+ssh-keygen -R <ip or host>
+```
+
 ## Configure the SSH server on the remote host
 ```bash
 sudo nano /etc/ssh/sshd_config
