@@ -15,7 +15,7 @@ So to set up backups: create a PreBackupPod (how) and a Schedule (when). To trig
 
 ## Restic Access
 
-K8up stores all backups in a Restic repository on S3. Some operations (like deleting a specific backup) require direct restic CLI access. There are two ways:
+K8up stores all backups in a Restic repository on S3. Most operations require direct restic CLI access. There are two ways:
 
 ### Option A: Exec into the Operator Pod
 
@@ -74,6 +74,8 @@ To see what data you have, list Snapshots. To see backup job history, list Backu
 More powerful filtering:
 
 ```bash
+restic snapshots
+
 # All backups, grouped by source
 restic snapshots --group-by path
 
@@ -230,3 +232,18 @@ restic unlock --remove-all
 | Check repo health | Check CR | `restic check` |
 | Unlock stuck repo | — | `restic unlock --remove-all` |
 | Exclude a PVC | `k8up.io/backup: "false"` annotation | — |
+
+
+
+## todo
+- add info about restore CR and that it is not compatible for restores from a backup with a backup pod.
+- restic access needs to info about that restores have their own restic pods.
+- inform that backup CRs only trigger backups, you cannot delete or list them by handling the CRs. what is true for snapshot CRS?
+- backups and snapshot CRs. only represent the b and s that were done from this cluster. again, deleting the CRs also has no effect on the data in s3.
+- manual backup, add info for backups without prebackuppod.
+- add info on how backups without prebackuppod work. labels for inclunding and excluding resources, types and backup commands.
+- retention is usually done with schedules, add that info
+- schedules
+- restoring, use 2 pods for restores from prebackuppod backups. use kubectl copy to copy p1 to local and local to p2.
+- manifests for restores and manula backups schould be part of the repo
+- add info from restore.md files from other repos here
