@@ -17,3 +17,6 @@ __pycache__/
 # secrets
 secrets.json
 .env
+
+.devcontainer/
+.claude/
