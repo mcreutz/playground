@@ -1,13 +1,23 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-setup-blueprint
+  name: authentik-connected-apps
   namespace: authentik
 data:
   blueprint.yaml: |
     version: 1
     entries:
-      # Groups scope mapping — returns user's group names in the token
+      # --- Groups ---------------------------------------------------------
+      - model: authentik_core.group
+        identifiers:
+          name: pk_admins
+
+      - model: authentik_core.group
+        identifiers:
+          name: pk_users
+
+      # --- Grafana --------------------------------------------------------
+      # Groups scope mapping — returns the user's group names in the token
       - model: authentik_providers_oauth2.scopemapping
         id: grafana-groups-scope
         identifiers:

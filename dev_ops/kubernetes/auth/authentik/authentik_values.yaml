@@ -21,7 +21,10 @@ postgresql:
   auth:
     password: "ThisIsNotASecurePassword"
 
+# Connected apps are declared statically in connected_apps_blueprint.yaml and
+# loaded by the chart natively (mounted into the worker, applied automatically).
+# Apply that ConfigMap before installing. To add an app, edit the blueprint and
+# re-apply.
 blueprints:
   configMaps:
-    - groups-blueprint
-    - grafana-setup-blueprint
+    - authentik-connected-apps
