@@ -91,6 +91,28 @@ source ~/.bashrc
 ```
 
 
+## Check the RKE2 version of an existing cluster
+
+```sh
+# from anywhere with kubectl access — the node VERSION column is the full RKE2 version
+kubectl get nodes -o wide
+# just the versions, one per node
+kubectl get nodes -o custom-columns='NODE:.metadata.name,VERSION:.status.nodeInfo.kubeletVersion'
+```
+Output looks like `v1.35.2+rke2r1` — Kubernetes version plus the RKE2 release suffix.
+Nodes can differ during a rolling update, so check all of them.
+
+```sh
+# on a node itself (binary is at /usr/local/bin for tarball, /usr/bin for rpm installs)
+rke2 --version
+```
+
+Available versions/channels to update to:
+```sh
+curl -sL https://update.rke2.io/v1-release/channels | jq '.data[] | {name, latest}'
+```
+
+
 ## Update RKE2
 Update server nodes first, one at a time. Then update agent nodes.
 Do not skip minor Kubernetes versions (version skew policy applies).
@@ -109,7 +131,14 @@ curl -sfL https://get.rke2.io | sudo INSTALL_RKE2_TYPE="agent" INSTALL_RKE2_VERS
 systemctl restart rke2-agent
 kubectl uncordon <node-name>
 ```
-Omit `INSTALL_RKE2_VERSION` to update to the latest stable release.
+To install the latest stable release, omit `INSTALL_RKE2_VERSION`:
+```sh
+curl -sfL https://get.rke2.io | sudo sh -
+```
+To update your current minor version to the latest patch release, pin the minor version:
+```sh
+curl -sfL https://get.rke2.io | sudo INSTALL_RKE2_CHANNEL=v1.35 sh -
+```
 
 ### Automated update (system-upgrade-controller)
 ```sh

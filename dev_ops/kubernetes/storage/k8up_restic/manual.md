@@ -15,7 +15,7 @@ So to set up backups: create a PreBackupPod (how) and a Schedule (when). To trig
 
 ## Restic Access
 
-K8up stores all backups in a Restic repository on S3. Most operations require direct restic CLI access. There are two ways:
+K8up stores all backups in a Restic repository on S3. Some operations (like deleting a specific backup) require direct restic CLI access. There are two ways:
 
 ### Option A: Exec into the Operator Pod
 
@@ -50,10 +50,10 @@ kubectl run restic-cli --rm -it \
 
 Then set this env vars:
 ```bash
-export RESTIC_REPOSITORY=s3:s3.amazonaws.com/<bucket>
-export RESTIC_PASSWORD=<repo-password>
-export AWS_ACCESS_KEY_ID=<key>
-export AWS_SECRET_ACCESS_KEY=<secret>
+export RESTIC_REPOSITORY=s3:$BACKUP_GLOBALS3ENDPOINT/$BACKUP_GLOBALS3BUCKET
+export RESTIC_PASSWORD=$BACKUP_GLOBALREPOPASSWORD
+export AWS_ACCESS_KEY_ID=$BACKUP_GLOBALACCESSKEYID
+export AWS_SECRET_ACCESS_KEY=$BACKUP_GLOBALSECRETACCESSKEY
 ```
 
 ---
@@ -74,8 +74,6 @@ To see what data you have, list Snapshots. To see backup job history, list Backu
 More powerful filtering:
 
 ```bash
-restic snapshots
-
 # All backups, grouped by source
 restic snapshots --group-by path
 
@@ -117,6 +115,103 @@ kubectl logs -n my-app -l k8up.io/owned-by=backup_manual-backup
 ```
 
 The Backup CR and its Job are cleaned up automatically based on Schedule history limits.
+
+---
+
+## Restoring a Backup
+
+K8up has no built-in restore CR. Use restic directly to extract the snapshot, then restore the data to its target service.
+
+### Example: Restoring MinIO Data
+
+The MinIO PreBackupPod creates a `.tar` archive of all bucket contents. To restore:
+
+#### 1. Launch the restore pod
+
+A pre-built manifest is provided at `restore_pods.yaml`. It creates a ServiceAccount with RBAC permissions to read env vars from the k8up operator pod, then launches a restore pod that auto-discovers all S3 and restic credentials at startup and saves them to `/tmp/restic-env.sh`.
+
+```bash
+kubectl apply -f restore_pods.yaml
+kubectl wait -n k8up-system pod/restore-restic --for=condition=Ready --timeout=120s
+kubectl exec -it -n k8up-system restore-restic -- sh
+```
+
+Once inside the pod, source the discovered env vars:
+
+```bash
+. /tmp/restic-env.sh
+```
+
+#### 2. Find the snapshot and restore
+
+```bash
+# List all snapshots — pick one by date/ID
+restic snapshots
+
+# List files inside the snapshot to find the filename
+restic ls <snapshot-id>
+
+# Download the entire snapshot to local filesystem
+restic restore <snapshot-id> --target /tmp/data
+```
+
+#### 3. Copy the tar to the MinIO restore pod
+
+The manifest also creates a `restore-minio` pod in the `finfetcher` namespace with `mc` pre-installed and MinIO credentials from the `finfetcher-minio-backup` secret.
+
+`kubectl cp` (and piping between `kubectl exec` commands) uses tar internally, which can corrupt or time out on large files. Instead, use busybox's built-in `httpd` and `wget` to transfer the file over HTTP between pods. Both are already available in alpine:3 — no additional installs needed.
+
+First, get the restic pod's IP:
+
+```bash
+kubectl get pod -n k8up-system restore-restic -o jsonpath='{.status.podIP}'
+```
+
+On the **restic pod**, start a file server (this will run in the foreground):
+
+```bash
+kubectl exec -n k8up-system restore-restic -- httpd -f -p 8080 -h /tmp/data
+```
+
+In a **second terminal**, on the **minio pod**, download the file (replace `<pod-ip>` with the restic pod IP from above):
+
+```bash
+kubectl exec -n finfetcher restore-minio -- wget http://<pod-ip>:8080/<filename>.tar -O /tmp/data/<filename>.tar
+```
+
+Once the download completes, stop `httpd` on the restic pod with Ctrl+C. Verify the file size matches on both sides:
+
+```bash
+kubectl exec -n k8up-system restore-restic -- ls -l /tmp/data/<filename>.tar
+kubectl exec -n finfetcher restore-minio -- ls -l /tmp/data/<filename>.tar
+```
+
+#### 4. Extract and mirror to MinIO
+
+Exec into the MinIO restore pod:
+
+```bash
+kubectl exec -it -n finfetcher restore-minio -- sh
+```
+
+Extract the tar and upload to MinIO:
+
+```bash
+mkdir -p /tmp/data/restore
+tar -xf /tmp/data/<filename>.tar -C /tmp/data/restore/
+mc alias set dest http://$MINIO_HOST:9000 "$ACCESS_KEY" "$SECRET_KEY"
+mc mirror /tmp/data/restore dest/$BUCKET
+```
+
+⚠️ Always extract into a clean subdirectory (`/tmp/data/restore`), not directly into `/tmp/data/`. The PVC root contains `lost+found/` and other artifacts that would otherwise get mirrored to MinIO.
+
+⚠️ `mc mirror` will overwrite existing objects with the same keys. If you want to restore only missing objects, add `--newer-than` or review the diff first with `mc diff /tmp/data/restore dest/$BUCKET`.
+
+#### 5. Clean up
+
+```bash
+kubectl delete -f restore_pods.yaml
+```
 
 ---
 

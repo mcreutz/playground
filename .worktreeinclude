@@ -1,0 +1,6 @@
+# general
+.claude/
+!.claude/worktrees/
+.env
+.mcp.json
+opencode.jsonc
